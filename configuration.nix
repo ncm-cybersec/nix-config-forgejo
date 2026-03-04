@@ -13,17 +13,6 @@
   # 1. Essential for NVIDIA drivers
   nixpkgs.config.allowUnfree = true;
 
-  # 2. Graphics and Driver Setup
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
-
   # Bootloader - Disable systemd-boot
   boot.loader.systemd-boot.enable = false;
 
@@ -93,11 +82,22 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  # services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
+  services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "plasma";
+  services.displayManager.autoLogin.user = "nixadmin";
+  
+  hardware.graphics.enable = true;
+
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.powerManagement.enable = false;
+  hardware.nvidia.open = true; 
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -163,6 +163,7 @@
     isNormalUser = true;
     description = "nixadmin";
     extraGroups = [ "networkmanager" "wheel" "podman" "adbusers" "libvirtd" "kvm" "i2c" ];
+    shell = pkgs.bash;
     packages = with pkgs; [
       kdePackages.kate
     ];
@@ -181,6 +182,7 @@
   programs.virt-manager.enable = true;
 
   # Fastfetch | lolcat for bash startup
+  programs.bash.enable = true;
   programs.bash.shellAliases = {
   # This doesn't just create an alias;
   # it ensures the tools are available and defined in the shell environment.
@@ -188,9 +190,9 @@
   };
 
   # Force the command to run at the very end of the bashrc
-  programs.bash.promptInit = ''
-    fastfetch | lolcat
-  '';
+#  programs.bash.promptInit = ''
+#    fastfetch | lolcat
+#  '';
 
   # enable appimage support
   programs.appimage.enable = true;
@@ -219,6 +221,7 @@
 
      # System
      bat
+     cachix
      cargo
      cmake
      deadnix
@@ -233,7 +236,7 @@
      manix
      nfs-utils
      nix-index
-     nix-remplate
+     nix-template
      nix-tree
      nix-update
      nixpkgs-fmt
@@ -294,19 +297,19 @@
 
   # Enable Vicinae service and autostart
   # Vicinae launcher service
-  systemd.user.services.vicinae = {
-  description = "Vicinae desktop launcher server";
-  wantedBy = [ "graphical-session.target" ];
-  after = [ "graphical-session.target" ];
+  #systemd.user.services.vicinae = {
+  #description = "Vicinae desktop launcher server";
+  #wantedBy = [ "graphical-session.target" ];
+  #after = [ "graphical-session.target" ];
 
-  serviceConfig = {
-    Type = "simple";
-    Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
-    ExecStart = "${pkgs.vicinae}/bin/vicinae server";
-    Restart = "on-failure";
-    RestartSec = 5;
-   };
-  };
+  #serviceConfig = {
+  #  Type = "simple";
+  #  Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
+  #  ExecStart = "${pkgs.vicinae}/bin/vicinae server";
+  #  Restart = "on-failure";
+  #  RestartSec = 5;
+  # };
+  #};
 
   # NixOS Network Configuration
 

@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vicinae, vicinae-extensions, ... }:
 
 {
   imports = [
-
-
+    vicinae.homeManagerModules.default
   ];
 
   home.username = "nixadmin";
@@ -19,7 +18,6 @@
     # CLI tools
     gemini-cli
     github-copilot-cli
-    github-desktop
     goose-cli
     ollama-cuda
     opencode
@@ -28,6 +26,7 @@
     aria2
     binutils
     btop
+    bun
     coreutils
     curlFull
     dnsutils
@@ -44,6 +43,7 @@
     pciutils
     sysstat
     usbutils
+    uv
     wget
     which
     xdg-utils
@@ -52,12 +52,14 @@
     android-studio
     android-tools
     antigravity
+    github-desktop
+    kiro
 
     # KDE
     hardinfo2
     kdePackages.dolphin-plugins
     kdePackages.gwenview
-    kdePackages.isoimagewrier
+    kdePackages.isoimagewriter
     kdePackages.kaccounts-integration
     kdePackages.kaccounts-providers
     kdePackages.kalarm
@@ -105,6 +107,7 @@
     packet
     proton-pass
     rclone
+    rclone-ui
     vicinae
     waveterm
   ];
@@ -133,17 +136,16 @@
     historyFileSize = 10000;
     historySize = 10000;
 
-    initExtra = ''
-      if [[ $- == *i* ]]; then
-        exec ${pkgs.nushell}/bin/nu
-      fi
-    '';
+ #   initExtra = ''
+ #     if [[ $- == *i* ]]; then
+ #       exec ${pkgs.nushell}/bin/nu
+ #     fi
+ #   '';
 
     bashrcExtra = ''
         fastfetch | lolcat
 
-        exec nu
-    '';
+      '';
   };
 
   # ---------------------------------------------------
@@ -160,21 +162,21 @@
   # Nushell
   # ---------------------------------------------------
 
-  programs.nushell = {
-    enable = true;
+#  programs.nushell = {
+#    enable = true;
     # Optional: Add extra config or aliases here
-    extraConfig = ''
-       $env.config = {
-         show_banner: false,
-       }
-    '';
-    shellAliases = {
-      ll = "ls -l";
-      g = "git";
-      update = "sudo nixos-rebuild switch";
-      upgrade = "sudo nixos-rebuild switch --upgrade";
-    };
-  };
+#    extraConfig = ''
+#       $env.config = {
+#         show_banner: false,
+#       }
+#    '';
+#    shellAliases = {
+#      ll = "ls -l";
+#      g = "git";
+#      update = "sudo nixos-rebuild switch";
+#      upgrade = "sudo nixos-rebuild switch --upgrade";
+#    };
+#  };
 
   # ---------------------------------------------------
   # Tmux
@@ -211,24 +213,58 @@
     services.ollama = {
       enable = true;
       acceleration = "cuda";
-      loadModels = [ "gemma3:1b" ];
+      #loadModels = [ "gemma3:1b" ];
   };
+
+  services.vicinae = {
+  enable = true;
+  systemd = {
+    enable = true;
+    autoStart = true; # default: false
+    environment = {
+      USE_LAYER_SHELL = 1;
+    };
+  };
+  settings = {
+    close_on_focus_loss = true;
+    consider_preedit = true;
+    pop_to_root_on_close = true;
+    favicon_service = "twenty";
+    search_files_in_root = true;
+    font = {
+      normal = {
+        size = 12;
+        family = "Maple Nerd Font";
+      };
+    };
+    theme = {
+      catppuccin = {
+        name = "catppuccin-macchiato";
+        icon_theme = "default";
+      };
+    };
+    launcher_window = {
+      opacity = 0.98;
+    };
+  };
+};
+
 
   # Enable Vicinae service and autostart
   # Vicinae launcher service
-  systemd.user.services.vicinae = {
-  description = "Vicinae desktop launcher server";
-  wantedBy = [ "graphical-session.target" ];
-  after = [ "graphical-session.target" ];
+  #systemd.user.services.vicinae = {
+  #description = "Vicinae desktop launcher server";
+  #wantedBy = [ "graphical-session.target" ];
+  #after = [ "graphical-session.target" ];
 
-  serviceConfig = {
-    Type = "simple";
-    Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
-    ExecStart = "${pkgs.vicinae}/bin/vicinae server";
-    Restart = "on-failure";
-    RestartSec = 5;
-   };
-  };
+  #serviceConfig = {
+   # Type = "simple";
+    #Environment = "PATH=/run/current-system/sw/bin:/etc/#profiles/per-user/%u/bin";
+    #ExecStart = "${pkgs.vicinae}/bin/vicinae server";
+    #Restart = "on-failure";
+    #RestartSec = 5;
+   #};
+  #};
 
   home.stateVersion = "25.11";
 }
