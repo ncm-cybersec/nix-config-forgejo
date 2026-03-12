@@ -2,7 +2,7 @@
 # Nixos System Services
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgsUnstable, ... }:
 
 {
   # Enable Avahi/mDNS for network discovery
@@ -24,6 +24,7 @@
   services.ollama = {
     enable = true;
     acceleration = "cuda";
+    package = pkgsUnstable.ollama-cuda;
   };
 
   # Enable the OpenSSH daemon

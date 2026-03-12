@@ -2,35 +2,37 @@
 # Nixos System Packages
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, pkgsUnstable, ... }:
 
 {
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # Enable unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-  # Enable ADB/Scrcpy
-  programs.adb.enable = true;
+  # Install applications with provided options
+  programs = {
+    firefox.enable = true;
+    adb.enable = true;
+    bash.enable = true;
+    kdeconnect.enable = true;
+    virt-manager.enable = true;
+    
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };  
 
-  # Enable appimage support
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
+    fuse = {
+      enable = true;
+      userAllowOther = true;
+    };
+  };
 
-  # Enable bash
-  programs.bash.enable = true;
-
-  # Enable kdeconnect
-  programs.kdeconnect.enable = true;
-
-  # Enable virt-manager
-  programs.virt-manager.enable = true;
-
-  environment.systemPackages = with pkgs; [
-
+  environment.systemPackages = (with pkgs; [
+     
      # Applications
      distrobox
      distroshelf
-     ollama-cuda
      podman
      podman-compose
      podman-desktop
@@ -41,8 +43,24 @@
           -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
           "$@"
       '')
+     rclone
+     remote-exec
+     rsync
      virt-manager
 
+     # Security
+     burpsuite
+     caido
+     ghidra
+     maltego
+     netscanner
+     netsniff-ng
+     nmap
+     suricata
+     wireshark
+     zeek
+     zenmap
+     
      # System
      bat
      cachix
@@ -69,7 +87,13 @@
      openrgb-with-all-plugins
      pavucontrol
      perl
+     powershell
      python3
-  ];
-
+  ]) ++ 
+  
+  (with pkgsUnstable; [
+     ollama-cuda
+     warp-terminal
+  ]);
+  
 }

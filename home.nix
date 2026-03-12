@@ -1,19 +1,26 @@
-{ config, pkgs, vicinae, ... }:
+# ---------------------------------------------------
+# Nixos Home Manager Conf
+# ---------------------------------------------------
+
+{ config, inputs, pkgs, ... }:
 
 {
   imports =
     [
       ./home_imports/home_packages/kdepackages.nix
+      ./home_imports/home_packages/llmagents.nix
       ./home_imports/shell/bash/bash.nix
       ./home_imports/shell/nushell/nushell.nix
       ./home_imports/shell/tmux/tmux.nix
       ./home_imports/utilities/git/git.nix
+      ./home_imports/utilities/rclone/rclone.nix
       ./home_imports/utilities/vicinae/vicinae.nix
-      vicinae.homeManagerModules.default
     ];
 
-  home.username = "nixadmin";
-  home.homeDirectory = "/home/nixadmin";
+  home = {
+    username = "nixadmin";
+    homeDirectory = "/home/nixadmin";
+  };
 
   # ---------------------------------------------------
   # Home Manager - nixadmin packages
@@ -21,12 +28,6 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-
-    # CLI tools
-    gemini-cli
-    github-copilot-cli
-    goose-cli
-    opencode
 
     # Core
     aria2
@@ -74,7 +75,7 @@
     thunderbird
     tor-browser
     vivaldi
-    vivaldi-ffmpeg-codecs
+    vivaldi-ffmpeg-codecs  
 
     # Utilities
     hardinfo2
@@ -82,13 +83,10 @@
     netpeek
     packet
     proton-pass
-    rclone
-    rclone-ui
     vicinae
     vlc
     waveterm
   ];
-
 
   home.stateVersion = "25.11";
 

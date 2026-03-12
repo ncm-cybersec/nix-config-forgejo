@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+# ---------------------------------------------------
+# Nixos Conf
+# ---------------------------------------------------
+
+{ config, inputs, pkgs, ... }:
 
 {
   imports =
@@ -28,9 +32,6 @@
   };
 
   environment.shells =  with pkgs; [ bashInteractive ];
-
-  # Enable unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Enable Experimental Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
