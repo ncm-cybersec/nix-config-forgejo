@@ -11,6 +11,14 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Enable Tailscale
+  services.tailscale.enable = true;
+
+  # Opnsense Tailscale Interface
+  networking.firewall.trustedInterfaces = [
+    "tailscale0"
+  ];
+  
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     9300  # Packet / Quick Share
@@ -19,6 +27,7 @@
 
   networking.firewall.allowedUDPPorts = [
     5353 # Avahi / MDNS, enabled by services.avahi ^
+    41641 # Tailscale
     53317 # Localsend
   ];
 

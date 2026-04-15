@@ -2,19 +2,12 @@
 # Nixos Home Manager Conf
 # ---------------------------------------------------
 
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, pkgsUnstable, ... }:
 
 {
   imports =
     [
-      ./home_imports/home_packages/kdepackages.nix
-      ./home_imports/home_packages/llmagents.nix
-      ./home_imports/shell/bash/bash.nix
-      ./home_imports/shell/nushell/nushell.nix
-      ./home_imports/shell/tmux/tmux.nix
-      ./home_imports/utilities/git/git.nix
-      ./home_imports/utilities/rclone/rclone.nix
-      ./home_imports/utilities/vicinae/vicinae.nix
+      ./modules/user
     ];
 
   home = {
@@ -27,7 +20,7 @@
   # ---------------------------------------------------
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
 
     # Core
     aria2
@@ -46,9 +39,10 @@
     lolcat
     mtr
     nmap
-    nvtopPackages.amd
+    nvtopPackages.nvidia
     pciutils
     sysstat
+    tree
     usbutils
     uv
     wget
@@ -58,20 +52,21 @@
     # Dev
     android-studio
     android-tools
-    antigravity
     github-desktop
-    kiro
-
+        
     # Productivity
     affine
     alacritty-graphics
     alacritty-theme
     cherry-studio
-    contour
     drawio
+    joplin-desktop
     libreoffice
+    logseq
+    marktext
     newelle
     newsflash
+    obsidian
     thunderbird
     tor-browser
     vivaldi
@@ -86,7 +81,17 @@
     vicinae
     vlc
     waveterm
-  ];
+
+  ]) ++ 
+  
+  (with pkgsUnstable; [
+    
+    antigravity
+    lmstudio
+    opencode-desktop
+    toolhive
+   
+  ]);
 
   home.stateVersion = "25.11";
 

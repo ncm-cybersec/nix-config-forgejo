@@ -8,12 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./conf_imports/boot/boot.nix
-      ./conf_imports/graphics/graphics.nix
-      ./conf_imports/hardware/hardware.nix
-      ./conf_imports/networking/networking.nix
-      ./conf_imports/packages/packages.nix
-      ./conf_imports/services/services.nix
+      ./modules/system
     ];
 
 

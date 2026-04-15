@@ -7,7 +7,13 @@
 {
 
   # Enable unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-37.10.3"
+      "electron-38.8.4"
+    ];
+  };
 
   # Install applications with provided options
   programs = {
@@ -31,6 +37,7 @@
   environment.systemPackages = (with pkgs; [
      
      # Applications
+     chatmcp
      distrobox
      distroshelf
      podman
@@ -47,6 +54,11 @@
      remote-exec
      rsync
      virt-manager
+     warehouse
+
+     # Network
+     tailscale
+     tail-tray
 
      # Security
      burpsuite
@@ -73,6 +85,7 @@
      git
      gparted
      i2c-tools
+     javaPackages.compiler.openjdk25
      libvirt
      llvm
      manix
@@ -84,16 +97,17 @@
      nixpkgs-fmt
      nixpkgs-review
      nodejs_24
-     openrgb-with-all-plugins
      pavucontrol
      perl
      powershell
      python3
+
   ]) ++ 
   
   (with pkgsUnstable; [
-     ollama-cuda
-     warp-terminal
+     
+    warp-terminal
+     
   ]);
   
 }

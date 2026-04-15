@@ -9,7 +9,7 @@
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
     
     # Assistants
-    picoclaw
+    hermes-agent
     
     # Coding Agents
     crush
@@ -30,7 +30,8 @@
     openskills
 
     # Workflow
-    agent-deck  
+    agent-deck
+      
   ];
 
 }

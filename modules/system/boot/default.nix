@@ -40,9 +40,13 @@
   # Kernel modules
   boot.kernelModules = [ "kvm-amd" "i2c-dev" "i2c-piix4" ];
 
+  # ACPI / SMBus Conflict Fix for OpenRGB
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+
   # Enable KVM virtualisation
   virtualisation.libvirtd.enable = true;
 
   # I2C kernel modules for openrgb
   hardware.i2c.enable = true;
+
 }

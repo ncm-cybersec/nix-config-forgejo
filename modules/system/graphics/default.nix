@@ -28,8 +28,7 @@
     autoLogin.user = "nixadmin";
   };
 
-  # NVIDIA 3060 GPU
-  hardware.graphics.enable = true;
+  # NVIDIA GeForce RTX 3060 12GB GPU
 
   hardware.nvidia = {
     open = true;

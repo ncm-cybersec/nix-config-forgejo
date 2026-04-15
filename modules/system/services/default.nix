@@ -17,8 +17,27 @@
     };
   };
 
+  # Enable Flatpak
+  services.flatpak.enable = true;
+
+  # Required to install flatpak
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        default = [
+          "kde"
+        ];
+      };
+    };
+  };
+
   # Enable OpenRGB udev
-  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    motherboard = "amd";
+  };
 
   # Enable Ollama for local llms
   services.ollama = {
