@@ -13,22 +13,22 @@
     
     # Coding Agents
     crush
-    forge
     gemini-cli
+    gitnexus
     copilot-cli
-    goose-cli
     kilocode-cli
-    letta-code
     nanocoder
+    oh-my-opencode
     opencode
-    qwen-code
     
     # Utilities
-    copilot-language-server
+    amp
     gno
     mcporter
     openskills
-
+    skills
+    skills-installer
+    
     # Workflow
     agent-deck
       

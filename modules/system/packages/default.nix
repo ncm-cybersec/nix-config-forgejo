@@ -37,9 +37,9 @@
   environment.systemPackages = (with pkgs; [
      
      # Applications
-     chatmcp
      distrobox
      distroshelf
+     gearlever
      podman
      podman-compose
      podman-desktop

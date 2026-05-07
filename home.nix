@@ -56,8 +56,6 @@
         
     # Productivity
     affine
-    alacritty-graphics
-    alacritty-theme
     cherry-studio
     drawio
     joplin-desktop
@@ -80,8 +78,7 @@
     proton-pass
     vicinae
     vlc
-    waveterm
-
+    
   ]) ++ 
   
   (with pkgsUnstable; [
@@ -89,8 +86,7 @@
     antigravity
     lmstudio
     opencode-desktop
-    toolhive
-   
+       
   ]);
 
   home.stateVersion = "25.11";

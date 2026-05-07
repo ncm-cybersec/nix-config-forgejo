@@ -9,6 +9,8 @@
     ./hardware
     ./networking
     ./packages
-    ./services
+    ./services/productivity
+    ./services/system
+    ./services/syncthing
   ];
 }
