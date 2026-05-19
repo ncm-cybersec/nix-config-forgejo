@@ -90,6 +90,8 @@
      llvm
      manix
      nfs-utils
+     nil
+     nixd
      nix-index
      nix-template
      nix-tree

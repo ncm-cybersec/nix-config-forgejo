@@ -59,7 +59,7 @@
     cherry-studio
     drawio
     joplin-desktop
-    libreoffice
+    libreoffice-fresh
     logseq
     marktext
     newelle
@@ -67,9 +67,13 @@
     obsidian
     thunderbird
     tor-browser
-    vivaldi
-    vivaldi-ffmpeg-codecs  
-
+    
+    (vivaldi.override {
+      proprietaryCodecs = true;
+      enableWidevine = true;
+    })
+    vivaldi-ffmpeg-codecs
+    
     # Utilities
     hardinfo2
     localsend
@@ -86,6 +90,7 @@
     antigravity
     lmstudio
     opencode-desktop
+    tabularis
        
   ]);
 

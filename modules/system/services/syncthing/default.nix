@@ -27,11 +27,9 @@
       folders = {
         "Homelab" = {
           path = "/home/nixadmin/NCM_Cybersec/homelab";
-          devices = [
-            ""
-          ];
-        }
+        };
       };
     };
   };
+
 }
