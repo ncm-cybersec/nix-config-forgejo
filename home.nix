@@ -22,6 +22,8 @@
   # Packages that should be installed to the user profile.
   home.packages = (with pkgs; [
 
+    # Stable packages
+    
     # Core
     aria2
     binutils
@@ -29,6 +31,7 @@
     bun
     coreutils
     curlFull
+    desktop-file-utils
     dnsutils
     ethtool
     fastfetch
@@ -85,8 +88,8 @@
     
   ]) ++ 
   
+  # Unstable packages 
   (with pkgsUnstable; [
-    
     antigravity
     lmstudio
     opencode-desktop
