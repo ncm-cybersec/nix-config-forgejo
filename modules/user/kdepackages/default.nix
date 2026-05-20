@@ -32,6 +32,7 @@
     kdePackages.ksystemlog
     kdePackages.partitionmanager
     kdePackages.sddm-kcm
+    # Fix for KDE Plasma Applet/Widgets
     (python3.withPackages (ps: with ps; [
       dbus-python
       pygobject3

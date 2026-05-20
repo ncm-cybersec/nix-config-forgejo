@@ -1,5 +1,5 @@
 # ---------------------------------------------------
-# Bootloader Conf
+# Bootloader Configuration
 # ---------------------------------------------------
 
 { config, pkgs, ... }:
@@ -8,7 +8,7 @@
   # Disable systemd-boot
   boot.loader.systemd-boot.enable = false;
 
-  # Grub
+  # Grub bootloader configuration
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;

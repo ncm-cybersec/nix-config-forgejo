@@ -1,5 +1,5 @@
 # ---------------------------------------------------
-# Display Manager & NVIDIA GPU Conf
+# Display Manager & NVIDIA GPU Configuration
 # ---------------------------------------------------
 
 { config, pkgs, ... }:
@@ -29,7 +29,6 @@
   };
 
   # NVIDIA GeForce RTX 3060 12GB GPU
-
   hardware.nvidia = {
     open = true;
     nvidiaSettings = true;
