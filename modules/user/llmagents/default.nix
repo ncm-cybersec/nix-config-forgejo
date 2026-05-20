@@ -2,18 +2,18 @@
 # Home Manager Packages - LLM-Agents Input
 # ---------------------------------------------------
 
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, pkgsUnstable, ... }:
 
 {
   
+  # Packages from numtide/llm-agents.nix flake input
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
     
     # Assistants
     hermes-agent
     
     # Coding Agents
-    crush
-    gemini-cli
+    antigravity
     gitnexus
     copilot-cli
     kilocode-cli
@@ -22,7 +22,7 @@
     opencode
     
     # Utilities
-    amp
+    apm
     gno
     mcporter
     openskills
