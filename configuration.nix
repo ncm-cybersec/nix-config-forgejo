@@ -1,5 +1,5 @@
 # ---------------------------------------------------
-# Nixos Conf
+# NixOS System Configuration
 # ---------------------------------------------------
 
 { config, inputs, pkgs, ... }:
@@ -11,11 +11,10 @@
       ./modules/system
     ];
 
+  # Define system hostname
+  networking.hostName = "nixadmin";
 
-  networking.hostName = "nixadmin"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define user account
   users.users.nixadmin = {
     isNormalUser = true;
     description = "nixadmin";
@@ -30,6 +29,9 @@
 
   # Enable Experimental Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Allow root to access the flake repo (required for auto-upgrade)
+  programs.git.config.safe.directory = "/home/nixadmin/nix-config";
 
   # Automatically install system updates daily
   system.autoUpgrade = {
