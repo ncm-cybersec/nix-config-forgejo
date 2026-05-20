@@ -36,6 +36,8 @@
 
   environment.systemPackages = (with pkgs; [
      
+     # Stable packages
+
      # Applications
      distrobox
      distroshelf
@@ -106,6 +108,7 @@
 
   ]) ++ 
   
+  # Unstable packages
   (with pkgsUnstable; [
      
     warp-terminal
