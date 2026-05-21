@@ -13,7 +13,15 @@
     hermes-agent
     
     # Coding Agents
-    antigravity
+
+    # ag-cli declared here is antigravity-cli from llm-agents.nix. it uses a wrapper derivation to rename the binary to avoid collision with the IDE version declared in home.nix
+    (pkgs.symlinkJoin {
+      name = "ag-cli";
+      paths = [ antigravity ];
+      postBuild = '' 
+        mv "$out/bin/antigravity" "$out/bin/ag-cli"
+      '';
+    })
     gitnexus
     copilot-cli
     kilocode-cli
