@@ -25,7 +25,7 @@
     kdePackages.kate
     kdePackages.kbookmarks
     kdePackages.kcalc
-    kdePackages.kcalendar
+    kdePackages.kcalendarcore
     kdePackages.kcalutils
     kdePackages.kcron
     kdePackages.kdeconnect-kde
