@@ -23,6 +23,7 @@
   networking.firewall.allowedTCPPorts = [
     8384  # Syncthing
     9300  # Packet / Quick Share
+    24800 # Input-Leap
     53317 # Localsend
   ];
 
