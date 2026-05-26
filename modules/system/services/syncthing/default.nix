@@ -2,7 +2,7 @@
 # Nixos Syncthing Service
 # ---------------------------------------------------
 
-{ config, pkgs, pkgsUnstable, ... }:
+{ config, pkgs, ... }:
 
 {
   # Enable Syncthing with declarative configuration	
@@ -15,10 +15,6 @@
     user = "nixadmin";
     group = "users";
     configDir = "/home/nixadmin/.config/syncthing";
-
-    # Override all settings set from the GUI. This is necessary if I don't want to have changes made from the GUI apply.
-    overrideDevices = true;
-    overrideFolders = true;
 
     settings = {
       devices = {
