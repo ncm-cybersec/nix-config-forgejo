@@ -30,6 +30,14 @@
   # Enable Experimental Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Increase maximum number of open files for user sessions to resolve 
+  # "too many open files" error. Equivalent to running 
+  # "ulimit -n 4096" command after flake update > nix rebuild.
+  security.pam.loginLimits = [
+    { domain = "*"; type = "soft"; item = "nofile"; value = "1048576"; }
+    { domain = "*"; type = "hard"; item = "nofile"; value = "16777216"; }
+  ];
+
   # Allow root to access the flake repo (required for auto-upgrade)
   programs.git.config.safe.directory = "/home/nixadmin/nix-config";
 
