@@ -90,10 +90,17 @@
   
   # Unstable packages 
   (with pkgsUnstable; [
+    
     antigravity
+    code-cursor
+    cursor-cli
+    kiro
+    kiro-cli
     lmstudio
     opencode-desktop
     tabularis
+    windsurf
+    zed-editor
        
   ]);
 
