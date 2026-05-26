@@ -42,6 +42,7 @@
      distrobox
      distroshelf
      gearlever
+     input-leap
      podman
      podman-compose
      podman-desktop
