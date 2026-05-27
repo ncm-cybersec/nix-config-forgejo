@@ -2,7 +2,7 @@
 # Display Manager & NVIDIA GPU Configuration
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   # Keymap 

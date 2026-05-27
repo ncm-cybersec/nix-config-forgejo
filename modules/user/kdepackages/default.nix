@@ -2,7 +2,7 @@
 # Home Manager KDE Plasma Packages
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
