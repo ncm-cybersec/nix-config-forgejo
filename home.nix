@@ -97,7 +97,6 @@
     kiro
     kiro-cli
     lmstudio
-    morgen
     opencode-desktop
     tabularis
     windsurf
