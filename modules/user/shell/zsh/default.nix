@@ -9,6 +9,9 @@
     zsh = {
       enable = true;
       enableCompletion = true;
+      initExtra = ''
+        fastfetch
+      '';
     };
     eza = {
       enable = true;
