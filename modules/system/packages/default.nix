@@ -2,7 +2,7 @@
 # Nixos System Packages
 # ---------------------------------------------------
 
-{ config, inputs, pkgs, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
 
@@ -102,6 +102,7 @@
      nixpkgs-fmt
      nixpkgs-review
      nodejs_24
+     openssl
      pavucontrol
      perl
      powershell
