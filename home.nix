@@ -2,7 +2,7 @@
 # Nixos Home Manager Conf
 # ---------------------------------------------------
 
-{ config, inputs, pkgs, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
   imports =
