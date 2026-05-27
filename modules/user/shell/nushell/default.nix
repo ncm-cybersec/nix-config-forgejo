@@ -43,13 +43,7 @@
    
    starship = { 
      enable = true;
-     settings = {
-       add_newline = true;
-       character = {
-       success_symbol = "[➜](bold green)";
-         error_symbol = "[➜](bold red)";
-       };
-     };
+     settings = builtins.fromTOML (builtins.readFile ./starship.toml);
    };
  };
 
