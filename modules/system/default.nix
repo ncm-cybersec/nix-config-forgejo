@@ -12,5 +12,6 @@
     ./services/productivity
     ./services/system
     ./services/syncthing
+    ./shell
   ];
 }
