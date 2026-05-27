@@ -82,7 +82,6 @@
     localsend
     netpeek
     packet
-    proton-pass
     vicinae
     vlc
     
@@ -98,6 +97,8 @@
     kiro-cli
     lmstudio
     opencode-desktop
+    proton-pass
+    proton-pass-cli
     tabularis
     windsurf
     zed-editor
