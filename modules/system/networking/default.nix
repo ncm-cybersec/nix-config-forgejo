@@ -2,7 +2,7 @@
 # Networking Configuration
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   # System hostname
@@ -11,8 +11,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Enable Tailscale
-  services.tailscale.enable = true;
+  # Enable Tailscale.
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    useRoutingFeatures = "client";
+    interfaceName = "tailscale0";
+  };
 
   # Opnsense Tailscale Interface
   networking.firewall.trustedInterfaces = [
