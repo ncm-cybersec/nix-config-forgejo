@@ -2,7 +2,7 @@
 # NixOS System Configuration
 # ---------------------------------------------------
 
-{ config, inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -19,13 +19,11 @@
     isNormalUser = true;
     description = "nixadmin";
     extraGroups = [ "networkmanager" "wheel" "podman" "adbusers" "libvirtd" "kvm" "i2c" ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
     ];
   };
-
-  environment.shells =  with pkgs; [ bashInteractive ];
 
   # Enable Experimental Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
