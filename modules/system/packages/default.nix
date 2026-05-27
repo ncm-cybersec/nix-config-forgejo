@@ -87,6 +87,7 @@
      gdb
      git
      gparted
+     gsettings-desktop-schemas
      i2c-tools
      javaPackages.compiler.openjdk25
      libvirt
