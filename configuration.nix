@@ -36,14 +36,19 @@
     { domain = "*"; type = "hard"; item = "nofile"; value = "16777216"; }
   ];
 
-  # Allow root to access the flake repo (required for auto-upgrade)
-  programs.git.config.safe.directory = "/home/nixadmin/nix-config";
+  # Allow root to access the flake git repo (required for auto-upgrade)
+  systemd.services.nixos-upgrade = {
+    preStart = ''
+      git config --global --add safe.directory /home/nixadmin/nix-config
+    '';
+  };
 
   # Automatically install system updates daily
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
     dates = "23:00";
+    flake = "git+file:///home/nixadmin/nix-config";
   };
 
   # Run garbage collection every Sunday at 3pm
