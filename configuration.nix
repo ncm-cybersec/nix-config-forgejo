@@ -47,7 +47,14 @@
   nix.gc = {
     automatic = true;
     dates = "Sun *-*-* 15:00:00";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 15d";
+  };
+
+  # Optimise the Nix store (reduce disk usage) every Saturday at 4pm
+  nix.optimise-store = {
+    automatic = true;
+    dates = "Sat *-*-* 16:00:00";
+    options = "--max-keep 15d";
   };
 
   system.stateVersion = "25.11";
