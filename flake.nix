@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------
-# Nixos Top-Level Flake w/ Multiple Input Channels & Caches
+# Nixos Top-Level Flake w/ Multiple Input Channels & BinaryCaches
 # ------------------------------------------------------------------------
 
 {
@@ -37,7 +37,7 @@
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          "electron-37.10.3"
+          "electron-38.8.4"
         ];
       };
     };
@@ -51,7 +51,7 @@
         # Core Configuration
         ./configuration.nix
         # Input channel binary caches
-        ({ config, pkgs, ... }: {
+        ({ ... }: {
           nix.settings.substituters = [
             "https://nix-community.cachix.org"
             "https://cache.nixos.org"
