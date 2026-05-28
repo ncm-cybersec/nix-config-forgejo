@@ -2,7 +2,7 @@
 # Nixos System Services
 # ---------------------------------------------------
 
-{ config, pkgs, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
   # Enable Avahi/mDNS for network discovery
