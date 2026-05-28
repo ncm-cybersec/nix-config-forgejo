@@ -5,6 +5,7 @@
 { ... }: {
   imports = [
     ./boot
+    ./cache
     ./graphics
     ./hardware
     ./networking
