@@ -47,7 +47,6 @@
     kdePackages.kio
     kdePackages.kio-admin
     kdePackages.kio-extras
-    kio-fuse
     kdePackages.kio-gdrive
     kdePackages.kio-zeroconf
     kdePackages.korganizer
