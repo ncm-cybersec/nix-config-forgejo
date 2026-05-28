@@ -2,14 +2,27 @@
 # Home Manager KDE Plasma Packages
 # ---------------------------------------------------
 
-{ pkgs, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
 
-    # KDE
+    # Stable 
+
+    # Fix for KDE Plasma Applet/Widgets
+    (python3.withPackages (ps: with ps; [
+      dbus-python
+      pygobject3
+    ]))
+    wayland-utils
+    
+  ]) ++ 
+  
+  (with pkgsUnstable; [
+  
+    # Unstable KDE packages, because stable versions are significantly outdated
     kdePackages.akonadi
     kdePackages.akonadi-calendar
     kdePackages.dolphin-plugins
@@ -44,13 +57,7 @@
     kdePackages.sddm-kcm
     kdePackages.kweather
     kdePackages.kweathercore
-
-    # Fix for KDE Plasma Applet/Widgets
-    (python3.withPackages (ps: with ps; [
-      dbus-python
-      pygobject3
-    ]))
-    wayland-utils
-  ];
+    
+  ]);
 
 }
