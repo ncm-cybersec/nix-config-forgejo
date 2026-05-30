@@ -114,6 +114,7 @@
   # Unstable packages
   (with pkgsUnstable; [
      
+    openrgb-with-all-plugins
     warp-terminal
      
   ]);
