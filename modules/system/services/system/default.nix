@@ -35,9 +35,6 @@
   # Enable OpenRGB udev
   services.hardware.openrgb = {
     enable = true;
-    package = with pkgsUnstable; [ 
-      openrgb-with-all-plugins 
-    ];
     motherboard = "amd";
   };
 
