@@ -2,7 +2,7 @@
 # Hardware Support
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Time zone
