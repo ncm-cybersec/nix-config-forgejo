@@ -28,7 +28,7 @@
   # Enable Experimental Features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Allow root to access the flake git repo (required for auto-upgrade)
+  # Allow root to access the flake git repo (my nix-config folder lives in home directory, and is symlinked into /etc/nixos, so this is required for auto-upgrade)
   systemd.services.nixos-upgrade = {
     preStart = ''
       git config --global --add safe.directory /home/nixadmin/nix-config
