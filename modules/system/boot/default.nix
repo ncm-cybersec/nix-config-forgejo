@@ -34,8 +34,8 @@
     };
   };
 
-  # Use LTS kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen.kernel;
+  # Use Zen kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Kernel modules
   boot.kernelModules = [ "kvm-amd" "i2c-dev" "i2c-piix4" ];
