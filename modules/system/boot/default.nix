@@ -2,7 +2,7 @@
 # Bootloader Configuration
 # ---------------------------------------------------
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Disable systemd-boot
@@ -35,7 +35,7 @@
   };
 
   # Use LTS kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_zen.kernel;
 
   # Kernel modules
   boot.kernelModules = [ "kvm-amd" "i2c-dev" "i2c-piix4" ];
