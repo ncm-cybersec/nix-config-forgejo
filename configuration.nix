@@ -51,10 +51,9 @@
   };
 
   # Optimise the Nix store (reduce disk usage) every Saturday at 4pm
-  nix.optimise-store = {
+  nix.optimise = {
     automatic = true;
     dates = "Sat *-*-* 16:00:00";
-    options = "--max-keep 15d";
   };
 
   system.stateVersion = "25.11";
