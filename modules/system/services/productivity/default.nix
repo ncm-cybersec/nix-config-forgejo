@@ -2,14 +2,13 @@
 # Nixos Productivity Services
 # ---------------------------------------------------
 
-{ config, pkgs, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
   # Enable Ollama for local llms
   services.ollama = {
     enable = true;
-    acceleration = "cuda";
-    package = pkgsUnstable.ollama-cuda;
+    package = pkgs.ollama-cuda;
   };
 
   # Enable the OpenSSH daemon
