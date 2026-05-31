@@ -19,7 +19,6 @@
   programs = {
     firefox.enable = true;
     bash.enable = true;
-    kdeconnect.enable = true;
     virt-manager.enable = true;
     
     appimage = {

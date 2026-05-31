@@ -6,6 +6,8 @@
 
 {
 
+  services.kdeconnect.enable = true;
+
   # Packages that should be installed to the user profile.
   home.packages = (with pkgs; [
 
@@ -41,7 +43,6 @@
     kdePackages.kcalendarcore
     kdePackages.kcalutils
     kdePackages.kcron
-    kdePackages.kdeconnect-kde
     kdePackages.kdenlive
     kdePackages.kdnssd
     kdePackages.kio
