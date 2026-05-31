@@ -18,7 +18,6 @@
   # Install applications with provided options
   programs = {
     firefox.enable = true;
-    adb.enable = true;
     bash.enable = true;
     kdeconnect.enable = true;
     virt-manager.enable = true;
@@ -39,6 +38,7 @@
      # Stable packages
 
      # Applications
+     android-tools
      distrobox
      distroshelf
      gearlever
