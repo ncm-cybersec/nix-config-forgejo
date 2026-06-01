@@ -26,7 +26,8 @@
     };
     fastfetch = {
       enable = true;
-      settings = builtins.fromJSON (builtins.readFile ./fastfetch25.jsonc);
+      # Thank you borko17 for the fastfetch config! https://github.com/borko17/fastfetch-config.git
+      settings = builtins.fromJSON (builtins.readFile ./fastfetch1.jsonc);
     };
     fzf = {
       enable = true;
