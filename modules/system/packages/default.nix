@@ -37,7 +37,6 @@
      # Stable packages
 
      # Applications
-     android-tools
      distrobox
      distroshelf
      gearlever
@@ -64,7 +63,8 @@
 
      # Security
      burpsuite
-     caido
+     caido-cli
+     caido-desktop
      ghidra
      maltego
      netscanner
@@ -76,6 +76,7 @@
      zenmap
      
      # System
+     android-tools
      bat
      cachix
      cargo
