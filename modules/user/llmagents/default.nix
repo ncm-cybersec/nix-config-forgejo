@@ -10,7 +10,9 @@
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
     
     # Assistants
+    aionui
     hermes-agent
+    hermes-desktop
     
     # Coding Agents
 
@@ -24,8 +26,6 @@
     })
     gitnexus
     copilot-cli
-    kilocode-cli
-    nanocoder
     oh-my-opencode
     opencode
     
@@ -39,6 +39,7 @@
     
     # Workflow
     agent-deck
+    herdr
       
   ];
 
