@@ -13,10 +13,20 @@
       layout = "us";
       variant = "";
     };
-    gdk-pixbuf.modulePackages = [ 
-      pkgs.librsvg 
-    ];
   };
+
+  # Force Qt and Electron apps to use the proper Wayland/GBM backends, and set env var for GTK to use vulkan renderer
+  environment.sessionVariables = {
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    QT_QUICK_BACKEND = "vulkan";
+  };
+
+  # Enable GTK's pixbuf loader for Electron apps to display svg
+  programs.gdk-pixbuf.modulePackages = [
+    pkgs.librsvg
+  ];
 
   # Enable Plasma 6 (KDE)
   services.desktopManager.plasma6.enable = true;
@@ -29,6 +39,9 @@
     defaultSession = "plasma";
     autoLogin.user = "nixadmin";
   };
+
+  # Enable 32 bit GPU drivers
+  hardware.graphics.enable32Bit = true;  
 
   # NVIDIA GeForce RTX 3060 12GB GPU
   hardware.nvidia = {
