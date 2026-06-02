@@ -5,36 +5,23 @@
 { pkgs, ... }:
 
 {
-  # Disable systemd-boot
-  boot.loader.systemd-boot.enable = false;
 
-  # Grub bootloader configuration
+  # Bootloader configuration; enabled systemd-boot for generation tracking (rEFInd will chainload this)
   boot.loader = {
+    systemd-boot.enable = true;
     efi = {
-      canTouchEfiVariables = true;
+      # EFI variables disabled to prevent systemd-boot from taking over rEFInd
+      canTouchEfiVariables = false;
       efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-      splashImage = "/etc/nixos/emperor.png";
-
-      # Manual Grub Menu entry for Manjaro on nvme1n1p1
-      extraEntries = ''
-        menuentry "Manjaro Linux" {
-          insmod part_gpt
-          insmod fast
-          insmod chain
-          search --no-floppy --fs-uuid --set=root 6B9A-BB79
-          chainloader /EFI/manjaro/grubx64.efi
-        }
-      '';
     };
   };
 
-  # Use Zen kernel
+  # Add refind package so we can run `refind-install`
+  environment.systemPackages = with pkgs; [
+    refind
+  ];
+
+  # Use latest Zen kernel 7.0.10
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Kernel modules
