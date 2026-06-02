@@ -6,6 +6,7 @@
   imports = [
     ./kdepackages
     ./llmagents
+    ./mcp
     ./shell/bash
     ./shell/nushell
     ./shell/tmux
