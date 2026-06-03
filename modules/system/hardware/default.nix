@@ -48,7 +48,7 @@
     cups-browsed
     epson-escpr2
     ];
-  };s
+  };
 
   # Enable OpenRGB udev
   services.hardware.openrgb = {
