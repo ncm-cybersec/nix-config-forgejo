@@ -6,20 +6,18 @@
 
 {
   
+  # MCP Settings
+  programs = {
+    antigravity.profiles.nixadmin.enableMcpIntegration = true;
+    opencode.enableMcpIntegration = true;
+    zed-editor.enableMcpIntegration = true;
+  };
+
   # MCP Servers
   programs.mcp = {
     enable = true;
-    antigravity.profiles.NCM_Cybersec.enableMcpIntegration = true;
-    opencode.enableMcpIntegration = true;
-    zed-editor.enableMcpIntegration = true;
     servers = {
-      podman = {
-        args = [
-          "-y"
-          "podman-mcp-server@latest"
-        ];
-        command = "npx";
-      };
+
       forgejo = {
         command = "npx";
         args = [
@@ -27,9 +25,11 @@
           "@forgejo/mcp-server@latest"
         ];
       };
+
       mcp-language-server = {
         command = "mcp-language-server";
       };
+
       mcp-nixos = {
         command = "npx";
         args = [
@@ -37,6 +37,7 @@
           "mcp-nixos@latest"
         ];
       };
+
       mcp-server-fetch = {
         command = "npx";
         args = [
@@ -44,6 +45,7 @@
           "mcp-server-fetch@latest"
         ];
       };
+
       mcp-server-filesystem = {
         command = "npx";
         args = [
@@ -51,6 +53,7 @@
           "mcp-server-filesystem@latest"
         ];
       };
+
       mcp-server-git = {
         command = "npx";
         args = [
@@ -58,6 +61,7 @@
           "mcp-server-git@latest"
         ];
       };
+      
       mcp-server-sequential-thinking = {
         command = "npx";
         args = [
@@ -65,6 +69,15 @@
           "mcp-server-sequential-thinking@latest"
         ];
       };
+
+      podman = {
+        args = [
+          "-y"
+          "podman-mcp-server@latest"
+        ];
+        command = "npx";
+      };
+
       terraform = {
         command = "npx";
         args = [
