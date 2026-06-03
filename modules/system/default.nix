@@ -9,9 +9,10 @@
     ./graphics
     ./hardware
     ./networking
-    ./packages
-    ./services/productivity
-    ./services/system
+    ./packages/flatpak
+    ./packages/system
+    ./services/localllama
+    ./services/podman
     ./services/syncthing
     ./shell
   ];
