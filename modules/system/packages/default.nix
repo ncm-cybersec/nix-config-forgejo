@@ -44,6 +44,7 @@
      podman
      podman-compose
      podman-desktop
+     pods
      qemu
      # QEMU UEFI support
      (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
