@@ -13,4 +13,8 @@
     safe.directory = "/etc/nixos";
   };
   
+  programs.ssh = {
+    enable = true;
+  };
+
 }
