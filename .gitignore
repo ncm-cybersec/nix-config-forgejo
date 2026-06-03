@@ -1,0 +1,13 @@
+# Ignore local environment variables or private scripts
+.env
+.envrc
+.sops.yaml
+secrets.yaml
+private-secrets.nix
+
+# Ignore your custom SSH key if it's accidentally placed here
+*.pem
+*.key
+id_ed25519
+id_rsa
+ssh_hosts
