@@ -1,8 +1,16 @@
-# ---------------------------------------------------
-# NixOS System Configuration
-# ---------------------------------------------------
+# ==========================================================================
+# NixOS System Configuration:
+# - HP Omen 45L Gaming Desktop
+#   - AMD Ryzen 7 5800X 
+#   - NVIDIA GeForce RTX 3060 12GB
+#   - 64GB DDR4 RAM
+# ==========================================================================
 
-{ pkgs, ... }:
+{ 
+  pkgs,
+  pkgsUnstable,
+  ... 
+}: 
 
 {
   imports =
@@ -18,7 +26,15 @@
   users.users.nixadmin = {
     isNormalUser = true;
     description = "nixadmin";
-    extraGroups = [ "networkmanager" "wheel" "podman" "adbusers" "libvirtd" "kvm" "i2c" ];
+    extraGroups = [ 
+      "networkmanager" 
+      "wheel" 
+      "podman" 
+      "adbusers" 
+      "libvirtd" 
+      "kvm" 
+      "i2c" 
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
@@ -26,7 +42,10 @@
   };
 
   # Enable Experimental Features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ 
+    "nix-command" 
+    "flakes" 
+  ];
 
   # Allow root to access the flake git repo (my nix-config folder lives in home directory, and is symlinked into /etc/nixos, so this is required for auto-upgrade)
   systemd.services.nixos-upgrade = {
@@ -35,7 +54,7 @@
     '';
   };
 
-  # Automatically install system updates daily
+  # Automatically install system updates daily at 11pm
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
