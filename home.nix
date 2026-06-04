@@ -1,8 +1,12 @@
-# ---------------------------------------------------
-# Nixos Home Manager Conf
-# ---------------------------------------------------
+# ==========================================================================
+# Home Manager Configuration
+# ==========================================================================
 
-{ pkgs, pkgsUnstable, ... }:
+{ 
+  pkgs, 
+  pkgsUnstable,
+  ... 
+}: 
 
 {
   imports =
@@ -15,16 +19,12 @@
     homeDirectory = "/home/nixadmin";
   };
 
-  # ---------------------------------------------------
-  # Home Manager - nixadmin packages
-  # ---------------------------------------------------
-
-  # Packages that should be installed to the user profile.
+  # Packages installed to user profile.
   home.packages = (with pkgs; [
 
     # Stable packages
     
-    # Core
+    # Core CLI tools
     aria2
     binutils
     btop
@@ -52,38 +52,46 @@
     which
     xdg-utils
 
-    # Dev
+    # AI & Dev
     android-studio
     android-tools
-    github-desktop
-        
-    # Productivity
-    affine
+    beekeeper-studio
     cherry-studio
+    github-desktop
+    newelle
+        
+    # Office & Productivity
+    affine
+    bluemail
+    discord
     drawio
+    ferdium
     joplin-desktop
     libreoffice-fresh
-    logseq
     marktext
-    newelle
     newsflash
     obsidian
+    obs-studio
+    slack
+    spotify
     thunderbird
     tor-browser
-    
     (vivaldi.override {
       proprietaryCodecs = true;
       enableWidevine = true;
     })
     vivaldi-ffmpeg-codecs
+    zoom-us
     
     # Utilities
     hardinfo2
+    ksnip
     localsend
     netpeek
-    packet
+    rustdesk
     vicinae
     vlc
+    warp
     
   ]) ++ 
   
@@ -100,7 +108,6 @@
     proton-pass
     proton-pass-cli
     tabularis
-    windsurf
     zed-editor
        
   ]);
