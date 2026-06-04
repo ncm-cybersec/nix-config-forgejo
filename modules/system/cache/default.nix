@@ -1,8 +1,12 @@
-# ---------------------------------------------------
-# NixOS System Binary Cache Configuration
-# ---------------------------------------------------
+# ==========================================================================
+# System Binary Cache Configuration
+# ==========================================================================
 
-{ ... }: { 
+{ 
+  ... 
+}: 
+
+{ 
 
   # Increase maximum number of open files for user sessions to resolve 
   # "too many open files" error. Equivalent to running 

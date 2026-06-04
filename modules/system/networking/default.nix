@@ -1,14 +1,16 @@
-# ---------------------------------------------------
+# ==========================================================================
 # Networking Configuration
-# ---------------------------------------------------
+# ==========================================================================
 
-{ ... }:
+{ 
+  ... 
+}:
 
 {
   # System hostname
   networking.hostName = "nixadmin";
 
-  # Enable networking
+  # Enable NetworkManager for network management
   networking.networkmanager.enable = true;
 
   # Enable Avahi/mDNS for network discovery
@@ -28,7 +30,7 @@
     enable = true;
   };
   
-  # Enable Tailscale.
+  # Enable Tailscale for remote access
   services.tailscale = {
     enable = true;
     openFirewall = true;
@@ -44,10 +46,10 @@
   # TCP Ports and Ranges
   networking.firewall = {
     allowedTCPPorts = [
-      8384  # Syncthing
-      9300  # Packet / Quick Share
-      24800 # Input-Leap
-      53317 # Localsend
+      8384           # Syncthing
+      9300           # Packet / Quick Share
+      24800          # Input-Leap
+      53317          # Localsend
     ];
     allowedTCPPortRanges = [
       {
@@ -60,9 +62,9 @@
   # UDP Ports and Ranges
   networking.firewall = {
     allowedUDPPorts = [
-      5353  # Avahi / MDNS, enabled by services.avahi ^
-      41641 # Tailscale
-      53317 # Localsend
+      5353           # Avahi / MDNS, enabled by services.avahi ^
+      41641          # Tailscale
+      53317          # Localsend
     ];
     allowedUDPPortRanges = [
       {

@@ -1,8 +1,11 @@
-# ---------------------------------------------------
-# Hardware Support
-# ---------------------------------------------------
+# ==========================================================================
+# Hardware Configuration
+# ==========================================================================
 
-{ pkgs, ... }:
+{ 
+  pkgs, 
+  ... 
+}: 
 
 {
   # Time zone
@@ -51,6 +54,7 @@
   };
 
   # Enable OpenRGB udev
+  # For my system, OpenRGB also requires kernelParams with acpi_enforce_resources=lax (added to modules/system/boot/default.nix), user to be added to i2c group, and udev rule added. Using pkgsUnstable.openrgb-with-all-plugins, declared in /modules/system/packages/system/default.nix.
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";

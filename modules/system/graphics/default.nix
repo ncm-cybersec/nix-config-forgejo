@@ -1,14 +1,20 @@
-# ---------------------------------------------------
+# ==========================================================================
 # Display Manager & NVIDIA GPU Configuration
-# ---------------------------------------------------
+# ==========================================================================
 
-{ config, pkgs,... }:
+{ 
+  config, 
+  pkgs, 
+  ... 
+}:
 
 {
   # Enable X11, Wayland, nvidia, and GTK's pixbuf loader for Electron apps to display svg
-  services.xserver = { 
+  services.xserver = {
     enable = true; 
-    videoDrivers = ["nvidia"]; 
+    videoDrivers = [
+      "nvidia" 
+    ]; 
     xkb = {
       layout = "us";
       variant = "";
@@ -31,6 +37,7 @@
   # Enable Plasma 6 (KDE)
   services.desktopManager.plasma6.enable = true;
 
+  # Enable SDDM display manager, Wayland, and auto-login 
   services.displayManager = {
     sddm = {
       enable = true;

@@ -1,8 +1,11 @@
-# ---------------------------------------------------
-# Bootloader Configuration
-# ---------------------------------------------------
+# ==========================================================================
+# Bootloader Configuration - rEFInd chainloads systemd-boot
+# ==========================================================================
 
-{ pkgs, ... }:
+{ 
+  pkgs, 
+  ... 
+}: 
 
 {
 
@@ -17,6 +20,7 @@
   };
 
   # Add refind package so we can run `refind-install`
+  # See refindtheme.conf for custom theme and complete configuration steps for NixOS.
   environment.systemPackages = with pkgs; [
     refind
   ];
@@ -25,10 +29,17 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Kernel modules
-  boot.kernelModules = [ "kvm-amd" "i2c-dev" "i2c-piix4" ];
+  boot.kernelModules = [ 
+    "kvm-amd"    # KVM virtualization
+    "i2c-dev"    # I2C device support - required for OpenRGB
+    "i2c-piix4"  # SMBus for Ryzen - required for OpenRGB
+  ];
 
   # ACPI / SMBus Conflict Fix for OpenRGB
-  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+  # Allows OpenRGB to access i2c/SMBus devices (including motherboard RGB, RAM modules, and fans)
+  boot.kernelParams = [ 
+    "acpi_enforce_resources=lax" 
+  ];
 
   # Enable KVM virtualisation
   virtualisation.libvirtd.enable = true;

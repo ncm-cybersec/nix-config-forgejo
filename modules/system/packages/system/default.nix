@@ -1,11 +1,15 @@
-# ---------------------------------------------------
+# ==========================================================================
 # Nixos System Packages
-# ---------------------------------------------------
+# ==========================================================================
 
-{ pkgs, pkgsUnstable, ... }:
+{ 
+  pkgs, 
+  pkgsUnstable, 
+  config, 
+  ... 
+}:
 
 {
-
   # Enable unfree packages
   nixpkgs.config = {
     allowUnfree = true;
@@ -41,6 +45,7 @@
      distroshelf
      gearlever
      input-leap
+     normcap
      podman
      podman-compose
      podman-desktop
@@ -55,6 +60,7 @@
      rclone
      remote-exec
      rsync
+     tesseract
      virt-manager
      warehouse
 
@@ -121,3 +127,4 @@
   ]);
   
 }
+
