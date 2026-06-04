@@ -1,14 +1,16 @@
-# ---------------------------------------------------
+# ==========================================================================
 # Flatpak
-# ---------------------------------------------------
+# ==========================================================================
 
-{ pkgs, pkgsUnstable, ... }:
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  ... 
+}:
 
 {
-
-  # Enable Flatpak
-  services.flatpak.enable = true;
-
+  
   # Required to install flatpak
   xdg.portal = {
     enable = true;
@@ -19,6 +21,20 @@
         ];
       };
     };
+    extraPortals = with pkgs;[
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk   
+    ];
+  };
+
+  # Enable Flatpak
+  services.flatpak = {
+    enable = true;
+    update.onActivation = true;
+    packages = [
+      "com.github.tchx84.Flatseal"
+      "org.garudalinux.firedragon"
+    ];
   };
 
 }
