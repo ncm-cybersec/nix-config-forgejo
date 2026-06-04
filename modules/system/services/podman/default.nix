@@ -15,7 +15,6 @@
     containers.enable = true;
     podman = {
       enable = true;
-      enableNvidia = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
@@ -27,5 +26,8 @@
     "quay.io"
     "ghcr.io"
   ];
+
+  # Allow podman containers to utilize NVIDIA GPU
+  hardware.nvidia-container-toolkit.enable = true;
 
 }
