@@ -1,20 +1,26 @@
-# ---------------------------------------------------
-# Home Manager Bash Conf
-# ---------------------------------------------------
+# ==========================================================================
+# Home Manager Bash Configuration
+# ==========================================================================
 
-{ ... }:
+{ 
+  pkgs,
+  ... 
+}:
 
 {
 
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    historyControl = [ "ignoredups" "ignorespace" ];
+    historyControl = [
+      "ignoredups"
+      "ignorespace"
+    ];
     historyFileSize = 10000;
     historySize = 10000;
     bashrcExtra = ''
-        fastfetch | lolcat
-     '';
+      fastfetch | lolcat
+    '';
     shellAliases = {
     };
   };

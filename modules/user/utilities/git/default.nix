@@ -1,11 +1,14 @@
-# ---------------------------------------------------
+# ==========================================================================
 # Home Manager Git Conf
-# ---------------------------------------------------
+# ==========================================================================
 
-{ config, pkgs, ... }:
+{ 
+  config,
+  pkgs,
+  ... 
+}:
 
 {
-
   programs.git.enable = true;
   programs.git.settings.user.name = "nixadmin";
   programs.git.settings.user.email = "nciampamartin@proton.me";
