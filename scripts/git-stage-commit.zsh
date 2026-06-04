@@ -1,6 +1,52 @@
 #!/usr/bin/env zsh
 
-# Make sure we are in a git repository
+# ==========================================================================
+# Git Stage & Commit ZSH Script
+# By N1x_Cybersec
+#
+# - ZSH script to help automate the process of staging and committing 
+#   changes to the nix-config repository.
+# - Shows a preview/diff of the file(s) that have been modified (including any 
+#   untracked/newly added files/directories) then prompts the user to stage 
+#   and commit them.
+# - Script will automatically determine where the root of the git repo is,
+#   allowing it to live anywhere within the repository and still work.
+# - Standard usage: make changes to any file(s) in ~/nix-config/, run the
+#   script using "y" to stage each file, then enter a commit message for each
+#   file, or hit enter to use the default commit message.
+# - Script also includes getopts argument parsing to allow for full automation 
+#   via flags. Run "./scripts/git-stage-commit.zsh -y -m" to stage and commit 
+#   all changed files with the default message.
+# 
+# ==========================================================================
+
+
+# Parse command line flags
+auto_stage=0
+auto_msg=0
+while getopts "ymh" opt; do
+  case ${opt} in
+    y )
+      auto_stage=1
+      ;;
+    m )
+      auto_msg=1
+      ;;
+    h )
+      printf "Usage: %s [-y] [-m]\n" "$0"
+      printf "  -y  Automatically answer 'y' to stage all changed files\n"
+      printf "  -m  Automatically use the default commit message\n"
+      exit 0
+      ;;
+    \? )
+      printf "Invalid option. Use -h for help.\n" 1>&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# Ensure we are located in the nix-config directory that contains the git repository; cd ~/nix-config
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     printf "Error: Not inside a git repository.\n"
     exit 1
@@ -18,7 +64,7 @@ if [[ -z "$files_raw" ]]; then
     exit 0
 fi
 
-# Extract file paths safely
+# Safely extract file paths 
 local files
 files=("${(@f)$(echo "$files_raw" | sed 's/^...//' | sed 's/^"//' | sed 's/"$//')}")
 
@@ -60,10 +106,20 @@ for file in "${files[@]}"; do
     fi
     printf "--------------------------------------------------------\n"
     
-    # Ask if user wants to stage and commit
-    printf "Stage and commit this file? [y/N/q(uit)] "
-    read -k 1 action
-    printf "\n"
+    # Prompt user to stage and commit changed file(s)
+    if (( auto_stage )); then
+        action="y"
+        printf "Auto-staging file...\n"
+    else
+        printf "Stage and commit this file? [y/N/q(uit)] "
+        if [[ ! -t 0 ]]; then
+            # Stdin is not a terminal (e.g. piped), so use standard read
+            read action
+        else
+            read -k 1 action
+            printf "\n"
+        fi
+    fi
     
     if [[ "$action" == "q" || "$action" == "Q" ]]; then
         printf "Exiting...\n"
@@ -72,10 +128,15 @@ for file in "${files[@]}"; do
         git add "$file"
         
         # Read the commit message
-        printf "\nEnter detailed message (will be appended to '%s'): " "$prefix"
-        read msg
+        local msg=""
+        if (( auto_msg )); then
+            printf "Auto-accepting default message.\n"
+        else
+            printf "\nEnter detailed message (will be appended to '%s'): " "$prefix"
+            read msg
+        fi
         
-        # If user provides a message, append it. Otherwise, just use the prefix + update
+        # If a message is provided, append it. Otherwise, just use the prefix + update
         local full_msg=""
         if [[ -n "$msg" ]]; then
             full_msg="${prefix}${msg}"
