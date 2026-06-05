@@ -5,7 +5,6 @@
 { 
   pkgs, 
   pkgsUnstable, 
-  config, 
   ... 
 }:
 
