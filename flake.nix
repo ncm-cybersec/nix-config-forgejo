@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
+    # KWIN Effects Glass Flake Module
+    kwin-effects-glass = {
+      url = "github:4v3ngR/kwin-effects-glass";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # NumtideLLM Agents
     llm-agents.url = "github:numtide/llm-agents.nix";
     
@@ -39,8 +45,9 @@
   outputs = { 
     self, 
     nixpkgs, 
+    nixpkgs-unstable,
     home-manager, 
-    nixpkgs-unstable, 
+    kwin-effects-glass,
     llm-agents, 
     nix-flatpak, 
     sops-nix, 
