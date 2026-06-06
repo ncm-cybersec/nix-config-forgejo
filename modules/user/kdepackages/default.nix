@@ -3,6 +3,7 @@
 # ==========================================================================
 
 { 
+  inputs,
   pkgs,
   pkgsUnstable,
   ... 
@@ -15,7 +16,8 @@
   # Packages that should be installed to the user profile.
   home.packages = (with pkgs; [
 
-    # Stable 
+    # Stable
+    inputs.kwin-effects-glass.packages.${pkgs.system}.default 
 
     # Fix for KDE Plasma Applet/Widgets
     (python3.withPackages (ps: with ps; [
