@@ -84,6 +84,7 @@
      # System
      android-tools
      bat
+     cacert
      cachix
      cargo
      cmake

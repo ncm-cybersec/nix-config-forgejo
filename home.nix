@@ -24,11 +24,12 @@
 
     # Stable packages
     
-    # Core CLI tools
+    # Core & Desktop utilities (CLI)
     aria2
     binutils
     btop
     bun
+    cacert
     coreutils
     curlFull
     desktop-file-utils
