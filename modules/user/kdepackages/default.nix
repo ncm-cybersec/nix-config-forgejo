@@ -19,11 +19,13 @@
     # Stable
     inputs.kwin-effects-glass.packages.${pkgs.system}.default 
 
-    # Fix for KDE Plasma Applet/Widgets
+    # Fix for KDE Plasma Applet/Widgets crashing or causing issues w/ plasmashell
     (python3.withPackages (ps: with ps; [
       dbus-python
       pygobject3
     ]))
+
+    utterly-nord-plasma
     wayland-utils
     
   ]) ++ 
