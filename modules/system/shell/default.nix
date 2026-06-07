@@ -21,7 +21,6 @@
 
     eval "$(starship init zsh)"
 
-    fastfetch
   '';
 
   # Thank you to https://github[.]com/sircam-html/nixos-conf for "fastfetch -c examples/25"!
