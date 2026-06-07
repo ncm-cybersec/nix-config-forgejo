@@ -7,37 +7,38 @@
 
   inputs = {
     
-    # Nixpkgs Stable
+    # Nixpkgs Stable - Default Channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     
-    # Nixpkgs Unstable
+    # Nixpkgs Unstable. System is on stable channel, but unstable is used for certain packages receiving rapid updates. See home.nix, /modules/system/packages/system/default.nix, or
+    # /modules/user/kdepackages/default.nix for examples.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     
-    # Home Manager
+    # Home Manager - Declared as a module, allowing me to simply run "nix flake update" & "sudo nixos-rebuild switch" without any flags. 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # KWIN Effects Glass Flake Module
+    # KWIN Effects Glass Flake Module - Aesthetic
     kwin-effects-glass = {
       url = "github:4v3ngR/kwin-effects-glass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NumtideLLM Agents
+    # NumtideLLM Agents - Awesome flake module that packages common LLM agents and tools for NixOS that are not currently in Nixpkgs.
     llm-agents.url = "github:numtide/llm-agents.nix";
     
-    # Nix Declarative Flatpaks
+    # Nix Declarative Flatpaks - Declarative Flatpak management for a couple of applications that aren't in nixpkgs, or provide more frequent updates than nixpkgs stable/unstable.
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    # SOPS Nix
+    # SOPS Nix - Secrets management for NixOS.
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Vicinae
+    # Vicinae - Local Desktop Search Runner
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
@@ -105,6 +106,9 @@
         
         # SOPS configuration for secrets management
         sops-nix.nixosModules.sops
+
+        # Vicinae configuration for local desktop search runner
+        vicinae.nixosModules.default 
       ];
     };
   };
