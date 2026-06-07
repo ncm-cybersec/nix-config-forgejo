@@ -56,14 +56,12 @@
     # AI & Dev
     android-studio
     android-tools
-    beekeeper-studio
     cherry-studio
     github-desktop
     newelle
         
     # Office & Productivity
     affine
-    bluemail
     discord
     drawio
     ferdium
@@ -86,7 +84,6 @@
     
     # Utilities
     hardinfo2
-    ksnip
     localsend
     netpeek
     rustdesk
@@ -105,7 +102,6 @@
     kiro
     kiro-cli
     lmstudio
-    opencode-desktop
     proton-pass
     proton-pass-cli
     tabularis
