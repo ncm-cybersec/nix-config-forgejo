@@ -40,11 +40,18 @@
     ];
   };
 
-  # Enable Experimental Features
-  nix.settings.experimental-features = [ 
-    "nix-command" 
-    "flakes" 
-  ];
+  # Enable Experimental Features and declare trusted users
+  nix.settings = {
+    experimental-features = [ 
+      "nix-command" 
+      "flakes" 
+    ];
+    trusted-users = [ 
+      "nixadmin" 
+      "root" 
+      "@wheel" 
+    ];
+  };
 
   # Allow root to access the flake git repo (my nix-config folder lives in home directory, and is symlinked into /etc/nixos, so this is required for auto-upgrade)
   systemd.services.nixos-upgrade = {
