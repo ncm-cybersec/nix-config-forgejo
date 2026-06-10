@@ -43,6 +43,7 @@
     lolcat
     mtr
     nmap
+    nssTools
     nvtopPackages.nvidia
     pciutils
     sysstat
