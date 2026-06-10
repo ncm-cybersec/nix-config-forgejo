@@ -11,28 +11,25 @@
 
 {
 
-  # Install the sops CLI tool 
-  home.packages = [
-    pkgs.sops
-  ];
-
   # Import the sops-nix Home Manager module
   imports = [
     inputs.sops-nix.homeManagerModules.sops
   ];
 
+  # Install the sops CLI tool 
+  home.packages = [
+    pkgs.sops
+  ];
+
   # Configure secrets
   sops = {
     defaultSopsFile = /home/nixadmin/nix-config/secrets/secrets.yaml; 
-    age.keyFile = "/home/nixadmin/.config/sops/age/keys.txt"; 
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt"; 
     
     secrets = {
-      # ==========================================================================
-      # Environment Variables
-      # ==========================================================================
-      HOME_NIXOS_PASSWORD = {
-        path = "secrets.yaml";
-        sops.age.ageKeyFile = "~/.config/sops/age/keys.txt";
+
+      git_config_user = {
+        path = "${config.home.homeDirectory}/.config/git/git_config_user";
       };
     };
   };
