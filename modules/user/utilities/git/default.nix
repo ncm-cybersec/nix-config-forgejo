@@ -11,7 +11,9 @@
 {
   programs.git.enable = true;
   programs.git.settings.user.name = "nixadmin";
-  programs.git.settings.user.email = "nciampamartin@proton.me";
+  includes = [
+    { path = config.sops.secrets.git_config_user.path; }
+  ];
   programs.git.settings = {
     safe.directory = "/etc/nixos";
   };
