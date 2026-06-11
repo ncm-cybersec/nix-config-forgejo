@@ -17,13 +17,14 @@
   ];
 
   # Install the sops CLI tool 
-  home.packages = [
-    pkgs.sops
+  home.packages = with pkgs; [
+    age
+    sops
   ];
 
   # Configure secrets
   sops = {
-    defaultSopsFile = /home/nixadmin/nix-config/secrets/secrets.yaml; 
+    defaultSopsFile = ../../../secrets/secrets.yaml; 
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt"; 
     
     secrets = {

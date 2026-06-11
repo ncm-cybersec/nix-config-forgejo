@@ -13,9 +13,7 @@
   # Enable Proton Pass Agent - Used for SSH key management 
   services.proton-pass-agent = {
     enable = true;
-    package = with pkgsUnstable; [
-      proton-pass-cli
-    ];
+    package = pkgsUnstable.proton-pass-cli;
     socket = "proton-pass-agent";
     extraArgs = [
       "--share-id"

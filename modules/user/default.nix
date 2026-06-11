@@ -11,6 +11,7 @@
     ./shell/nushell
     ./shell/tmux
     ./shell/zsh
+    ./sops
     ./utilities/git
     ./utilities/protonpass
     ./utilities/rclone

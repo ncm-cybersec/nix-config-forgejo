@@ -9,13 +9,14 @@
 }:
 
 {
-  programs.git.enable = true;
-  programs.git.settings.user.name = "nixadmin";
-  includes = [
-    { path = config.sops.secrets.git_config_user.path; }
-  ];
-  programs.git.settings = {
-    safe.directory = "/etc/nixos";
+  programs.git = {
+    enable = true;
+    includes = [
+      { path = config.sops.secrets.git_config_user.path; }
+    ];
+    settings = {
+      user.name = "nixadmin";
+      safe.directory = "/etc/nixos";
+    };
   };
-  
 }
