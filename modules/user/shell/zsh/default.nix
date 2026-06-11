@@ -16,6 +16,8 @@
       initContent = ''
         export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
 
+        export SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"
+
         eval "$(starship init zsh)"
 
         fastfetch
