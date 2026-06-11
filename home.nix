@@ -54,7 +54,7 @@
     which
     xdg-utils
 
-    # AI & Dev
+    # AI & Dev Tools
     android-studio
     android-tools
     cherry-studio
@@ -74,7 +74,6 @@
     obs-studio
     slack
     spotify
-    thunderbird
     tor-browser
     (vivaldi.override {
       proprietaryCodecs = true;
@@ -86,7 +85,6 @@
     # Utilities
     hardinfo2
     localsend
-    netpeek
     rustdesk
     vicinae
     vlc
@@ -102,9 +100,10 @@
     cursor-cli
     kiro
     kiro-cli
-    lmstudio
+    proton-authenticator
     proton-pass
-    proton-pass-cli
+    proton-vpn
+    proton-vpn-cli
     tabularis
     zed-editor
        
