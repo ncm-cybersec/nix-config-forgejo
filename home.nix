@@ -59,8 +59,7 @@
     android-tools
     cherry-studio
     github-desktop
-    newelle
-        
+            
     # Office & Productivity
     affine
     discord
