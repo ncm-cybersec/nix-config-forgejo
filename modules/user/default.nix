@@ -1,5 +1,5 @@
 # ==========================================================================
-# Home Manager Home.nix Imports
+# Home Manager - Home.nix Imports
 # ==========================================================================  
 
 { ... }: {
@@ -12,6 +12,7 @@
     ./shell/tmux
     ./shell/zsh
     ./utilities/git
+    ./utilities/protonpass
     ./utilities/rclone
     ./utilities/vicinae
   ];
