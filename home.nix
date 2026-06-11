@@ -72,6 +72,7 @@
     newsflash
     obsidian
     obs-studio
+    onlyoffice-desktopeditors
     slack
     spotify
     tor-browser
