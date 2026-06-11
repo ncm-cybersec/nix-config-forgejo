@@ -18,9 +18,6 @@
   environment.shells =  with pkgs; [ bashInteractive zsh ];
   environment.loginShellInit = ''
     export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-
-    eval "$(starship init zsh)"
-
   '';
 
   # Thank you to https://github[.]com/sircam-html/nixos-conf for "fastfetch -c examples/25"!
