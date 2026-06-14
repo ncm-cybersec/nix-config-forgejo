@@ -14,6 +14,9 @@
     # /modules/user/kdepackages/default.nix for examples.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     
+    # Catppuccin Global Theme
+    catppuccin.url = "github:catppuccin/nix/release-26.05";
+
     # Home Manager - Declared as a module, allowing me to simply run "nix flake update" & "sudo nixos-rebuild switch" without any flags. 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -47,6 +50,7 @@
     self, 
     nixpkgs, 
     nixpkgs-unstable,
+    catppuccin,
     home-manager, 
     kwin-effects-glass,
     llm-agents, 
@@ -58,7 +62,8 @@
   
   let 
     system = "x86_64-linux";
-    # Define nixpkgs-unstable as pkgsUnstable to be shared with configuration.nix and home.nix
+    
+    # Define nixpkgs-unstable as pkgsUnstable to be passed to configuration.nix and home.nix
     pkgsUnstable = import nixpkgs-unstable {
       inherit system;
       config = {
@@ -97,7 +102,12 @@
           home-manager.extraSpecialArgs = { 
             inherit inputs pkgsUnstable; 
           };
-          home-manager.users.nixadmin = import ./home.nix;
+          home-manager.users.nixadmin = {
+            imports = [
+              ./home.nix
+              catppuccin.homeModules.catppuccin
+            ];
+          };
           home-manager.backupFileExtension = "backup";
         }
         
