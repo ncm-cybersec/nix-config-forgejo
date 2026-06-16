@@ -10,6 +10,7 @@
     ./hardware
     ./networking
     ./packages/flatpak
+    ./packages/scripts
     ./packages/system
     ./services/localllama
     ./services/podman
