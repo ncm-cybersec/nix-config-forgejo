@@ -16,9 +16,6 @@
   # Configure ZSH as default system shell. Configuring for system and user was required for oh-my-zsh to work. Declaring system.userActivationScripts.zshrc creates a .zshrc file in the user's home directory, bypassing the ZSH first-time setup wizard.
   system.userActivationScripts.zshrc = "touch .zshrc";
   environment.shells =  with pkgs; [ bashInteractive zsh ];
-  environment.loginShellInit = ''
-    export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-  '';
 
   # Thank you to https://github[.]com/sircam-html/nixos-conf for "fastfetch -c examples/25"!
   programs.zsh = {
