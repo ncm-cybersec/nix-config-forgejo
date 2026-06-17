@@ -17,7 +17,6 @@
   home.packages = (with pkgs; [
 
     # Stable
-    inputs.kwin-effects-glass.packages.${pkgs.system}.default 
 
     # Fix for KDE Plasma Applet/Widgets crashing or causing issues w/ plasmashell
     (python3.withPackages (ps: with ps; [
