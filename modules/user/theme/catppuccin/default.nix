@@ -11,71 +11,71 @@
 
 {
 
-  # Import the sops-nix Home Manager module
+  # Import the catppuccin flake module
   imports = [
     inputs.catppuccin.homeModules.catppuccin
   ];
 
-  # Set global theme using catppuccin flake input, mimicking Garuda Mokka theme
+  # Set global theme using catppuccin flake input, to create a theme similar to Garuda Mokka
   catppuccin = {
     enable = true;
     accent = "mauve";
     flavor = "macchiato";
     btop = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     cache = {
       enable = true;
     };
     cursors = {
       enable = true;
-      flavor = "catppuccin.macchiato";
+      flavor = "macchiato";
       accent = "mauve";
     };
     eza = {
       enable = true;
-      accent = "catppuccin.mauve";
+      accent = "mauve";
     };
     fzf = {
-      enable = "catppuccin.enable";
-      accent = "catppuccin.mauve";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      accent = "mauve";
+      flavor = "macchiato";
     };
     gtk = {
       icon = {
-        enable = "catppuccin.enable";
-        accent = "catppuccin.mauve";
-        flavor = "catppuccin.macchiato";
+        enable = true;
+        accent = "mauve";
+        flavor = "macchiato";
       };
     };
     nushell = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     obs = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     opencode = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     spotify-player = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     tmux = {
-      enable = "catppuccin.enable";
-      flavor = "catppuccin.macchiato";
+      enable = true;
+      flavor = "macchiato";
     };
     vicinae = {
-      enable = "catppuccin.enable";
-      accent = "catppuccin.mauve";
+      enable = true;
+      accent = "mauve";
     };
     zsh-syntax-highlighting = {
-      enable = "catppuccin.enable";
-      accent = "catppuccin.mauve";
+      enable = true;
+      flavor = "macchiato";
     };
 
   };
