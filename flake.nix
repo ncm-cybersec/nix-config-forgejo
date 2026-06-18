@@ -36,7 +36,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     # PlasmaZones - Window tiling manager inspired by PowerToys FancyZones for KDE Plasma. Defined as a nixosModule (line 126) and imported as a program in /modules/system/desktop.
-    plasmazones.url = "github:fuddlesworth/PlasmaZones";
+    # Flake input pinned to release v3.0.15, as nixpkgs stable or unstable does not currently support KWIN 6.7. 
+    plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
 
     # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule (line 129) and added as an input to /modules/system/security.
     sops-nix = {
