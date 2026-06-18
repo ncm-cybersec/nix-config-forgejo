@@ -11,16 +11,11 @@
 
 {
 
-  # Import PlasmaZones window tiling manager flake module
-  imports = [
-    inputs.plasmazones.nixosModules.default
-  ];
-
-  # PlasmaZones window tiling manager configuration
+  # Enable PlasmaZones window tiling manager flake module
   programs.plasmazones = {
     enable = true;
   };
-  
+
   # Enable X11, Wayland, nvidia, and GTK's pixbuf loader for Electron apps to display svg
   services.xserver = {
     enable = true; 
