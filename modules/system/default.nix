@@ -6,7 +6,7 @@
   imports = [
     ./boot
     ./cache
-    ./graphics
+    ./desktop
     ./hardware
     ./networking
     ./packages/flatpak
