@@ -1,7 +1,7 @@
 # ==========================================================================
-# Bootloader Configuration - Currently using Grub
+# Bootloader Configuration - Currently using systemd-boot (UEFI)
 #
-# rEFInd chainloading systemd-boot config is below (commented out)
+# GRUB config is kept below (commented out) for reference.
 # ==========================================================================
 
 { 
@@ -11,32 +11,15 @@
 
 {
 
-  # Disable systemd-boot
-  boot.loader.systemd-boot.enable = false;
-
-  # Grub bootloader configuration
+  # systemd-boot
   boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 20;
+    };
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-      splashImage = "/home/nixadmin/nix-config/assets/emperor.png";
-
-      # Manual Grub Menu entry for Manjaro on nvme1n1p1
-      extraEntries = ''
-        menuentry "Manjaro Linux" {
-          insmod part_gpt
-          insmod fast
-          insmod chain
-          search --no-floppy --fs-uuid --set=root 6B9A-BB79
-          chainloader /EFI/manjaro/grubx64.efi
-        }
-      '';
     };
   };
 
@@ -62,24 +45,26 @@
   # I2C kernel modules for openrgb
   hardware.i2c.enable = true;
 
-  # ==========================================================================
-  # rEFInd Bootloader Configuration - rEFInd chainloads systemd-boot
-  # ==========================================================================
-
-  # Bootloader configuration; enabled systemd-boot for generation tracking (rEFInd will chainload this)
-  #boot.loader = {
-    #systemd-boot.enable = true;
-    #efi = {
-      # EFI variables disabled to prevent systemd-boot from taking over rEFInd
-      #canTouchEfiVariables = false;
-      #efiSysMountPoint = "/boot";
-    #};
+  # GRUB kept for reference (NOT active)
+  # GRUB never took over the firmware boot path on this board: the firmware kept
+  # booting systemd-boot via its NVRAM entry / the \EFI\BOOT\BOOTX64.EFI
+  # fallback. To actually use GRUB you would also need to remove systemd-boot's
+  # NVRAM entry and overwrite that fallback, then make GRUB first in BootOrder.
+  #boot.loader.grub = {
+  #  enable = true;
+  #  efiSupport = true;
+  #  device = "nodev";
+  #  useOSProber = true;   # auto-detects Manjaro / Windows
+  #  splashImage = "/home/nixadmin/nix-config/assets/emperor.png";
+  #  extraEntries = ''
+  #    menuentry "Manjaro Linux" {
+  #      insmod part_gpt
+  #      insmod fast
+  #      insmod chain
+  #      search --no-floppy --fs-uuid --set=root 6B9A-BB79
+  #      chainloader /EFI/manjaro/grubx64.efi
+  #    }
+  #  '';
   #};
-
-  # Add refind package so we can run `refind-install`
-  # See refindtheme.conf for custom theme and complete configuration steps for NixOS.
-  #environment.systemPackages = with pkgs; [
-    #refind
-  #];
 
 }
