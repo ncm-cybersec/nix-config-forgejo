@@ -12,8 +12,7 @@
     ./shell/tmux
     ./shell/zsh
     ./sops
-    ./theme/catppuccin
-    ./theme/globals
+    ./theme
     ./utilities/git
     ./utilities/protonpass
     ./utilities/rclone
