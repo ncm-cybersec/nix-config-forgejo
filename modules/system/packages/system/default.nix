@@ -91,6 +91,9 @@
      deadnix
      dbus
      direnv
+     efibooteditor
+     efibootmgr
+     efitools
      gdb
      git
      gparted
