@@ -16,7 +16,7 @@ let
 in {
 
   imports = [
-    inputs.vicinae.homeModules.default
+    inputs.vicinae.homeManagerModules.default
   ];
   
   # Links rose-pine-moon.png to the correct path for Vicinae ~/.config/vicinae/themes/icons/.
