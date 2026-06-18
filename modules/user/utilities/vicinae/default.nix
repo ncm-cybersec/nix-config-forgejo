@@ -4,6 +4,7 @@
 
 { 
   config,
+  inputs,
   pkgs,
   ... 
 }:
@@ -13,6 +14,11 @@ let
   rawThemeData = builtins.fromTOML (builtins.readFile ./rose-pine-moon.toml);
 
 in {
+
+  imports = [
+    inputs.vicinae.homeModules.default
+  ];
+  
   # Links rose-pine-moon.png to the correct path for Vicinae ~/.config/vicinae/themes/icons/.
   home.file.".config/vicinae/themes/icons/rose-pine-moon.png".source = ./rose-pine.png;
 
