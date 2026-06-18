@@ -35,17 +35,20 @@
     # Nix Declarative Flatpaks - Declarative Flatpak management for applications that aren't in nixpkgs, or provide more frequent updates than nixpkgs stable/unstable. Defined as a nixosModule (line 119) and added as an input to /modules/system/packages/system.
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule (line 122).
+    # PlasmaZones - Window tiling manager inspired by PowerToys FancyZones for KDE Plasma. Defined as a nixosModule (line 126) and imported as a program in /modules/system/desktop.
+    plasmazones.url = "github:fuddlesworth/PlasmaZones";
+
+    # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule (line 129) and added as an input to /modules/system/security.
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Vicinae - Local Desktop Search Runner. Defined as a nixosModule (line 125)for low-level system access and permissions, then imported in /modules/user/utilities/vicinae as a homeModule for access to custom options.
+    # Vicinae - Local Desktop Search Runner. Defined as a nixosModule (line 132)for low-level system access and permissions, then imported in /modules/user/utilities/vicinae as a homeModule for access to custom options.
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
-  # Channel outputs to be used by system modules 
+  # Flake outputs passed to nixos configurations and home manager via specialArgs and extraSpecialArgs
   outputs = { 
     self, 
     nixpkgs, 
@@ -55,6 +58,7 @@
     kwin-effects-glass,
     llm-agents, 
     nix-flatpak, 
+    plasmazones, 
     sops-nix, 
     vicinae, 
     ... 
@@ -117,6 +121,9 @@
         
         # Nix Declarative Flatpak configuration
         nix-flatpak.nixosModules.nix-flatpak
+
+        # PlasmaZones window tiling manager for KDE Plasma
+        plasmazones.nixosModules.default
         
         # SOPS configuration for secrets management
         sops-nix.nixosModules.sops
