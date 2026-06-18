@@ -10,38 +10,38 @@
     # Nixpkgs Stable - Default Channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     
-    # Nixpkgs Unstable. System is on stable channel, but unstable is used for certain packages receiving rapid updates. See home.nix, /modules/system/packages/system/default.nix, or
-    # /modules/user/kdepackages/default.nix for examples.
+    # Nixpkgs Unstable. System is on stable channel, but unstable is used for certain packages receiving rapid updates. See home.nix, /modules/system/packages/system, or
+    # /modules/user/kdepackages for examples.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     
-    # Catppuccin Global Theme
+    # Catppuccin Global Theme - Defined as a home-manager module and imported in home.nix (line 112). Module options defined in /modules/user/theme.
     catppuccin.url = "github:catppuccin/nix/release-26.05";
 
-    # Home Manager - Declared as a module, allowing me to simply run "nix flake update" & "sudo nixos-rebuild switch" without any flags. 
+    # Home Manager - Defined as a nixos module (lines 102-116), allowing me to simply run "nix flake update" & "sudo nixos-rebuild switch" without any flags. 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # KWIN Effects Glass Flake Module - Aesthetic
+    # KWIN Effects Glass Flake Module for system theme. Added as an input to /modules/system/theme.
     kwin-effects-glass = {
       url = "github:4v3ngR/kwin-effects-glass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NumtideLLM Agents - Awesome flake module that packages common LLM agents and tools for NixOS that are not currently in Nixpkgs.
+    # NumtideLLM Agents - Flake module that packages common LLM agents and tools for NixOS that are not currently in Nixpkgs, added as an input to /modules/user/llmagents.
     llm-agents.url = "github:numtide/llm-agents.nix";
     
-    # Nix Declarative Flatpaks - Declarative Flatpak management for a couple of applications that aren't in nixpkgs, or provide more frequent updates than nixpkgs stable/unstable.
+    # Nix Declarative Flatpaks - Declarative Flatpak management for applications that aren't in nixpkgs, or provide more frequent updates than nixpkgs stable/unstable. Defined as a nixosModule (line 119) and added as an input to /modules/system/packages/system.
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
-    # SOPS Nix - Secrets management for NixOS.
+    # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule (line 122).
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Vicinae - Local Desktop Search Runner
+    # Vicinae - Local Desktop Search Runner. Defined as a nixosModule (line 125)for low-level system access and permissions, then imported in /modules/user/utilities/vicinae as a homeModule for access to custom options.
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
@@ -63,7 +63,7 @@
   let 
     system = "x86_64-linux";
     
-    # Define nixpkgs-unstable as pkgsUnstable to be passed to configuration.nix and home.nix
+    # System primarily uses nixpkgs stable, but defines nixpkgs-unstable as pkgsUnstable, passing it to configuration.nix using specialArgs, and home.nix using extraSpecialArgs (lines 106-107). This allows stable and unstable packages to be safely mixed. See home.nix, /modules/system/packages/system/default.nix, /modules/user/llmagents for examples.
     pkgsUnstable = import nixpkgs-unstable {
       inherit system;
       config = {
@@ -78,14 +78,18 @@
         
       };
     };
- 
+  
+  # nixosConfigurations.nixadmin attribute is defined to match the hostname of the machine (defined as "networking.hostName = "nixadmin";" in configuration.nix), to allow for multiple machines to use the same flake, each with its own configuration, by simply changing the hostname attribute. For example, if you want to use the flake on a new machine, change the hostname attributes in flake.nix, configuration.nix, and home.nix to the new machine's hostname and run "sudo nixos-rebuild switch". Existing System/User Modules can be removed if needed by commenting out the relevant imports in /modules/system/default.nix, and /modules/user/default.nix. 
+  
+  # nixos-rebuild is intelligent enough to detect this attribute, enforce locked inputs instead of using channels (flake.lock from running "nix flake update"), detect home-manager as a nixos module (see below), and rebuild the entire system through "sudo nixos-rebuild switch" without any flags.
+  
   in { 
     nixosConfigurations.nixadmin = nixpkgs.lib.nixosSystem {
       inherit system;
       
-      # Pass inputs and pkgsUnstable to modules
+
       specialArgs = { 
-        inherit inputs pkgsUnstable; 
+        inherit self inputs pkgsUnstable; 
       };
       
       # Configuration modules 
