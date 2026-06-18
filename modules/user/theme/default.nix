@@ -11,9 +11,23 @@
 
 {
 
-  # Import the catppuccin flake module
-  imports = [
-    inputs.catppuccin.homeModules.catppuccin
+  # Additional theme packages
+  home.packages = with pkgs; [
+
+    # kde kwin-effects-glass flake module
+    inputs.kwin-effects-glass.packages.${pkgs.system}.default 
+    inputs.kwin-effects-glass.packages.${pkgs.system}.x11    
+
+    # kde
+    kdePackages.kzones
+    kde-rounded-corners
+
+    # icons
+    beauty-line-icon-theme
+    kora-icon-theme
+    papirus-folders
+    papirus-icon-theme
+    tela-circle-icon-theme
   ];
 
   # Set global theme using catppuccin flake input, to create a theme similar to Garuda Mokka
