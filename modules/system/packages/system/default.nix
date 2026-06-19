@@ -83,6 +83,7 @@
      
      # System
      android-tools
+     argc
      bat
      cacert
      cachix
@@ -100,6 +101,8 @@
      gsettings-desktop-schemas
      i2c-tools
      javaPackages.compiler.openjdk25
+     jq
+     jql
      libvirt
      llvm
      manix
