@@ -95,6 +95,8 @@
   # Unstable packages 
   (with pkgsUnstable; [
     
+    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to home-manager/user modules using extraSpecialArgs (lines 111-113).
+    
     antigravity
     code-cursor
     cursor-cli

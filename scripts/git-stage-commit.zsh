@@ -18,6 +18,8 @@
 #   via flags. Run "./scripts/git-stage-commit.zsh -y -m" to stage and commit 
 #   all changed files with the default message.
 # 
+# - Script is defined system-wide in /modules/system/packages/scripts using 
+#   pkgs.writeShellScriptBin.
 # ==========================================================================
 
 

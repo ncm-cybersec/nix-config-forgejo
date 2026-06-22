@@ -31,6 +31,8 @@
   
   (with pkgsUnstable; [
   
+    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to home-manager/user modules using extraSpecialArgs (lines 111-113).
+
     # Unstable KDE packages, because stable versions are significantly outdated
     kdePackages.akonadi
     kdePackages.akonadi-calendar

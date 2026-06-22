@@ -6,8 +6,12 @@
 #
 # - ZSH script to automate updating Netcatty via the github API.
 # - Netcatty is a modern GUI SSH client.
-# - Netcatty receives frequent updates, and is not yet available via nixpkgs unstable.
-# - This script is useful for keeping it up to date via the AppImage directly from the github API.
+# - Netcatty is not yet available for nixos via nixpkgs.
+# - This script is useful for keeping it up to date via the AppImage 
+#   directly from the github API.
+#
+# - Script is defined system-wide in /modules/system/packages/scripts using 
+#   pkgs.writeShellScriptBin.
 #
 # ==========================================================================
 

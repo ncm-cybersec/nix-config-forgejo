@@ -1,5 +1,5 @@
 # ==========================================================================
-# Display Manager & NVIDIA GPU Configuration
+# Desktop Environment & NVIDIA GPU Configuration
 # ==========================================================================
 
 { 

@@ -46,10 +46,7 @@
   hardware.i2c.enable = true;
 
   # GRUB kept for reference (NOT active)
-  # GRUB never took over the firmware boot path on this board: the firmware kept
-  # booting systemd-boot via its NVRAM entry / the \EFI\BOOT\BOOTX64.EFI
-  # fallback. To actually use GRUB you would also need to remove systemd-boot's
-  # NVRAM entry and overwrite that fallback, then make GRUB first in BootOrder.
+
   #boot.loader.grub = {
   #  enable = true;
   #  efiSupport = true;

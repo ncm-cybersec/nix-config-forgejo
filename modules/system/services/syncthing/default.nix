@@ -1,5 +1,5 @@
 # ==========================================================================
-# Nixos Syncthing Service
+# Syncthing Service Configuration
 # ==========================================================================
 
 { 
@@ -9,8 +9,10 @@
 }:
 
 {
-  # Enable Syncthing with declarative configuration	
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder.
+  # Enable Syncthing with declarative configuration
+  
+  # Don't create default ~/Sync folder
+  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; 
   services.syncthing = {
     enable = true;
     package = pkgs.syncthing;

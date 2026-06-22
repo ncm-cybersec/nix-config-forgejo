@@ -127,6 +127,8 @@
   # Unstable packages
   (with pkgsUnstable; [
      
+    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to nixos/system modules using extraSpecialArgs (lines 96-98).
+    
     openrgb-with-all-plugins
      
   ]);

@@ -1,5 +1,5 @@
 # ==========================================================================
-# Home Manager Packages - MCP Servers
+# Home Manager MCP Configuration
 # ==========================================================================
 
 { 
@@ -20,7 +20,18 @@
   programs.mcp = {
     enable = true;
     servers = {
+      
+      ansible-dev = {
+        command = "${pkgs.nodejs}/bin/npx";
+        args = [ 
+          "-y" 
+          "@ansible/mcp-server" 
+        ];
+        env = {
 
+        };
+      };
+      
       forgejo = {
         command = "npx";
         args = [

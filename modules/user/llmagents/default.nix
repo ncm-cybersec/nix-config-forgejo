@@ -1,5 +1,5 @@
 # ==========================================================================
-# Home Manager Packages - LLM-Agents Input
+# Home Manager Packages - Numtide/LLMAgents Flake Input
 # ==========================================================================
 
 { 

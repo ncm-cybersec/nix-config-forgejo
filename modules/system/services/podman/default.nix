@@ -1,5 +1,5 @@
 # ==========================================================================
-# Nixos Productivity Services
+# Podman Container Runtime
 # ==========================================================================
 
 { 
@@ -22,9 +22,10 @@
 
   # Podman container registries
   virtualisation.containers.registries.search = [
-    "docker.io"
-    "quay.io"
-    "ghcr.io"
+    "docker.io"     # Docker Container Registry
+    "ghcr.io"       # Github Container Registry
+    "lscr.io"       # Linux Server Container Registry
+    "quay.io"       # Quay Container Registry
   ];
 
   # Allow podman containers to utilize NVIDIA GPU

@@ -9,24 +9,28 @@
 { 
 
   # Increase maximum number of open files for user sessions to resolve 
-  # "too many open files" error. Equivalent to running 
-  # "ulimit -n 4096" command after flake update > nix rebuild.
+  # "too many open files" error. I had previously solved this by running the
+  # "ulimit -n 4096" command before updating flake inputs and running 
+  # nixos-rebuild switch.
+
+  # This should ensure that the "too many open files" error does not occur, 
+  # while also protecting against memory spikes during large updates.
   security.pam.loginLimits = [
     {
       domain = "*";
       type = "soft";
       item = "nofile";
-      value = "1048576";
+      value = "524288";
     }
     { 
       domain = "*";
       type = "hard";
       item = "nofile"; 
-      value = "226214400";
+      value = "1048576";
     }
   ];
 
-  # Input channel binary caches
+  # Binary caches for Nix flake inputs
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
