@@ -101,7 +101,7 @@
       modules = [
         
         # Core Configuration
-        ./configuration.nix
+        ./hosts/desktop/configuration.nix
         
         # Home Manager configuration for user
         home-manager.nixosModules.home-manager
