@@ -15,7 +15,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./modules/system
+      ../../modules/system
     ];
 
   # Define system hostname
