@@ -29,9 +29,7 @@
   };
 
   # Use latest Zen kernel 7.0.10
-  boot.kernelPackages = with pkgs; [
-    linuxPackages_zen
-  ];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Kernel modules
   boot.kernelModules = [ 

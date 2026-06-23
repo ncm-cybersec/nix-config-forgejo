@@ -28,9 +28,7 @@
   };
 
   # Use LTS Kernel
-  boot.kernelPackages = with pkgs; [
-    linuxPackages_6_12
-  ];
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Additional kernel module options
   boot.kernelModules = [
