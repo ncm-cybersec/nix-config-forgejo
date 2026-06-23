@@ -9,9 +9,7 @@
 }:
 
 {
-  # Enable Syncthing with declarative configuration
-  
-  # Don't create default ~/Sync folder
+  # Enable Syncthing
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; 
   services.syncthing = {
     enable = true;

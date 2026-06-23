@@ -28,7 +28,7 @@
     "quay.io"       # Quay Container Registry
   ];
 
-  # Allow podman containers to utilize NVIDIA GPU
+  # Pass NVIDIA GPU to containers
   hardware.nvidia-container-toolkit.enable = true;
 
 }

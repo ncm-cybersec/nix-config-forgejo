@@ -13,7 +13,7 @@
 {
   imports = [
     
-    # Core modules shared between all hosts, using /modules/system & default.nix for imports format.
+    # Core modules shared between all hosts
     ./cache
     ./hardware
     ./networking
@@ -26,7 +26,7 @@
   
   ] 
   
-  # To ensure that specific modules are loaded for each host, a conditional list based on config.networking.hostName is used with lib.optionals to only include the path if the hostname matches.
+  # Conditional list based on config.networking.hostName used with lib.optionals to only include path if hostname matches
   
   # Desktop-specific modules
   ++ lib.optionals (config.networking.hostName == "nixadmin") [

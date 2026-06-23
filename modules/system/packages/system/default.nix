@@ -18,17 +18,15 @@
     ];
   };
 
-  # Install applications with provided options
+  # Install applications using Nix options
   programs = {
     firefox.enable = true;
     bash.enable = true;
     virt-manager.enable = true;
-    
     appimage = {
       enable = true;
       binfmt = true;
     };  
-
     fuse = {
       enable = true;
       userAllowOther = true;
@@ -130,9 +128,7 @@
   
   # Unstable packages
   (with pkgsUnstable; [
-     
-    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to nixos/system modules using extraSpecialArgs (lines 96-98).
-    
+         
     openrgb-with-all-plugins
      
   ]);
