@@ -115,6 +115,7 @@
           home-manager.extraSpecialArgs = { 
             inherit inputs pkgsUnstable;
             # Hostname matches username for multiple hosts sharing home-manager configuration for uniformity across systems
+            hostName = "nixadmin";
             username = "nixadmin";          
           };
           home-manager.users.nixadmin = {
@@ -158,6 +159,7 @@
           home-manager.extraSpecialArgs = { 
             inherit inputs pkgsUnstable;
             # Hostname matches username for multiple hosts sharing home-manager configuration for uniformity across systems
+            hostName = "nixpgadmin";
             username = "nixpgadmin";          
           };
           home-manager.users.nixpgadmin = {
