@@ -89,10 +89,15 @@
   # nixos-rebuild is intelligent enough to detect this attribute, enforce locked inputs instead of using channels (flake.lock from running "nix flake update"), detect home-manager as a nixos module (see below), and rebuild the entire system through "sudo nixos-rebuild switch" without any flags.
   
   in { 
+
+    # ==========================================================================
+    # Nixos Desktop - Hostname: nixadmin
+    # ==========================================================================
+
     nixosConfigurations.nixadmin = nixpkgs.lib.nixosSystem {
       inherit system;
       
-
+      # Special arguments passed to configuration.nix & nixosModules
       specialArgs = { 
         inherit self inputs pkgsUnstable; 
       };
@@ -108,8 +113,11 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
           home-manager.extraSpecialArgs = { 
-            inherit inputs pkgsUnstable; 
+            inherit inputs pkgsUnstable;
+            # Hostname matches username, required for multiple hosts to share my home-manager configuration for uniformity across systems.
+            username = "nixadmin";          
           };
           home-manager.users.nixadmin = {
             imports = [
@@ -117,7 +125,6 @@
               catppuccin.homeModules.catppuccin
             ];
           };
-          home-manager.backupFileExtension = "backup";
         }
         
         # Nix Declarative Flatpak configuration
@@ -133,5 +140,56 @@
         vicinae.nixosModules.default 
       ];
     };
+
+    # ==========================================================================
+    # Nixos Laptop - Hostname: nixpgadmin
+    # ==========================================================================
+
+    nixosConfigurations.nixpgadmin = nixpkgs.lib.nixosSystem {
+      inherit system;
+      
+      # Special arguments passed to configuration.nix & nixosModules
+      specialArgs = { 
+        inherit self inputs pkgsUnstable; 
+      };
+      
+      # Configuration modules 
+      modules = [
+        
+        # Core Configuration
+        ./hosts/laptop/configuration.nix
+        
+        # Home Manager configuration for user
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.extraSpecialArgs = { 
+            inherit inputs pkgsUnstable;
+            # Hostname matches username, required for multiple hosts to share my home-manager configuration for uniformity across systems.
+            username = "nixpgadmin";          
+          };
+          home-manager.users.nixpgadmin = {
+            imports = [
+              ./home.nix
+              catppuccin.homeModules.catppuccin
+            ];
+          };
+        }
+        
+        # Nix Declarative Flatpak configuration
+        nix-flatpak.nixosModules.nix-flatpak
+
+        # PlasmaZones window tiling manager for KDE Plasma
+        plasmazones.nixosModules.default
+        
+        # SOPS configuration for secrets management
+        sops-nix.nixosModules.sops
+
+        # Vicinae configuration for local desktop search runner
+        vicinae.nixosModules.default 
+      ];
+    };  
   };
 }
