@@ -85,42 +85,46 @@
      android-tools
      argc
      bat
-     cacert
-     cachix
      cargo
      cmake
-     deadnix
-     dbus
      direnv
-     efibooteditor
-     efibootmgr
-     efitools
-     gdb
      git
-     gparted
-     gsettings-desktop-schemas
-     i2c-tools
      javaPackages.compiler.openjdk25
      jq
      jql
      libvirt
      llvm
-     manix
+     nodejs_24
+     perl
+     powershell
+     python3
+     
+     cacert
+     gsettings-desktop-schemas
      nfs-utils
+     openssl
+     pavucontrol
+
+     dbus
+     efibooteditor
+     efibootmgr
+     efitools
+     gdb
+     gparted
+     i2c-tools
+
+     cachix
+     deadnix
+     manix
      nil
      nixd
      nix-index
+     nix-output-monitor
      nix-template
      nix-tree
      nix-update
      nixpkgs-fmt
      nixpkgs-review
-     nodejs_24
-     openssl
-     pavucontrol
-     perl
-     powershell
-     python3
 
   ]) ++ 
   

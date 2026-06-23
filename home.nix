@@ -25,33 +25,44 @@
     # Stable packages
     
     # Core & Desktop utilities (CLI)
-    aria2
-    binutils
     btop
+    iftop
+    iotop
+    nvtopPackages.nvidia
+    sysstat
+
+    aria2
     bun
+    curlFull
+    socat
+    uv
+    wget
+
+    fastfetch
+    lolcat
+    tree
+    which
+
+    binutils
     cacert
     coreutils
-    curlFull
     desktop-file-utils
     dnsutils
     ethtool
-    fastfetch
     file
-    iftop
-    iotop
+    ipcalc
     iputils
-    lolcat
+    ldns
+    lsof
+    ltrace
     mtr
     nmap
     nssTools
-    nvtopPackages.nvidia
     pciutils
-    sysstat
-    tree
+    poppler
+    strace
+    tcpdump
     usbutils
-    uv
-    wget
-    which
     xdg-utils
 
     # AI & Dev Tools
