@@ -3,8 +3,10 @@
 # ==========================================================================
 
 { 
+  config,
   pkgs, 
   pkgsUnstable,
+  username,
   ... 
 }: 
 
@@ -14,9 +16,12 @@
       ./modules/user
     ];
 
+  # Use the home directory of the user running the command, required for multiple hosts to share the same home-manager configuration for uniformity across systems.
+  
+  # Username is defined for each host in flake.nix (line 120, 171) and passed to home-manager using extraSpecialArgs.
   home = {
-    username = "nixadmin";
-    homeDirectory = "/home/nixadmin";
+    username = username;
+    homeDirectory = "/home/${username}";
   };
 
   # Packages installed to user profile.
