@@ -40,9 +40,7 @@
       
   ];
 
-    # Antigravity has been renamed to antigravity-cli in the numtide/llmagents flake repo. leaving this here as a reference for renaming nixpkgs if needed in the future.
-
-    # ag-cli declared here is antigravity-cli from llm-agents.nix. it uses a wrapper derivation to rename the binary to avoid collision with the IDE version declared in home.nix. Every time I run a nixos-rebuild switch, I receive a warning saying "antigravity" has been renamed to antigravity-cli, even though both are currently included in 26.05 unstable (https://search.nixos.org/packages?channel=unstable&query=antigravity). Im not sure what this means for antigravity IDE, to be determined.
+    # ag-cli is antigravity-cli from llm-agents.nix; wrapper derivation to rename binary to avoid collision with IDE version from nixpkgs - reference 
 
     #(pkgs.symlinkJoin {
     #  name = "ag-cli";

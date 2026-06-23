@@ -9,7 +9,8 @@
 }:
 
 {
-
+  
+  # Enable Nushell w/ completions, carapace, and starship prompt
   programs = {
     nushell = { enable = true;
       extraConfig = ''

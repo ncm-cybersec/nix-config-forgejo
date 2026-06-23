@@ -30,7 +30,7 @@
     tela-circle-icon-theme
   ];
 
-  # Set global theme using catppuccin flake input, to create a theme similar to Garuda Mokka
+  # Set global theme using catppuccin flake
   catppuccin = {
     enable = true;
     accent = "mauve";

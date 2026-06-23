@@ -13,7 +13,7 @@
 
   services.kdeconnect.enable = true;
 
-  # Packages that should be installed to the user profile.
+  # User profile packages
   home.packages = (with pkgs; [
 
     # Stable
@@ -31,9 +31,7 @@
   
   (with pkgsUnstable; [
   
-    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to home-manager/user modules using extraSpecialArgs (lines 111-113).
-
-    # Unstable KDE packages, because stable versions are significantly outdated
+    # Unstable KDE packages
     kdePackages.akonadi
     kdePackages.akonadi-calendar
     kdePackages.dolphin-plugins

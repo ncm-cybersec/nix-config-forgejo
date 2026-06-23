@@ -1,23 +1,20 @@
 #!/usr/bin/env zsh
 
 # ==========================================================================
-# Git Stage & Commit ZSH Script
+# Git Stage & Commit 
 # By N1x_Cybersec
 #
 # - ZSH script to help automate the process of staging and committing 
 #   changes to the nix-config repository.
 # - Shows a preview/diff of the file(s) that have been modified (including any 
-#   untracked/newly added files/directories) then prompts the user to stage 
-#   and commit them.
-# - Script will automatically determine where the root of the git repo is,
-#   allowing it to live anywhere within the repository and still work.
+#   untracked/newly added files/directories)
+# - Script will automatically determine where the root of the git repo is
 # - Standard usage: make changes to any file(s) in ~/nix-config/, run the
 #   script using "y" to stage each file, then enter a commit message for each
 #   file, or hit enter to use the default commit message.
-# - Script also includes getopts argument parsing to allow for full automation 
-#   via flags. Run "./scripts/git-stage-commit.zsh -y -m" to stage and commit 
-#   all changed files with the default message.
-# 
+# - Script includes getopts argument parsing to allow for full automation via 
+#   flags. Run "./scripts/git-stage-commit.zsh -y -m" to stage and commit all 
+#   changed files with the default message.
 # - Script is defined system-wide in /modules/system/packages/scripts using 
 #   pkgs.writeShellScriptBin.
 # ==========================================================================
@@ -48,7 +45,7 @@ while getopts "ymh" opt; do
 done
 shift $((OPTIND -1))
 
-# Ensure we are located in the nix-config directory that contains the git repository; cd ~/nix-config
+# Ensure we are located in the nix-config directory
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     printf "Error: Not inside a git repository.\n"
     exit 1
@@ -108,14 +105,13 @@ for file in "${files[@]}"; do
     fi
     printf "--------------------------------------------------------\n"
     
-    # Prompt user to stage and commit changed file(s)
+    # Prompt to stage and commit changed file(s)
     if (( auto_stage )); then
         action="y"
         printf "Auto-staging file...\n"
     else
         printf "Stage and commit this file? [y/N/q(uit)] "
         if [[ ! -t 0 ]]; then
-            # Stdin is not a terminal (e.g. piped), so use standard read
             read action
         else
             read -k 1 action

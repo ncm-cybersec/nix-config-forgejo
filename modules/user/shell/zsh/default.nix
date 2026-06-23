@@ -8,7 +8,8 @@
 }:
 
 {
-  # ZSH Shell configuration
+
+  # Enable ZSH w/ completions & extensions
   programs = {
     zsh = {
       enable = true;

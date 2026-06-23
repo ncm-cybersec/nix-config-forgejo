@@ -1,15 +1,11 @@
 #!/usr/bin/env zsh
 
 # ==========================================================================
-# Netcatty Update ZSH Script
+# Netcatty AppImage Update 
 # By N1x_Cybersec
 #
-# - ZSH script to automate updating Netcatty via the github API.
-# - Netcatty is a modern GUI SSH client.
+# - ZSH script to automate updating Netcatty AppImage via the github API.
 # - Netcatty is not yet available for nixos via nixpkgs.
-# - This script is useful for keeping it up to date via the AppImage 
-#   directly from the github API.
-#
 # - Script is defined system-wide in /modules/system/packages/scripts using 
 #   pkgs.writeShellScriptBin.
 #

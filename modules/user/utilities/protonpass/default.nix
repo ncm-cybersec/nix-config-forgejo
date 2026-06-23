@@ -10,7 +10,7 @@
 
 {
   
-  # Enable Proton Pass Agent - Used for SSH key management 
+  # Enable Proton Pass Agent
   services.proton-pass-agent = {
     enable = true;
     package = pkgsUnstable.proton-pass-cli;

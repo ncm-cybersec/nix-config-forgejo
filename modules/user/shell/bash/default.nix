@@ -9,6 +9,7 @@
 
 {
 
+  # Enable Bash
   programs.bash = {
     enable = true;
     enableCompletion = true;

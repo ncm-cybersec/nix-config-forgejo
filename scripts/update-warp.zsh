@@ -1,15 +1,12 @@
 #!/usr/bin/env zsh
 
 # ==========================================================================
-# Git Stage & Commit ZSH Script
+# Warp Terminal AppImage Update 
 # By N1x_Cybersec
 #
 # - ZSH script to automate updating Warp AppImage via gearlever cli
 # - Warp receives frequent updates, with nixpkgs unstable lagging behind on
 #   new releases.
-# - This script is useful for keeping it up to date via the AppImage 
-#   directly from the Warp API.
-#
 # - Script is defined system-wide in /modules/system/packages/scripts using 
 #   pkgs.writeShellScriptBin.
 #
