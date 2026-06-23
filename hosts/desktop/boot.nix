@@ -11,6 +11,11 @@
 
 {
 
+  # Kernel module for managing BIOS settings and updating firmware for HP devices
+  environment.systemPackages = with pkgs; [
+    linuxPackages.hpuefi-mod
+  ];
+
   # systemd-boot
   boot.loader = {
     systemd-boot = {
@@ -24,7 +29,9 @@
   };
 
   # Use latest Zen kernel 7.0.10
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = with pkgs; [
+    linuxPackages_zen
+  ];
 
   # Kernel modules
   boot.kernelModules = [ 

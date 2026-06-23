@@ -1,5 +1,5 @@
 # ==========================================================================
-# NixOS System Configuration:
+# NixOS DesktopSystem Configuration:
 # - HP Omen 45L Gaming Desktop
 #   - AMD Ryzen 7 5800X 
 #   - NVIDIA GeForce RTX 3060 12GB
@@ -14,6 +14,8 @@
 {
   imports =
     [
+      ./boot.nix
+      ./desktop.nix
       ./hardware-configuration.nix
       ../../modules/system
     ];

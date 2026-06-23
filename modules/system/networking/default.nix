@@ -7,8 +7,6 @@
 }:
 
 {
-  # System hostname
-  networking.hostName = "nixadmin";
 
   # Enable NetworkManager for network management
   networking.networkmanager.enable = true;

@@ -11,12 +11,25 @@
 
 {
 
+  # Enable Plasma 6 (KDE)
+  services.desktopManager.plasma6.enable = true;
+
+  # Enable SDDM display manager, Wayland, and auto-login 
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    defaultSession = "plasma";
+    autoLogin.user = "nixadmin";
+  };
+
   # Enable PlasmaZones window tiling manager flake module
   programs.plasmazones = {
     enable = true;
   };
 
-  # Enable X11, Wayland, nvidia, and GTK's pixbuf loader for Electron apps to display svg
+  # Enable X11
   services.xserver = {
     enable = true; 
     videoDrivers = [
@@ -40,19 +53,6 @@
   programs.gdk-pixbuf.modulePackages = [
     pkgs.librsvg
   ];
-
-  # Enable Plasma 6 (KDE)
-  services.desktopManager.plasma6.enable = true;
-
-  # Enable SDDM display manager, Wayland, and auto-login 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-    defaultSession = "plasma";
-    autoLogin.user = "nixadmin";
-  };
 
   # Enable 32 bit GPU drivers
   hardware.graphics.enable32Bit = true;  
