@@ -3,7 +3,7 @@
 # ==========================================================================
 
 { 
-  config,
+  hostName,
   lib,
   pkgs,
   ... 
@@ -29,13 +29,13 @@
   # Conditional list based on config.networking.hostName used with lib.optionals to only include path if hostname matches
   
   # Desktop-specific modules
-  ++ lib.optionals (config.networking.hostName == "nixadmin") [
+  ++ lib.optionals (hostName == "nixadmin") [
     ./services/syncthing
   
   ]
 
   # Laptop-specific modules - will be adding these shortly!
-  ++ lib.optionals (config.networking.hostName == "nixpgadmin") [
+  ++ lib.optionals (hostName == "nixpgadmin") [
 
   ];
 }

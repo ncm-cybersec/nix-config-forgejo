@@ -100,7 +100,7 @@
       inherit system;
       # Special arguments passed to configuration.nix & nixosModules
       specialArgs = { 
-        inherit self inputs pkgsUnstable; 
+        inherit self inputs pkgsUnstable; hostName = "nixadmin";
       };
       # Configuration modules 
       modules = [
@@ -143,7 +143,7 @@
       inherit system;
       # Special arguments passed to configuration.nix & nixosModules
       specialArgs = { 
-        inherit self inputs pkgsUnstable; 
+        inherit self inputs pkgsUnstable; hostName = "nixpgadmin";
       };
       # Configuration modules 
       modules = [
