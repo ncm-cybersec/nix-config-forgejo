@@ -32,6 +32,7 @@
     extraGroups = [ 
       "networkmanager" 
       "wheel" 
+      "git" 
       "podman" 
       "adbusers" 
       "libvirtd" 
