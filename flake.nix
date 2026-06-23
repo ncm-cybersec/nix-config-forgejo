@@ -1,6 +1,23 @@
-# ==========================================================================
+# ======================================================================================
 # Nixos Top-Level Flake w/ Multiple Input Channels & BinaryCaches
-# ==========================================================================
+#
+# - Refactored for multiple hosts sharing the same repo, each with their own
+#   host-specific configuration, shared system modules, and a shared home-manager
+#   configuration for uniformity across systems.
+# - System (configuration.nix) and User (home.nix) modules are imported using
+#   a conditional list based on config.networking.hostName, defined by lib.optionals.
+# - Defining username and hostname as the same value across top-level flake.nix, home.nix,  
+#   and respective configuration.nix allows nixos-rebuild to intelligently detect hosts,
+#   enforce locked inputs, and atomically build top-level configurations using "nixos-rebuild #   switch" without any flags.
+#
+# - SOPS is used for secrets management, and a CI pipeline has been implemented using only
+#   nix-native options, and a scripted nixos-upgrade service to sync changes between hosts.
+#
+# - This is the most involved NixOS project I have attempted thus far, and any thoughts 
+#   or suggestions for improvement are welcome! I am workshopping a name for the CI; 
+#   maybe something like "nixsync" or "ntvenix"?
+# 
+# ======================================================================================
 
 {
   description = "Nick's NixOS Top-Level Flake";
