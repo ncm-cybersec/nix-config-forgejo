@@ -4,9 +4,7 @@
 
 { ... }: {
   imports = [
-    ./boot
     ./cache
-    ./desktop
     ./hardware
     ./networking
     ./packages/flatpak
