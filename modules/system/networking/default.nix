@@ -8,10 +8,10 @@
 
 {
 
-  # Enable NetworkManager for network management
+  # Enable NetworkManager
   networking.networkmanager.enable = true;
 
-  # Enable Avahi/mDNS for network discovery
+  # Enable Avahi/mDNS
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -23,12 +23,12 @@
     };
   };
   
-  # Enable the OpenSSH daemon
+  # Enable OpenSSH
   services.openssh = { 
     enable = true;
   };
   
-  # Enable Tailscale for remote access
+  # Enable Tailscale 
   services.tailscale = {
     enable = true;
     openFirewall = true;

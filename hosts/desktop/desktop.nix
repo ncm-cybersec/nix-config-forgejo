@@ -24,7 +24,7 @@
     autoLogin.user = "nixadmin";
   };
 
-  # Enable PlasmaZones window tiling manager flake module
+  # Enable PlasmaZones window tiling manager 
   programs.plasmazones = {
     enable = true;
   };
@@ -41,7 +41,7 @@
     };
   };
 
-  # Force Qt and Electron apps to use the proper Wayland/GBM backends, and set env var for GTK to use vulkan renderer
+  # Force Qt and Electron apps to use the proper Wayland/GBM backends, set env var for GTK to use vulkan renderer
   environment.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
@@ -49,7 +49,7 @@
     QT_QUICK_BACKEND = "vulkan";
   };
 
-  # Enable GTK's pixbuf loader for Electron apps to display svg
+  # Enable GTK pixbuf loader for Electron apps to display svg
   programs.gdk-pixbuf.modulePackages = [
     pkgs.librsvg
   ];

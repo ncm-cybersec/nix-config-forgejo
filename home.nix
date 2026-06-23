@@ -16,15 +16,15 @@
       ./modules/user
     ];
 
-  # Use the home directory of the user running the command, required for multiple hosts to share the same home-manager configuration for uniformity across systems.
+  # Use the home directory of the user running the command
   
-  # Username is defined for each host in flake.nix (line 120, 171) and passed to home-manager using extraSpecialArgs.
+  # Username is defined for each host in flake.nix, passed to home-manager using extraSpecialArgs
   home = {
     username = username;
     homeDirectory = "/home/${username}";
   };
 
-  # Packages installed to user profile.
+  # Packages installed to user profiles
   home.packages = (with pkgs; [
 
     # Stable packages
@@ -110,8 +110,6 @@
   
   # Unstable packages 
   (with pkgsUnstable; [
-    
-    # nixpkgs-unstable defined as pkgsUnstable in flake.nix (line 72-76) and passed to home-manager/user modules using extraSpecialArgs (lines 111-113).
     
     antigravity
     code-cursor

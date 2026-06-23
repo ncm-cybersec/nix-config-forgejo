@@ -28,7 +28,7 @@
     autoLogin.user = "nixpgadmin";
   };
   
-  # Enable PlasmaZones window tiling manager flake module
+  # Enable PlasmaZones window tiling manager
   programs.plasmazones = {
     enable = true;
   };
@@ -55,14 +55,14 @@
   };
 
   hardware.nvidia = {
-    # Modesetting is required for modern desktop environments 
+    # Modesetting for modern desktop environments
     modesetting.enable = true;
 
-    # Power Management: Completely turns off the dGPU when not in use
+    # Power Management: turns off dGPU when not in use
     powerManagement.enable = true;
     powerManagement.finegrained = true;
 
-    # Use the proprietary driver package. 
+    # Proprietary driver
     open = false;
 
     # Enable the NVIDIA Settings control panel dashboard
@@ -75,7 +75,7 @@
     prime = {
       offload = {
         enable = true;
-        enableOffloadCmd = true; # Provides the 'nvidia-offload' utility shell script
+        enableOffloadCmd = true;  # Provides the 'nvidia-offload' utility shell script
       };
 
       # Bus IDs for hybrid graphics, verify these values using: lspci | grep -E "VGA|3D"

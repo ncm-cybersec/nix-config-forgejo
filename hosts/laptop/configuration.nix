@@ -57,20 +57,19 @@
     ];
   };
 
-  # SOPS configuration for access to secrets.yaml, which is needed for access to the forgejo repository to complete the CI pipeline.
+  # SOPS configuration for access to secrets.yaml for forgejo repository access
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.age.keyFile = "/var/lib/sops-nix/key.txt"; 
 
   sops.secrets.forgejo_ssh_config = {
-    # Securely writes the secret directly to the root user's SSH config folder at boot.
+    # Writes the secret directly to the root user's SSH config folder at boot.
     path = "/root/.ssh/config";
   };
 
-  # This forces the system to pull the latest changes from the forgejo repository before rebuilding to ensure that the additional host pulls changes from the central repo so that it's local configuration stays in sync.
-  # Without this, the additional host would not pull changes from the central repo and would become out of sync with the primary system, which would cause the CI pipeline to fail.
+  # Pull latest changes from forgejo before rebuilding to ensure that the additional host pulls changes from the central repo so that it's local configuration stays in sync
   systemd.services.nixos-upgrade.serviceConfig.ExecStartPre = "${pkgs.git}/bin/git -C /etc/nixos pull";
 
-  # Auto-upgrade flake from my self-hosted forgejo repository
+  # Auto-upgrade flake from self-hosted forgejo repository
   system.autoUpgrade = {
     enable = true;
     

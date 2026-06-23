@@ -8,13 +8,7 @@
 
 { 
 
-  # Increase maximum number of open files for user sessions to resolve 
-  # "too many open files" error. I had previously solved this by running the
-  # "ulimit -n 4096" command before updating flake inputs and running 
-  # nixos-rebuild switch.
-
-  # This should ensure that the "too many open files" error does not occur, 
-  # while also protecting against memory spikes during large updates.
+  # Increase maximum number of open files to resolve "too many open files" error
   security.pam.loginLimits = [
     {
       domain = "*";

@@ -15,7 +15,7 @@
     linuxPackages.hpuefi-mod
   ];  
 
-  # Bootloader - systemd-boot
+  # Systemd-boot
   boot.loader = {
     systemd-boot = {
       enable = true;
@@ -34,18 +34,18 @@
 
   # Additional kernel module options
   boot.kernelModules = [
-    # Essential for hardware-accelerated VMs (QEMU/KVM)
+    # For hardware-accelerated VMs
     "kvm-amd" 
-    # Forces the integrated Radeon driver to initialize early
+    # Integrated Radeon driver for early init
     "amdgpu" 
   ];
 
   boot.kernelParams = [
-    # Forces the modern AMD driver for granular power management
+    # AMD driver for power management
     "amd_pstate=active"        
-    # Forces Active State Power Management to save power on idle PCIe lanes
+    # Power savings on idle PCIe lanes
     "pcie_aspm=force"          
-    # Optimizes NVIDIA VRAM sleep thresholds
+    # NVIDIA VRAM sleep threshold optimization
     "nvidia.NVreg_DynamicPowerManagementVideoMemoryThreshold=200" 
   ];
 

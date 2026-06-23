@@ -8,10 +8,11 @@
 }: 
 
 {
+
   # Time zone
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
+  # Select internationalisation properties
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -54,7 +55,6 @@
   };
 
   # Enable OpenRGB udev
-  # For my system, OpenRGB also requires kernelParams with acpi_enforce_resources=lax (added to modules/system/boot/default.nix), user to be added to i2c group, and udev rule added. Using pkgsUnstable.openrgb-with-all-plugins, declared in /modules/system/packages/system/default.nix.
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";

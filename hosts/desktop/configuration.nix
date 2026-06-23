@@ -57,7 +57,7 @@
     ];
   };
 
-  # Allow root to access the flake git repo (my nix-config folder lives in home directory, and is symlinked into /etc/nixos, so this is required for auto-upgrade)
+  # Allow root to access the flake git repo
   systemd.services.nixos-upgrade = {
     preStart = ''
       git config --global --add safe.directory /home/nixadmin/nix-config
@@ -79,7 +79,7 @@
     options = "--delete-older-than 15d";
   };
 
-  # Optimise the Nix store (reduce disk usage) every Saturday at 4pm
+  # Optimise the Nix store every Saturday at 4pm
   nix.optimise = {
     automatic = true;
     dates = "Sat *-*-* 16:00:00";

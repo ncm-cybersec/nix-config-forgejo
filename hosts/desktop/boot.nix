@@ -16,7 +16,7 @@
     linuxPackages.hpuefi-mod
   ];
 
-  # systemd-boot
+  # Systemd-boot
   boot.loader = {
     systemd-boot = {
       enable = true;
@@ -36,12 +36,11 @@
   # Kernel modules
   boot.kernelModules = [ 
     "kvm-amd"    # KVM virtualization
-    "i2c-dev"    # I2C device support - required for OpenRGB
-    "i2c-piix4"  # SMBus for Ryzen - required for OpenRGB
+    "i2c-dev"    # I2C device support for OpenRGB
+    "i2c-piix4"  # SMBus for Ryzen/OpenRGB
   ];
 
-  # ACPI / SMBus Conflict Fix for OpenRGB
-  # Allows OpenRGB to access i2c/SMBus devices (including motherboard RGB, RAM modules, and fans)
+  # ACPI/SMBus conflict fix for OpenRGB
   boot.kernelParams = [ 
     "acpi_enforce_resources=lax" 
   ];
