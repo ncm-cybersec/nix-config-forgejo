@@ -73,7 +73,7 @@
     preStart = ''
       ${pkgs.git}/bin/git config --global --add safe.directory /home/nixpgadmin/nix-config
     '';
-    serviceConfig.ExecStartPre = "${pkgs.git}/bin/git -C /etc/nixos pull";
+    serviceConfig.ExecStartPre = "${pkgs.git}/bin/git -C /home/nixpgadmin/nix-config pull --ff-only";
   };
 
   # Auto-upgrade flake from self-hosted forgejo repository
