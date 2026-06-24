@@ -4,6 +4,7 @@
 
 { 
   config,
+  hostName,
   pkgs,
   ... 
 }:
@@ -17,7 +18,7 @@
     ];
     settings = {
       # Dynamically choose username based on host
-      user.name = if config.networking.hostName == "nixadmin"
+      user.name = if hostName == "nixadmin"
         then "nixadmin"
         else "nixpgadmin";
       safe.directory = "/etc/nixos";
