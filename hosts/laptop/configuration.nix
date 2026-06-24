@@ -81,7 +81,7 @@
     enable = true;
     
     # "flake" instructs NixOS to look at a git repository rather than traditional channels
-    flake = "git+ssh://forgejo_ssh_config/nas_forgejoadmin/nixos-config.git#nixpgadmin";
+    flake = "git+ssh://forgejo-upgrade/nas_forgejoadmin/nixos-config.git#nixpgadmin";
     
     # Run intervals every day at midnight
     dates = "00:00"; 
