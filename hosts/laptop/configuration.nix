@@ -86,10 +86,10 @@
     # Run intervals every day at midnight
     dates = "00:00"; 
     
-    # Options passed during the rebuild phase; auto-update nixpkgs dependencies.
-    flags = [
-      "--update-input" "nixpkgs"
-    ];
+    # Options passed during the rebuild phase
+    #flags = [
+      
+    #];
   };
 
   # Run garbage collection every Sunday at 3pm
