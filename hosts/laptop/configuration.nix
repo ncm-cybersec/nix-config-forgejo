@@ -67,8 +67,14 @@
     path = "/root/.ssh/config";
   };
 
-  # Pull latest changes from forgejo before rebuilding to ensure that the additional host pulls changes from the central repo so that it's local configuration stays in sync
-  systemd.services.nixos-upgrade.serviceConfig.ExecStartPre = "${pkgs.git}/bin/git -C /etc/nixos pull";
+  # Allow root access to flake git repo since nix-config is in Home w/ symlink to /etc/nixos
+  # Pull latest changes from forgejo before rebuilding to ensure additional host pulls changes from central repo so local configuration maintains sync with remote
+  systemd.services.nixos-upgrade = {
+    preStart = ''
+      ${pkgs.git}/bin/git config --global --add safe.directory /home/nixpgadmin/nix-config
+    '';
+    serviceConfig.ExecStartPre = "${pkgs.git}/bin/git -C /etc/nixos pull";
+  };
 
   # Auto-upgrade flake from self-hosted forgejo repository
   system.autoUpgrade = {

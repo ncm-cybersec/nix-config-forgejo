@@ -61,7 +61,7 @@
   # Allow root to access the flake git repo
   systemd.services.nixos-upgrade = {
     preStart = ''
-      git config --global --add safe.directory /home/nixadmin/nix-config
+      ${pkgs.git}/bin/git config --global --add safe.directory /home/nixadmin/nix-config
     '';
   };
 

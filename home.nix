@@ -43,6 +43,7 @@
     uv
     wget
 
+    alejandra
     fastfetch
     lolcat
     tree
