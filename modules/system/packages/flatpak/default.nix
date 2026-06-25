@@ -9,6 +9,10 @@
 
 {
   
+  environment.systemPackages = with pkgs; [
+    warehouse
+  ];
+
   # XDG is required to install flatpak on systems using window compositors, or installing flatpaks on a per-user basis
   xdg.portal = {
     enable = true;
