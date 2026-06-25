@@ -10,6 +10,15 @@
 
 {
 
+  environment.systemPackages = with pkgs; [
+    distrobox
+    distroshelf
+    podman
+    podman-compose
+    podman-desktop
+    pods
+  ];
+
   # Podman virtualisation
   virtualisation = {
     containers.enable = true;
