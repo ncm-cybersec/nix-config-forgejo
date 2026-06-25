@@ -9,6 +9,10 @@
 
 {
 
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+  ];
+
   # Time zone
   time.timeZone = "America/New_York";
 
