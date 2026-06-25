@@ -1,12 +1,39 @@
 # ==========================================================================
-# Network Services Configuration
+# Network Services & Security Configuration
 # ==========================================================================
 
 { 
+  pkgs,
   ... 
 }:
 
 {
+
+  environment.systemPackages = with pkgs; [
+    
+    # General
+    cacert
+    certinfo-go
+    macchanger
+    nfs-utils
+
+    # Security & Monitoring
+    aircrack-ng
+    airgeddon
+    arp-scan
+    arp-scan-rs
+    mdns-scanner
+    netscanner
+    netsniff-ng
+    nmap
+    suricata
+    tailscale
+    tail-tray
+    wireshark
+    wireshark-cli
+    zeek
+    zenmap
+  ];
 
   # Enable NetworkManager
   networking.networkmanager.enable = true;
