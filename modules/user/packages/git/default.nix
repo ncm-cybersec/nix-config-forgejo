@@ -46,13 +46,15 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        addKeysToAgent = "yes";
+      };
+    };
+    # SOPS secret for remote repo
     includes = [
       config.sops.secrets.forgejo_desktop_ssh_config.path
     ];
-    extraConfig = ''
-      Host *
-        AddKeysToAgent yes
-    '';
   };
 
   # Enable Git
