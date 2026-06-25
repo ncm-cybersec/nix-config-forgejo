@@ -18,10 +18,10 @@
     ./hardware
     ./networking
     ./packages/flatpak
+    ./packages/localllama
+    ./packages/podman
     ./packages/scripts
     ./packages/system
-    ./services/localllama
-    ./services/podman
     ./shell
   
   ] 
@@ -32,7 +32,7 @@
   ++ lib.optionals (hostName == "nixadmin") [
     
     ./packages/security
-    ./services/syncthing
+    ./storage/syncthing
   
   ]
 

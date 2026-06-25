@@ -13,14 +13,14 @@
   imports = [
 
     # Core modules shared between all hosts, using /modules/user & default.nix for imports format.
-    ./kdepackages
+    ./packages/git
+    ./packages/kde
+    ./packages/protonpass
+    ./packages/vicinae
     ./shell/bash
     ./shell/zsh
     ./sops
     ./theme
-    ./utilities/git
-    ./utilities/protonpass
-    ./utilities/vicinae
   
   ] 
 
@@ -28,11 +28,12 @@
   
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
-    ./llmagents
-    ./mcp
+
+    ./packages/llmagents
+    ./packages/mcp
     ./shell/nushell
     ./shell/tmux
-    ./utilities/rclone
+    ./storage/rclone
 
   ]
 

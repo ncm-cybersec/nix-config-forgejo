@@ -12,6 +12,31 @@
 
 {
 
+  environment.systemPackages = with pkgs; [
+    
+    # SSH Tools
+    croc
+    openssl
+    ssh-to-age
+    ssh-to-pgp
+    ssh-tools
+    step-cli
+    termscp
+
+    # Git Tools
+    gitfetch
+    git-get
+    gitlint
+    gitnr
+    git-ls
+    git-pages
+    git-pages-cli
+    gitsign
+    git-toolbelt
+    gittuf
+
+  ];
+
   # SOPS secret for remote repo
   sops.secrets.forgejo_desktop_ssh_config = {
     
@@ -20,6 +45,7 @@
   # Enable SSH
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     includes = [
       config.sops.secrets.forgejo_desktop_ssh_config.path
     ];

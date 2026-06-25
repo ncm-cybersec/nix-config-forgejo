@@ -71,7 +71,7 @@
     usbutils
     xdg-utils
 
-    # AI & Dev Tools
+    # Dev
     android-studio
     android-tools
     cherry-studio
@@ -109,8 +109,9 @@
     
   ]) ++ 
   
-  # Unstable packages 
   (with pkgsUnstable; [
+
+    # Unstable packages 
     
     antigravity
     code-cursor
