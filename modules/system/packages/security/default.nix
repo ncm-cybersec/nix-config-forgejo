@@ -39,7 +39,6 @@
      it-tools
 
      # Host
-     chkrootkit
      lynis
      vulnix
 
