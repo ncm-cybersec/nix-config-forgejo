@@ -12,7 +12,7 @@
 
 {
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     
     # SSH Tools
     croc
