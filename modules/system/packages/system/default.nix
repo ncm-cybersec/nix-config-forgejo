@@ -38,15 +38,9 @@
      # Stable packages
 
      # Applications
-     distrobox
-     distroshelf
      gearlever
      input-leap
      normcap
-     podman
-     podman-compose
-     podman-desktop
-     pods
      qemu
      # QEMU UEFI support
      (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
@@ -59,25 +53,6 @@
      rsync
      tesseract
      virt-manager
-     warehouse
-
-     # Network
-     tailscale
-     tail-tray
-
-     # Security
-     burpsuite
-     caido-cli
-     caido-desktop
-     ghidra
-     maltego
-     netscanner
-     netsniff-ng
-     nmap
-     suricata
-     wireshark
-     zeek
-     zenmap
      
      # System
      android-tools
@@ -87,6 +62,7 @@
      cmake
      direnv
      git
+     gsettings-desktop-schemas
      javaPackages.compiler.openjdk25
      jq
      jql
@@ -97,12 +73,6 @@
      powershell
      python3
      
-     cacert
-     gsettings-desktop-schemas
-     nfs-utils
-     openssl
-     pavucontrol
-
      dbus
      efibooteditor
      efibootmgr
