@@ -1,15 +1,30 @@
 # ==========================================================================
-# Home Manager Git Configuration
+# Home Manager - Git & SSH Configuration
 # ==========================================================================
 
 { 
   config,
   hostName,
+  inputs,
   pkgs,
   ... 
 }:
 
 {
+
+  # SOPS secret for remote repo
+  sops.secrets.forgejo_desktop_ssh_config = {
+    
+  };
+
+  # Enable SSH
+  programs.ssh = {
+    enable = true;
+    includes = [
+      config.sops.secrets.forgejo_desktop_ssh_config.path
+    ];
+  };
+
   # Enable Git
   programs.git = {
     enable = true;
