@@ -30,12 +30,15 @@
   
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
+    
+    ./packages/security
     ./services/syncthing
   
   ]
 
   # Laptop-specific modules - will be adding these shortly!
   ++ lib.optionals (hostName == "nixpgadmin") [
+
 
   ];
 }
