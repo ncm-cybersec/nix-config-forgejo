@@ -23,6 +23,10 @@
     includes = [
       config.sops.secrets.forgejo_desktop_ssh_config.path
     ];
+    extraConfig = ''
+      Host *
+        AddKeysToAgent yes
+    '';
   };
 
   # Enable Git
