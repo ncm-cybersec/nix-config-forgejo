@@ -1,5 +1,5 @@
 # ==========================================================================
-# Home Manager Rclone Conf
+# Home Manager Rclone Conf - Laptop
 # ==========================================================================
 
 { 
@@ -17,8 +17,8 @@
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"
       ];
-      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: /home/nixadmin/mnt/gdrive --vfs-cache-mode full";
-      ExecStop = "/run/wrappers/bin/fusermount -u /home/nixadmin/mnt/gdrive";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: /home/nixpgadmin/mnt/GoogleDrive --vfs-cache-mode full";
+      ExecStop = "/run/wrappers/bin/fusermount -u /home/nixpgadmin/mnt/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
     };
@@ -32,8 +32,8 @@
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"
       ];
-      ExecStart = "${pkgs.rclone}/bin/rclone mount onedrive: /home/nixadmin/mnt/onedrive --vfs-cache-mode full";
-      ExecStop = "/run/wrappers/bin/fusermount -u /home/nixadmin/mnt/onedrive";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount onedrive: /home/nixpgadmin/mnt/Onedrive --vfs-cache-mode full";
+      ExecStop = "/run/wrappers/bin/fusermount -u /home/nixpgadmin/mnt/Onedrive";
       Restart = "on-failure";
       RestartSec = "10s";
     };

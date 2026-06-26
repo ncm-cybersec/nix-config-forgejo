@@ -33,12 +33,14 @@
     ./packages/mcp
     ./shell/nushell
     ./shell/tmux
-    ./storage/rclone
+    ./storage/rclone/desktop
 
   ]
 
   # Laptop-specific modules - will be adding these shortly!
   ++ lib.optionals (hostName == "nixpgadmin") [
+
+    ./storage/rclone/laptop
     
   ];
 }
