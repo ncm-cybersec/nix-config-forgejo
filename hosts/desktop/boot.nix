@@ -13,7 +13,13 @@
 
   # Kernel module for managing BIOS settings and updating firmware for HP devices
   environment.systemPackages = with pkgs; [
+    
+    efibooteditor
+    efibootmgr
+    efitools
+    i2c-tools
     linuxPackages.hpuefi-mod
+    
   ];
 
   # Systemd-boot
