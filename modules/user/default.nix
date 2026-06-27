@@ -5,7 +5,6 @@
 { 
   hostName,
   lib,
-  pkgs,
   ... 
 }: 
 
@@ -16,6 +15,7 @@
     ./packages/git
     ./packages/kde
     ./packages/protonpass
+    ./packages/system
     ./packages/vicinae
     ./shell/bash
     ./shell/zsh
@@ -37,7 +37,7 @@
 
   ]
 
-  # Laptop-specific modules - will be adding these shortly!
+  # Laptop-specific modules
   ++ lib.optionals (hostName == "nixpgadmin") [
 
     ./storage/rclone/laptop
