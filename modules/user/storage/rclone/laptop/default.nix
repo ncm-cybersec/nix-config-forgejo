@@ -9,6 +9,14 @@
 }:
 
 {
+
+  environment.systemPackages = with pkgs; [
+    
+    rclone
+    remote-exec
+    rsync
+
+  ];
   
   # Mount Google Drive using rclone via systemd service
   systemd.user.services.rclone-googledrive = {
