@@ -15,9 +15,7 @@
     [
       ./modules/user
     ];
-
-  # Use the home directory of the user running the command
-  
+ 
   # Username is defined for each host in flake.nix, passed to home-manager using extraSpecialArgs
   home = {
     username = username;
@@ -29,66 +27,26 @@
 
     # Stable packages
     
-    # Core & Desktop utilities (CLI)
-    btop
-    iftop
-    iotop
-    nvtopPackages.nvidia
-    sysstat
-
-    aria2
-    bun
-    curlFull
-    socat
-    uv
-    wget
-
-    alejandra
-    fastfetch
-    lolcat
-    tree
-    which
-
-    binutils
-    cacert
-    coreutils
-    desktop-file-utils
-    dnsutils
-    ethtool
-    file
-    ipcalc
-    iputils
-    ldns
-    lsof
-    ltrace
-    mtr
-    nmap
-    nssTools
-    pciutils
-    poppler
-    strace
-    tcpdump
-    usbutils
-    xdg-utils
-
     # Dev
     android-studio
     android-tools
     cherry-studio
     github-desktop
             
-    # Office & Productivity
+    # Office
     affine
-    discord
     drawio
-    ferdium
     joplin-desktop
     libreoffice-fresh
     marktext
-    newsflash
     obsidian
-    obs-studio
     onlyoffice-desktopeditors
+
+    # Productivity
+    discord
+    ferdium
+    newsflash
+    obs-studio
     slack
     spotify
     tor-browser
@@ -111,17 +69,12 @@
   
   (with pkgsUnstable; [
 
-    # Unstable packages 
-    
+    # Unstable packages
     antigravity
     code-cursor
     cursor-cli
     kiro
     kiro-cli
-    proton-authenticator
-    proton-pass
-    proton-vpn
-    proton-vpn-cli
     tabularis
     zed-editor
        
