@@ -17,7 +17,8 @@
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"
       ];
-      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: /home/nixpgadmin/mnt/GoogleDrive --vfs-cache-mode full";
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /home/nixpgadmin/mnt/GoogleDrive";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount googledrive: /home/nixpgadmin/mnt/GoogleDrive --vfs-cache-mode full";
       ExecStop = "/run/wrappers/bin/fusermount -u /home/nixpgadmin/mnt/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
@@ -32,6 +33,7 @@
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"
       ];
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /home/nixpgadmin/mnt/Onedrive";
       ExecStart = "${pkgs.rclone}/bin/rclone mount onedrive: /home/nixpgadmin/mnt/Onedrive --vfs-cache-mode full";
       ExecStop = "/run/wrappers/bin/fusermount -u /home/nixpgadmin/mnt/Onedrive";
       Restart = "on-failure";
