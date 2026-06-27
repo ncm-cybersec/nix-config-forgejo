@@ -9,6 +9,7 @@
 }:
 
 {
+  
   # Enable unfree packages
   nixpkgs.config = {
     allowUnfree = true;
@@ -39,7 +40,6 @@
 
      # Applications
      gearlever
-     input-leap
      normcap
      qemu
      # QEMU UEFI support
@@ -48,9 +48,6 @@
           -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
           "$@"
       '')
-     rclone
-     remote-exec
-     rsync
      tesseract
      virt-manager
      
@@ -60,8 +57,11 @@
      bat
      cargo
      cmake
+     dbus
      direnv
+     gdb
      git
+     gparted
      gsettings-desktop-schemas
      javaPackages.compiler.openjdk25
      jq
@@ -73,14 +73,6 @@
      powershell
      python3
      
-     dbus
-     efibooteditor
-     efibootmgr
-     efitools
-     gdb
-     gparted
-     i2c-tools
-
      cachix
      deadnix
      manix

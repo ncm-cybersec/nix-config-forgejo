@@ -5,7 +5,6 @@
 { 
   hostName,
   lib,
-  pkgs,
   ... 
 }: 
 
