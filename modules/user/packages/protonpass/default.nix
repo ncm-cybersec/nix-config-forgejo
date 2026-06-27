@@ -10,6 +10,15 @@
 
 {
   
+  home.packages = with pkgsUnstable; [
+  
+    proton-authenticator
+    proton-pass
+    proton-vpn
+    proton-vpn-cli
+
+  ];
+  
   # Enable Proton Pass Agent
   services.proton-pass-agent = {
     enable = true;
