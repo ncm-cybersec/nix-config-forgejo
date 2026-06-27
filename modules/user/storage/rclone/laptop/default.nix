@@ -11,7 +11,7 @@
 {
   
   # Mount Google Drive using rclone via systemd service
-  systemd.user.services.rclone-gdrive = {
+  systemd.user.services.rclone-googledrive = {
     Unit.Description = "Mount Google Drive";
     Service = {
       Environment = [
