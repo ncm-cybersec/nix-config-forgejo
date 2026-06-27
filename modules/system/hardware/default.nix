@@ -10,7 +10,10 @@
 {
 
   environment.systemPackages = with pkgs; [
+    
+    input-leap
     pavucontrol
+    
   ];
 
   # Time zone
