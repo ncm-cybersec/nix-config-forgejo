@@ -10,12 +10,10 @@
 
 {
 
-  environment.systemPackages = with pkgs; [
-    
+  home.packages = with pkgs; [
     rclone
     remote-exec
     rsync
-
   ];
   
   # Mount Google Drive using rclone via systemd service
@@ -26,7 +24,7 @@
         "PATH=/run/wrappers/bin:$PATH"
       ];
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /home/nixadmin/mnt/gdrive";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: /home/nixadmin/mnt/gdrive --vfs-cache-mode full";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: /home/nixadmin/mnt/gdrive --vfs-cache-mode full --poll-interval 15s";
       ExecStop = "/run/wrappers/bin/fusermount -u /home/nixadmin/mnt/gdrive";
       Restart = "on-failure";
       RestartSec = "10s";
