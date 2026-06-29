@@ -34,6 +34,7 @@
     ./shell/nushell
     ./shell/tmux
     ./storage/rclone/desktop
+    ./storage/syncthing/desktop
 
   ]
 
@@ -41,6 +42,7 @@
   ++ lib.optionals (hostName == "nixpgadmin") [
 
     ./storage/rclone/laptop
+    ./storage/syncthing/laptop
     
   ];
 }
