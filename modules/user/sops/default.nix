@@ -35,6 +35,10 @@
       forgejo_desktop_ssh_config = {
       };
       forgejo_ssh_config = {
+        path = "/var/lib/sops-nix/key.txt";
+      };
+      syncthing_gui_password = {
+        path = "${config.home.homeDirectory}/.config/syncthing/syncthing_gui_password";
       };
     };
   };
