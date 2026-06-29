@@ -11,7 +11,7 @@
 
 {
 
-  sops.secrets.syncthing_gui_password = {
+  sops.secrets.syncthing_gui_pass = {
     neededForUsers = true;
   };
 
@@ -35,7 +35,7 @@
     settings = {
       gui = {
         user = "nixpgadmin";
-        password = config.sops.secrets.syncthing_gui_password.path;
+        password = config.sops.secrets.syncthing_gui_pass.path;
       };
 
       devices = {
