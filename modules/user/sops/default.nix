@@ -1,5 +1,5 @@
 # ==========================================================================
-# SOPS Secrets Management Configuration
+# SOPS Secrets Management - User
 # ==========================================================================
 
 { 
@@ -36,9 +36,6 @@
       };
       forgejo_ssh_config = {
         path = "/var/lib/sops-nix/key.txt";
-      };
-      syncthing_gui_password = {
-        path = "${config.home.homeDirectory}/.config/syncthing/syncthing_gui_password";
       };
     };
   };
