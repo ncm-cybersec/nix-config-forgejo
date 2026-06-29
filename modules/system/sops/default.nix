@@ -17,7 +17,7 @@
   ];
 
   # Install the sops CLI tool 
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     age
     sops
   ];
@@ -27,9 +27,8 @@
     age.keyFile = "/var/lib/sops-nix/key.txt"; 
     
     secrets = {
-      
-      syncthing_gui_password = {
-        path = "${config.home.homeDirectory}/.config/syncthing/syncthing_gui_password";
+
+      syncthing_gui_pass = {
         neededForUsers = true; 
       };
     };
