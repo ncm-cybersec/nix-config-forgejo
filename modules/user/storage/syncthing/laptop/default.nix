@@ -1,5 +1,5 @@
 # ==========================================================================
-# Syncthing Service Configuration
+# Syncthing Service Configuration - Host 2
 # ==========================================================================
 
 { 
@@ -9,6 +9,11 @@
 }:
 
 {
+
+  sops.secrets.syncthing_gui_password = {
+    neededForUsers = true;
+  };
+
   # Enable Syncthing
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; 
   services.syncthing = {
@@ -16,20 +21,29 @@
     package = pkgs.syncthing;
     openDefaultPorts = true;
     guiAddress = "0.0.0.0:8384";
-    user = "nixadmin";
+    user = "nixpgadmin"; 
     group = "users";
     configDir = "/home/nixadmin/.config/syncthing";
 
     settings = {
-      devices = {
-        
+      gui = {
+        user = "nixpgadmin";
+        password = config.sops.secrets.syncthing_gui_password.path;
       };
+
+      devices = {
+        "Desktop" = { 
+          id = "FPMFDBM-C7ZQX2H-SUBB43X-Y6UBSEW-VOJCBA2-F5SSJFS-NF3UMRY-F4EVVAQ"; 
+        };
+      };
+      
       folders = {
         "Homelab" = {
-          path = "/home/nixadmin/NCM_Cybersec/homelab";
+          id = "homelab-sync-id"; 
+          path = "/home/nixpgadmin/Homelab"; 
+          devices = [ "Host-1-Desktop" ]; 
         };
       };
     };
   };
-
 }
