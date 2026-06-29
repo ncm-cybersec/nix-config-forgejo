@@ -22,6 +22,7 @@
     ./packages/scripts
     ./packages/system
     ./shell
+    ./sops
   
   ] 
   
