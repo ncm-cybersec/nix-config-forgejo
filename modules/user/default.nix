@@ -34,15 +34,13 @@
     ./shell/nushell
     ./shell/tmux
     ./storage/rclone/desktop
-    ./storage/syncthing/desktop
-
+ 
   ]
 
   # Laptop-specific modules
   ++ lib.optionals (hostName == "nixpgadmin") [
 
     ./storage/rclone/laptop
-    ./storage/syncthing/laptop
     
   ];
 }

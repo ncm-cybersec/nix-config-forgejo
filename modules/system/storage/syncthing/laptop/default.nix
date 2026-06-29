@@ -15,15 +15,21 @@
   };
 
   # Enable Syncthing
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; 
+  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
+
   services.syncthing = {
     enable = true;
     package = pkgs.syncthing;
     openDefaultPorts = true;
     guiAddress = "0.0.0.0:8384";
+
     user = "nixpgadmin"; 
     group = "users";
+    dataDir = "/home/nixpgadmin/Homelab";
     configDir = "/home/nixadmin/.config/syncthing";
+
+    overrideDevices = true;
+    overrideFolders = true;
 
     settings = {
       gui = {
@@ -41,7 +47,7 @@
         "Homelab" = {
           id = "homelab-sync-id"; 
           path = "/home/nixpgadmin/Homelab"; 
-          devices = [ "Host-1-Desktop" ]; 
+          devices = [ "Desktop" ]; 
         };
       };
     };
