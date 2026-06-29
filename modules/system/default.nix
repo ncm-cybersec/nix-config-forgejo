@@ -31,7 +31,6 @@
   ++ lib.optionals (hostName == "nixadmin") [
     
     ./packages/security
-    ./storage/syncthing
   
   ]
 
