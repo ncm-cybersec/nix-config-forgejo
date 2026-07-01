@@ -35,7 +35,6 @@
       forgejo_desktop_ssh_config = {
       };
       forgejo_ssh_config = {
-        path = "/var/lib/sops-nix/key.txt";
       };
     };
   };
