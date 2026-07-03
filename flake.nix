@@ -26,6 +26,12 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     # Nix Declarative Flatpaks - Declarative Flatpak management for applications that aren't in nixpkgs
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    # Plasma-Manager - KDE Plasma Configuration Manager
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     # PlasmaZones - Window tiling manager inspired by PowerToys FancyZones for KDE Plasma
     plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
     # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule
@@ -47,6 +53,7 @@
     kwin-effects-glass,
     llm-agents, 
     nix-flatpak, 
+    plasma-manager, 
     plasmazones, 
     sops-nix, 
     vicinae, 
@@ -101,6 +108,7 @@
             imports = [
               ./home.nix
               catppuccin.homeModules.catppuccin
+              plasma-manager.homeModules.plasma-manager
             ];
           };
         }
@@ -145,6 +153,7 @@
             imports = [
               ./home.nix
               catppuccin.homeModules.catppuccin
+              plasma-manager.homeModules.plasma-manager
             ];
           };
         }
