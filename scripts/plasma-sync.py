@@ -103,7 +103,7 @@ def is_volatile(group, key):
     # Determine if group/key pair represents volatile state that should be ignored
     group_lower = group.lower()
     key_lower = key.lower()
-    
+
     if group_lower in VOLATILE_GROUPS:
         return True
     if "timestamp" in key_lower:
@@ -115,14 +115,16 @@ def is_volatile(group, key):
 def cast_value(v):
     # Cast string value to boolean, int, or float if appropriate
     v_lower = v.lower()
-    if v_lower == "true": return True
-    if v_lower == "false": return False
-    
+    if v_lower == "true":
+        return True
+    if v_lower == "false":
+        return False
+
     # Try integer cast
     if v.isdigit() or (v.startswith('-') and v[1:].isdigit()):
         if str(int(v)) == v:
             return int(v)
-            
+
     # Try float cast, excluding strings like '1920x1080'
     try:
         f = float(v)
@@ -130,7 +132,7 @@ def cast_value(v):
             return f
     except ValueError:
         pass
-        
+
     return v
 
 def parse_shortcut_value(v):
@@ -164,16 +166,16 @@ def parse_rc_file(path):
     # Parse KDE RC INI file into a nested dictionary, handling [Group][Subgroup]
     if not os.path.exists(path):
         return {}
-        
+
     result = {}
     current_group = ""
-    
+
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith("#"): 
                 continue
-                
+
             if line.startswith("[") and line.endswith("]"):
                 groups = re.findall(r'\[([^\]]+)\]', line)
                 if groups:
@@ -181,19 +183,19 @@ def parse_rc_file(path):
                 else:
                     current_group = line[1:-1]
                 continue
-                
+
             if "=" in line:
                 key, val = line.split("=", 1)
                 key = key.strip()
                 val = val.strip()
-                
+
                 # Strip KDE type markers (e.g. [$e], [$i])
                 key = re.sub(r'\[\$[a-zA-Z]\]$', '', key)
-                
+
                 if current_group not in result:
                     result[current_group] = {}
                 result[current_group][key] = val
-                
+
     return result
 
 def load_konsole_profiles(config_dir="~/.local/share/konsole"):
@@ -201,10 +203,10 @@ def load_konsole_profiles(config_dir="~/.local/share/konsole"):
     konsole_dir = os.path.expanduser(config_dir)
     schemes = {}
     profiles = {}
-    
+
     if not os.path.isdir(konsole_dir):
         return schemes, profiles
-        
+
     # Read color schemes
     for cs in glob.glob(os.path.join(konsole_dir, "*.colorscheme")):
         name = os.path.splitext(os.path.basename(cs))[0]
@@ -216,7 +218,7 @@ def load_konsole_profiles(config_dir="~/.local/share/konsole"):
         parsed = parse_rc_file(prof)
         profile_data = {}
         extra_config = {}
-        
+
         for group, keys in parsed.items():
             for k, v in keys.items():
                 if group == "General" and k == "Name":
@@ -229,12 +231,12 @@ def load_konsole_profiles(config_dir="~/.local/share/konsole"):
                     if group not in extra_config:
                         extra_config[group] = {}
                     extra_config[group][k] = cast_value(v)
-                    
+
         if extra_config:
             profile_data["extraConfig"] = extra_config
-            
+
         profiles[name] = profile_data
-        
+
     return schemes, profiles
 
 def get_live_state(config_dir="~/.config"):
@@ -265,18 +267,18 @@ def build_nix_struct(state):
             "konsole": {"enable": True}
         }
     }
-    
+
     # Load dynamic Konsole profiles
     schemes, profiles = load_konsole_profiles()
     if schemes:
         struct["programs"]["konsole"]["customColorSchemes"] = schemes
     if profiles:
         struct["programs"]["konsole"]["profiles"] = profiles
-    
+
     for fname, groups in state.items():
         for group, keys in groups.items():
             for key, val in keys.items():
-                
+
                 # Apply high-level mapped keys
                 mapped = False
                 for m_file, m_group, m_key, m_path, m_transform in MAPPINGS:
@@ -284,14 +286,14 @@ def build_nix_struct(state):
                         deep_set(struct, m_path, m_transform(val))
                         mapped = True
                         break
-                
+
                 if mapped:
                     continue
-                
+
                 # Skip volatile variables
                 if is_volatile(group, key):
                     continue
-                
+
                 # Handle shortcuts uniquely
                 if fname == "kglobalshortcutsrc":
                     shortcut_val = parse_shortcut_value(val)
@@ -299,7 +301,7 @@ def build_nix_struct(state):
                         struct["programs"]["plasma"]["shortcuts"][group] = {}
                     struct["programs"]["plasma"]["shortcuts"][group][key] = shortcut_val
                     continue
-                
+
                 # Drop remaining config keys into configFile block
                 val_cast = cast_value(val)
                 cf = struct["programs"]["plasma"]["configFile"]
@@ -308,55 +310,55 @@ def build_nix_struct(state):
                 if group not in cf[fname]:
                     cf[fname][group] = {}
                 cf[fname][group][key] = val_cast
-                
+
     return struct
 
 def to_nix(obj, indent=0, path=""):
     # Convert a Python dictionary to a formatted Nix expression
     ind = "  " * indent
-    
+
     if isinstance(obj, bool):
         return "true" if obj else "false"
-        
+
     elif isinstance(obj, (int, float)):
         return str(obj)
-        
+
     elif isinstance(obj, str):
-        # Interpret local path files dynamically, if path contains spaces, it must be constructed using Nix path interpolation.
+        # Interpret local path files dynamically
         if obj.startswith("/home/") and obj.endswith(".colorscheme"):
             if " " in obj:
                 return f'/. + "{obj}"'
             return obj
         escaped = obj.replace('\\', '\\\\').replace('"', '\\"')
         return f'"{escaped}"'
-        
+
     elif isinstance(obj, list):
         if not obj:
             return "[ ]"
         items = " ".join(to_nix(x) for x in obj)
         return f"[{items}]"
-        
+
     elif isinstance(obj, dict):
         if not obj:
             return "{ }"
         lines = ["{"]
-        
+
         # Sort items: ensure "enable" is always first in the block, otherwise alphabetical
         sorted_items = sorted(obj.items(), key=lambda x: (0 if x[0] == "enable" else 1, x[0]))
-        
+
         for k, v in sorted_items:
             current_path = f"{path}.{k}" if path else k
-            
+
             # Inject structural comments if matching the predefined path
             if current_path in NIX_COMMENTS:
                 lines.append(ind + "  # --- " + NIX_COMMENTS[current_path] + " ---")
-                
+
             safe_k = k if re.match(r'^[a-zA-Z_][a-zA-Z0-9_-]*$', k) else f'"{k}"'
             lines.append(ind + "  " + f"{safe_k} = {to_nix(v, indent + 1, current_path)};")
-            
+
         lines.append(ind + "}")
         return "\n".join(lines)
-        
+
     return '""'
 
 # ==============================================================================
@@ -367,17 +369,17 @@ def get_host():
     # Retrieve system hostname
     return subprocess.run(["hostname"], capture_output=True, text=True).stdout.strip()
 
-# My nix-config manages two separate hosts, both using plasma-manager. If you only have one host, remove or comment out the "def get_out_dir()" function, and replace "def cmd_convert()" function with the following (modify the out_file path to match your needs) and modify "baseline_file" below: 
+# Single host version, remove get_out_dir(), replace cmd_convert()
 # def cmd_convert(args):
     # Capture configuration, map to Nix, and write output
     # state = get_live_state()
     # struct = build_nix_struct(state)
     # out_nix = "{\n  config,\n  pkgs,\n  ...\n}:\n\n" + to_nix(struct, 0) + "\n"
-    
+
     # out_file = args.out
     # if not out_file:
     #    out_file = f"modules/user/packages/kde/plasma-{get_host()}.nix"
-        
+
     # os.makedirs(os.path.dirname(out_file) or ".", exist_ok=True)
     # with open(out_file, "w") as f:
     #    f.write(out_nix)
@@ -396,12 +398,12 @@ def cmd_convert(args):
     state = get_live_state()
     struct = build_nix_struct(state)
     out_nix = "{\n  config,\n  pkgs,\n  ...\n}:\n\n" + to_nix(struct, 0) + "\n"
-    
+
     out_file = args.out
     if not out_file:
         host = get_host()
         out_file = f"{get_out_dir(host)}/default.nix"
-        
+
     os.makedirs(os.path.dirname(out_file) or ".", exist_ok=True)
     with open(out_file, "w") as f:
         f.write(out_nix)
@@ -412,7 +414,7 @@ def diff_dict(d1, d2, path=""):
     diffs = []
     keys1 = set(d1.keys()) if isinstance(d1, dict) else set()
     keys2 = set(d2.keys()) if isinstance(d2, dict) else set()
-    
+
     for k in keys1 - keys2:
         diffs.append(("REMOVED", f"{path}.{k}".strip('.'), d1[k], None))
     for k in keys2 - keys1:
@@ -422,7 +424,7 @@ def diff_dict(d1, d2, path=""):
             diffs.extend(diff_dict(d1[k], d2[k], f"{path}.{k}"))
         elif d1[k] != d2[k]:
             diffs.append(("CHANGED", f"{path}.{k}".strip('.'), d1[k], d2[k]))
-            
+
     return diffs
 
 # If you only have one host, replace baseline_file with the following (modify the path accordingly):
@@ -432,10 +434,10 @@ def cmd_diff(args):
     # Compare live KDE configuration against a recorded JSON baseline snapshot
     host = get_host()
     baseline_file = f"{get_out_dir(host)}/plasma-{host}.baseline.json"
-    
+
     raw_state = get_live_state()
     state = {}
-    
+
     # Remove volatile items from the comparison state
     for fname, groups in raw_state.items():
         state[fname] = {}
@@ -448,26 +450,26 @@ def cmd_diff(args):
                 del state[fname][group]
         if not state[fname]:
             del state[fname]
-            
+
     if args.update or not os.path.exists(baseline_file):
         os.makedirs(os.path.dirname(baseline_file) or ".", exist_ok=True)
         with open(baseline_file, "w") as f:
             json.dump(state, f, indent=2)
         print(f"Updated baseline at {baseline_file}")
-        
+
         if args.update:
             cmd_convert(argparse.Namespace(out=None))
             print("Run 'git diff' to review the changes.")
         return 0
-        
+
     with open(baseline_file, "r") as f:
         baseline = json.load(f)
-        
+
     diffs = diff_dict(baseline, state)
     if not diffs:
         print("No configuration drift detected.")
         return 0
-        
+
     print(f"Configuration drift detected against baseline for host {host}:")
     for t, p, v1, v2 in diffs:
         if t == "ADDED":
@@ -476,19 +478,19 @@ def cmd_diff(args):
             print(f"  - {p} (was {v1})")
         elif t == "CHANGED":
             print(f"  ~ {p} : {v1} -> {v2}")
-            
+
     return 1
 
 def main():
     parser = argparse.ArgumentParser(description="Plasma Manager config synchronization tool")
     subparsers = parser.add_subparsers(dest="command", required=True)
-    
+
     p_convert = subparsers.add_parser("convert", help="Convert live KDE config to Nix module")
     p_convert.add_argument("--out", help="Output Nix file path")
-    
+
     p_diff = subparsers.add_parser("diff", help="Diff live KDE config against baseline")
     p_diff.add_argument("--update", action="store_true", help="Update the baseline snapshot and regenerate Nix module")
-    
+
     args = parser.parse_args()
     if args.command == "convert":
         cmd_convert(args)
@@ -497,3 +499,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

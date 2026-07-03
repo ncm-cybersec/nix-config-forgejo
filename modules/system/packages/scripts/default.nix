@@ -21,7 +21,7 @@
     (pkgs.writeShellScriptBin "update-netcatty" (builtins.readFile "${self}/scripts/update-netcatty.zsh"))
 
     # Python script to replace plasma-manager rc2nix for initial plasma config generation, and to continuously capture changes to plasma settings
-    (pkgs.writers.writePython3Bin "plasma-sync" { libraries = [ ]; } (builtins.readFile "${self}/scripts/plasma-sync.py"))
+    (pkgs.writers.writePython3Bin "plasma-sync" { libraries = [ ]; flakeIgnore = [ "E265" "E302" "E305" "E501" "F401" "W291" "W292" "W293" ]; } (builtins.readFile "${self}/scripts/plasma-sync.py"))
 
   ];
 }
