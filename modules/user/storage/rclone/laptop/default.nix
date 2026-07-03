@@ -29,7 +29,9 @@
       Restart = "on-failure";
       RestartSec = "10s";
     };
-    Install.WantedBy = [ "default.target" ];
+    Install.WantedBy = [ 
+      "default.target" 
+    ];
   };
 
   # Mount OneDrive using rclone via systemd service
