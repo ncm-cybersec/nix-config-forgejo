@@ -7,17 +7,13 @@
 # - A pure-Python utility to replace 'rc2nix'. Capture live KDE Plasma configurations, 
 #   map high-level options matching plasma-manager, filter out volatile state, and emit 
 #   a cleanly formatted Nix module.
+# - You can configure plasma-manager options declaratively, or configure your system
+#   entirely through settings, then use this script to generate and continuously capture 
+#   any updates.
 # - After installing plasma-manager flake, create or add a "scripts" folder to
 #   your nix-config directory and add this script to it. In your configuration.nix 
-#   file (or dedicated scripts module), add the following to make the script 
-#   available:
-#   
-#   environment.systemPackages = with pkgs; [
-#     Other packages...
-#     
-#     (writers.writePython3Bin "plasma-sync" { libraries = [ ]; } 
-#      (builtins.readFile ./scripts/plasma-sync.py))
-#   ];
+#   file (or dedicated scripts module), use pkgs.writers.writePython3Bin to make the script 
+#   available (see /modules/system/packages/scripts).
 #
 # - After rebuilding your system, simply type "plasma-sync diff --update" to 
 #   capture any changes.
@@ -294,7 +290,7 @@ def build_nix_struct(state):
                 if is_volatile(group, key):
                     continue
 
-                # Handle shortcuts uniquely
+                # Structure shortcuts
                 if fname == "kglobalshortcutsrc":
                     shortcut_val = parse_shortcut_value(val)
                     if group not in struct["programs"]["plasma"]["shortcuts"]:
@@ -343,7 +339,7 @@ def to_nix(obj, indent=0, path=""):
             return "{ }"
         lines = ["{"]
 
-        # Sort items: ensure "enable" is always first in the block, otherwise alphabetical
+        # Sort items: ensure "enable" option is always first in the block, otherwise alphabetical
         sorted_items = sorted(obj.items(), key=lambda x: (0 if x[0] == "enable" else 1, x[0]))
 
         for k, v in sorted_items:
@@ -369,7 +365,7 @@ def get_host():
     # Retrieve system hostname
     return subprocess.run(["hostname"], capture_output=True, text=True).stdout.strip()
 
-# Single host version, remove get_out_dir(), replace cmd_convert()
+# Single host version, remove get_out_dir(), replace cmd_convert() with:
 # def cmd_convert(args):
     # Capture configuration, map to Nix, and write output
     # state = get_live_state()
@@ -378,7 +374,7 @@ def get_host():
 
     # out_file = args.out
     # if not out_file:
-    #    out_file = f"modules/user/packages/kde/plasma-{get_host()}.nix"
+    #    out_file = f"modules/user/kde/plasma-manager.nix"
 
     # os.makedirs(os.path.dirname(out_file) or ".", exist_ok=True)
     # with open(out_file, "w") as f:
@@ -428,7 +424,7 @@ def diff_dict(d1, d2, path=""):
     return diffs
 
 # If you only have one host, replace baseline_file with the following (modify the path accordingly):
-#   baseline_file = f"modules/user/packages/kde/plasma-{host}.baseline.json"
+#   baseline_file = f"modules/user/kde/plasma-manager.baseline.json"
 
 def cmd_diff(args):
     # Compare live KDE configuration against a recorded JSON baseline snapshot
@@ -482,7 +478,7 @@ def cmd_diff(args):
     return 1
 
 def main():
-    parser = argparse.ArgumentParser(description="Plasma Manager config synchronization tool")
+    parser = argparse.ArgumentParser(description="Plasma Manager Config Synchronization Tool")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     p_convert = subparsers.add_parser("convert", help="Convert live KDE config to Nix module")
@@ -499,4 +495,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+
