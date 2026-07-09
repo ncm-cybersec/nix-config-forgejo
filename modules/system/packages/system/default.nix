@@ -10,15 +10,6 @@
 
 {
   
-  # Enable unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-38.8.4"
-      "electron-39.8.10"
-    ];
-  };
-
   # Install applications using Nix options
   programs = {
     firefox.enable = true;
