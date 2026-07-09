@@ -18,18 +18,17 @@
     hermes-desktop
     
     # Coding Agents
-
-    antigravity-cli
-    gitnexus
-    copilot-cli
     oh-my-opencode
     opencode
     
+    # Memory
+    gitnexus
+    gno
+    memvid-cli
+
     # Utilities
     apm
-    gno
     mcporter
-    memvid-cli
     openskills
     skills
     skills-installer
