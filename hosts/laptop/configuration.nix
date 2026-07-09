@@ -10,7 +10,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: 
+
+{
   imports = [
     ./boot.nix
     ./desktop.nix
@@ -38,6 +40,17 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
+    ];
+  };
+  
+  # Enable unfree packages, CUDA support, and configure NVIDIA drivers
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+    cudaCapabilities = [ "7.5" ];
+    permittedInsecurePackages = [
+      "electron-38.8.4"
+      "electron-39.8.10"
     ];
   };
 
