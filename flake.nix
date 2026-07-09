@@ -10,6 +10,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     # Nixpkgs Unstable. System is on stable channel, but unstable is used for certain packages
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Antigravity 2.0
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Catppuccin Global Theme - Defined as a home-manager module and imported in home.nix
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     # Home Manager - Defined as a nixos module
@@ -48,6 +53,7 @@
     self, 
     nixpkgs, 
     nixpkgs-unstable,
+    antigravity-nix,
     catppuccin,
     home-manager, 
     kwin-effects-glass,
