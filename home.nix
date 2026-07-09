@@ -4,6 +4,7 @@
 
 { 
   config,
+  inputs,
   pkgs, 
   pkgsUnstable,
   username,
@@ -70,7 +71,6 @@
   (with pkgsUnstable; [
 
     # Unstable packages
-    antigravity
     code-cursor
     cursor-cli
     kiro
@@ -78,6 +78,15 @@
     tabularis
     zed-editor
        
+  ]) ++ 
+  
+  (with inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}; [
+    
+    # Antigravity 2.0
+    google-antigravity-no-fhs       # AGY Base App
+    google-antigravity-ide-no-fhs   # AGY IDE
+    google-antigravity-cli          # AGY CLI
+  
   ]);
 
   home.stateVersion = "25.11";
