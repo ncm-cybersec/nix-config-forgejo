@@ -1,74 +1,77 @@
 # ======================================================================================
 # NixOS Multi-Host Architecture and CI/CD Using Only Native Nix Options
 # ======================================================================================
-
 {
   description = "NixOS Multi-Host Architecture with CI/CD";
 
   inputs = {
-    # Nixpkgs Stable - Default Channel
+    # Default Channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    # Nixpkgs Unstable. System is on stable channel, but unstable is used for certain packages
+    # Nixpkgs unstable is safely mixed with stable
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Antigravity 2.0
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Catppuccin Global Theme - Defined as a home-manager module and imported in home.nix
+    # Global Theme - Defined as a home-manager module & imported in home.nix
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     # Home Manager - Defined as a nixos module
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # KWIN Effects Glass Flake Module for system theme
+    # Flake Module for system theme
     kwin-effects-glass = {
       url = "github:4v3ngR/kwin-effects-glass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # NumtideLLM Agents - Flake module that packages common LLM agents and tools for NixOS
+    # Numtide's LLM Agents - common LLM agents and tools for NixOS
     llm-agents.url = "github:numtide/llm-agents.nix";
-    # Nix Declarative Flatpaks - Declarative Flatpak management for applications that aren't in nixpkgs
+    # Local LLM Inference via llama.cpp, vLLM, or sglang
+    llmhop = {
+      url = "github:mirkolenz/llmhop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Declarative Flatpak management for applications that aren't in nixpkgs
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    # Plasma-Manager - KDE Plasma Configuration Manager
+    # KDE Plasma Configuration Manager
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # PlasmaZones - Window tiling manager inspired by PowerToys FancyZones for KDE Plasma
+    # Window tiling manager inspired by PowerToys FancyZones for KDE Plasma
     plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
-    # SOPS Nix - Secrets management for NixOS. Defined as a nixosModule
+    # Secrets management for NixOS. Defined as a nixosModule
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Vicinae - Local Desktop Search Runner
+    # Local Desktop Search Runner
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
-  # Flake outputs passed to nixos configurations and home manager via specialArgs and extraSpecialArgs
-  outputs = { 
-    self, 
-    nixpkgs, 
+  # Flake outputs passed to config.nix & home.nix via specialArgs and extraSpecialArgs
+  outputs = {
+    self,
+    nixpkgs,
     nixpkgs-unstable,
     antigravity-nix,
     catppuccin,
-    home-manager, 
+    home-manager,
     kwin-effects-glass,
-    llm-agents, 
-    nix-flatpak, 
-    plasma-manager, 
-    plasmazones, 
-    sops-nix, 
-    vicinae, 
-    ... 
-  }@inputs:
-  
-  let 
+    llm-agents,
+    llmhop,
+    nix-flatpak,
+    plasma-manager,
+    plasmazones,
+    sops-nix,
+    vicinae,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
-    # Define nixpkgs-unstable as pkgsUnstable 
+    # Define nixpkgs-unstable as pkgsUnstable
     pkgsUnstable = import nixpkgs-unstable {
       inherit system;
       config = {
@@ -81,9 +84,7 @@
         ];
       };
     };
-    
-  in { 
-
+  in {
     # ==========================================================================
     # Nixos Desktop - Hostname: nixadmin
     # ==========================================================================
@@ -91,10 +92,11 @@
     nixosConfigurations.nixadmin = nixpkgs.lib.nixosSystem {
       inherit system;
       # Special arguments passed to configuration.nix & nixosModules
-      specialArgs = { 
-        inherit self inputs pkgsUnstable; hostName = "nixadmin";
+      specialArgs = {
+        inherit self inputs pkgsUnstable;
+        hostName = "nixadmin";
       };
-      # Configuration modules 
+      # Configuration modules
       modules = [
         # Core Configuration
         ./hosts/desktop/configuration.nix
@@ -104,11 +106,11 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.extraSpecialArgs = { 
+          home-manager.extraSpecialArgs = {
             inherit inputs pkgsUnstable;
-            # Hostname matches username for multiple hosts sharing home-manager configuration for uniformity across systems
+            # Hostname matches username for multiple hosts sharing home-manager configuration
             hostName = "nixadmin";
-            username = "nixadmin";          
+            username = "nixadmin";
           };
           home-manager.users.nixadmin = {
             imports = [
@@ -118,14 +120,11 @@
             ];
           };
         }
-        # Nix Declarative Flatpak configuration
+        llmhop.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
-        # PlasmaZones window tiling manager for KDE Plasma
         plasmazones.nixosModules.default
-        # SOPS configuration for secrets management
         sops-nix.nixosModules.sops
-        # Vicinae configuration for local desktop search runner
-        vicinae.nixosModules.default 
+        vicinae.nixosModules.default
       ];
     };
 
@@ -136,10 +135,11 @@
     nixosConfigurations.nixpgadmin = nixpkgs.lib.nixosSystem {
       inherit system;
       # Special arguments passed to configuration.nix & nixosModules
-      specialArgs = { 
-        inherit self inputs pkgsUnstable; hostName = "nixpgadmin";
+      specialArgs = {
+        inherit self inputs pkgsUnstable;
+        hostName = "nixpgadmin";
       };
-      # Configuration modules 
+      # Configuration modules
       modules = [
         # Core Configuration
         ./hosts/laptop/configuration.nix
@@ -149,11 +149,11 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.extraSpecialArgs = { 
+          home-manager.extraSpecialArgs = {
             inherit inputs pkgsUnstable;
             # Hostname matches username for multiple hosts sharing home-manager configuration for uniformity across systems
             hostName = "nixpgadmin";
-            username = "nixpgadmin";          
+            username = "nixpgadmin";
           };
           home-manager.users.nixpgadmin = {
             imports = [
@@ -163,15 +163,12 @@
             ];
           };
         }
-        # Nix Declarative Flatpak configuration
+        llmhop.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
-        # PlasmaZones window tiling manager for KDE Plasma
         plasmazones.nixosModules.default
-        # SOPS configuration for secrets management
         sops-nix.nixosModules.sops
-        # Vicinae configuration for local desktop search runner
-        vicinae.nixosModules.default 
+        vicinae.nixosModules.default
       ];
-    };  
+    };
   };
 }
