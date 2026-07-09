@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     
+    bluez-tools
     input-leap
     pavucontrol
     
@@ -37,19 +38,19 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    package = with pkgs; [
+      bluez     
+    ];
     settings = {
       General = {
         Experimental = true;
         FastConnectable = true;
-    };
-    Policy = {
-      AutoEnable = true;
+      };
+      Policy = {
+        AutoEnable = true;
       };
     };
   };
-
-  # Bluetooth GUI manager
-  services.blueman.enable = true;
 
   # CUPS & epson print drivers
   services.printing = {
