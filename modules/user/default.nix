@@ -30,6 +30,7 @@
   ++ lib.optionals (hostName == "nixadmin") [
 
     ./packages/llmagents
+    ./packages/localllama/desktop
     ./packages/mcp
     ./shell/nushell
     ./shell/tmux
@@ -40,6 +41,7 @@
   # Laptop-specific modules
   ++ lib.optionals (hostName == "nixpgadmin") [
 
+    ./packages/localllama/laptop
     ./storage/rclone/laptop
     
   ];
