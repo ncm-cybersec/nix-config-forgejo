@@ -1,16 +1,8 @@
 # ==========================================================================
 # Network Services & Security Configuration
 # ==========================================================================
-
-{ 
-  pkgs,
-  ... 
-}:
-
-{
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    
     # General
     cacert
     certinfo-go
@@ -49,13 +41,13 @@
       addresses = true;
     };
   };
-  
+
   # Enable OpenSSH
-  services.openssh = { 
+  services.openssh = {
     enable = true;
   };
-  
-  # Enable Tailscale 
+
+  # Enable Tailscale
   services.tailscale = {
     enable = true;
     openFirewall = true;
@@ -67,19 +59,21 @@
   networking.firewall.trustedInterfaces = [
     "tailscale0"
   ];
-  
+
   # TCP Ports and Ranges
   networking.firewall = {
     allowedTCPPorts = [
-      8384           # Syncthing
-      9300           # Packet / Quick Share
-      24800          # Input-Leap
-      53317          # Localsend
+      8033 # LLMhop WebUI
+      8080 # LLMhop Proxy
+      8384 # Syncthing
+      9300 # Packet / Quick Share
+      24800 # Input-Leap
+      53317 # Localsend
     ];
     allowedTCPPortRanges = [
       {
         from = 1714;
-        to = 1764;   # TCP range for KDEConnect
+        to = 1764; # TCP range for KDEConnect
       }
     ];
   };
@@ -87,16 +81,15 @@
   # UDP Ports and Ranges
   networking.firewall = {
     allowedUDPPorts = [
-      5353           # Avahi / MDNS, enabled by services.avahi ^
-      41641          # Tailscale
-      53317          # Localsend
+      5353 # Avahi / MDNS, enabled by services.avahi ^
+      41641 # Tailscale
+      53317 # Localsend
     ];
     allowedUDPPortRanges = [
       {
         from = 1714;
-        to = 1764;   # UDP range for KDEConnect
+        to = 1764; # UDP range for KDEConnect
       }
     ];
   };
-
 }
