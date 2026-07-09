@@ -32,6 +32,7 @@
       "https://catppuccin.cachix.org"
       "https://cache.numtide.com"
       "https://cuda-maintainers.cachix.org"
+      "https://nixos-cuda.org"
       "https://vicinae.cachix.org"
     ];
     trusted-public-keys = [
@@ -40,6 +41,7 @@
       "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
