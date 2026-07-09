@@ -7,12 +7,6 @@
   ...
 }:
  
-let
-  # CUDA-enabled llama.cpp for the standalone Gemma service
-  llama-pkg = pkgs.llama-cpp.override {
-    cudaSupport = true;
-  };
-in 
 {
   # llmhop Router
   services.llmhop = {
@@ -26,7 +20,7 @@ in
     # Built-in llama.cpp worker management
     llama-cpp = {
       enable = true;
-      package = llama-pkg;
+      package = pkgs.llama-cpp;
       models."qwen3.5-9b" = {
         port = 30001;
         settings = {
