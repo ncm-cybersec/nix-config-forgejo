@@ -5,16 +5,12 @@
 #   - NVIDIA GeForce GTX 1650 4GB
 #   - 32GB DDR4 RAM
 # ==========================================================================
-
-
-{ 
+{
   config,
   lib,
   pkgs,
-  ... 
-}: 
-
-{
+  ...
+}: {
   imports = [
     ./boot.nix
     ./desktop.nix
@@ -51,16 +47,24 @@
       "nix-command"
       "flakes"
     ];
+    # Declare trusted users
     trusted-users = [
       "root"
       "nixpgadmin"
       "@wheel"
     ];
+    # Build optimization settings
+    max-jobs = "auto";
+    cores = 0;
+    # Commit lockfile summary
+    commit-lockfile-summary = "Update flake inputs/flake.lock";
+    # Disable Git tree warning
+    warn-dirty = false;
   };
 
   # SOPS configuration for access to secrets.yaml for forgejo repository access
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt"; 
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
 
   sops.secrets.forgejo_ssh_config = {
     # Writes the secret directly to the root user's SSH config folder at boot.
@@ -79,16 +83,16 @@
   # Auto-upgrade flake from self-hosted forgejo repository
   system.autoUpgrade = {
     enable = true;
-    
+
     # "flake" instructs NixOS to look at a git repository rather than traditional channels
     flake = "git+ssh://forgejo-upgrade/nas_forgejoadmin/nix-config.git#nixpgadmin";
-    
+
     # Run intervals every day at midnight
-    dates = "00:00"; 
-    
+    dates = "00:00";
+
     # Options passed during the rebuild phase
     #flags = [
-      
+
     #];
   };
 
@@ -106,5 +110,4 @@
   };
 
   system.stateVersion = "25.11";
-
 }

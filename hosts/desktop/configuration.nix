@@ -1,26 +1,22 @@
 # ==========================================================================
 # NixOS DesktopSystem Configuration:
 # - HP Omen 45L Gaming Desktop
-#   - AMD Ryzen 7 5800X 
+#   - AMD Ryzen 7 5800X
 #   - NVIDIA GeForce RTX 3060 12GB
 #   - 64GB DDR4 RAM
 # ==========================================================================
-
-{ 
+{
   config,
   lib,
   pkgs,
-  ... 
-}: 
-
-{
-  imports =
-    [
-      ./boot.nix
-      ./desktop.nix
-      ./hardware-configuration.nix
-      ../../modules/system
-    ];
+  ...
+}: {
+  imports = [
+    ./boot.nix
+    ./desktop.nix
+    ./hardware-configuration.nix
+    ../../modules/system
+  ];
 
   # Define system hostname
   networking.hostName = "nixadmin";
@@ -29,15 +25,15 @@
   users.users.nixadmin = {
     isNormalUser = true;
     description = "nixadmin";
-    extraGroups = [ 
-      "networkmanager" 
-      "wheel" 
-      "git" 
-      "podman" 
-      "adbusers" 
-      "libvirtd" 
-      "kvm" 
-      "i2c" 
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "git"
+      "podman"
+      "adbusers"
+      "libvirtd"
+      "kvm"
+      "i2c"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
@@ -45,17 +41,25 @@
     ];
   };
 
-  # Enable Experimental Features and declare trusted users
+  # Enable experimental features
   nix.settings = {
-    experimental-features = [ 
-      "nix-command" 
-      "flakes" 
+    experimental-features = [
+      "nix-command"
+      "flakes"
     ];
-    trusted-users = [ 
-      "nixadmin" 
-      "root" 
-      "@wheel" 
+    # Declare trusted users
+    trusted-users = [
+      "nixadmin"
+      "root"
+      "@wheel"
     ];
+    # Build optimization settings
+    max-jobs = "auto";
+    cores = 0;
+    # Commit lockfile summary
+    commit-lockfile-summary = "Update flake inputs/flake.lock";
+    # Disable Git tree warning
+    warn-dirty = false;
   };
 
   # Allow root to access the flake git repo
@@ -87,5 +91,4 @@
   };
 
   system.stateVersion = "25.11";
-
 }
