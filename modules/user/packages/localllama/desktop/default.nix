@@ -13,9 +13,7 @@
   
   programs.aichat = {
     enable = true;
-    package = with pkgsUnstable; [ 
-      aichat 
-    ];
+    package = pkgsUnstable.aichat;
     settings = {
       default_model = "llmhop:qwen3.5-9b";
       clients = [
@@ -37,9 +35,7 @@
 
   programs.aider-chat = {
     enable = true;
-    package = with pkgsUnstable; [ 
-      aider-chat 
-    ];
+    package = pkgsUnstable.aider-chat;
     settings = {
       openai-api-base = "http://127.0.0";
       openai-api-key = "local-dummy-key";
@@ -55,9 +51,7 @@
 
   programs.fabric-ai = {
     enable = true;
-    package = with pkgsUnstable; [ 
-      fabric-ai 
-    ];
+    package = pkgsUnstable.fabric-ai;
     enableZshIntegration = true;
     enablePatternsAliases = true;
   };
