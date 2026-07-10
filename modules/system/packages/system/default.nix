@@ -12,13 +12,16 @@
   
   # Install applications using Nix options
   programs = {
+    
     firefox.enable = true;
     bash.enable = true;
     virt-manager.enable = true;
+    
     appimage = {
       enable = true;
       binfmt = true;
     };  
+    
     fuse = {
       enable = true;
       userAllowOther = true;
@@ -96,7 +99,6 @@
      powershell
      python3
 
-
   ]) ++ 
   
   # Unstable packages
@@ -105,6 +107,4 @@
     openrgb-with-all-plugins
      
   ]);
-  
 }
-

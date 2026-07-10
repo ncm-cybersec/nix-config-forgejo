@@ -14,6 +14,7 @@
   programs.aichat = {
     enable = true;
     package = pkgsUnstable.aichat;
+    
     settings = {
       default_model = "llmhop:qwen3.5-4b";
       clients = [
@@ -36,6 +37,7 @@
   programs.aider-chat = {
     enable = true;
     package = pkgsUnstable.aider-chat;
+    
     settings = {
       openai-api-base = "http://127.0.0";
       openai-api-key = "local-dummy-key";

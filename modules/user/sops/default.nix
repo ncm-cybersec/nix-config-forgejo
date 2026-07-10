@@ -32,8 +32,10 @@
       git_config_user = {
         path = "${config.home.homeDirectory}/.config/git/git_config_user";
       };
+      
       forgejo_desktop_ssh_config = {
       };
+      
       forgejo_ssh_config = {
       };
     };

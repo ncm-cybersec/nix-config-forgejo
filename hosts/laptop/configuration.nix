@@ -5,6 +5,7 @@
 #   - NVIDIA GeForce GTX 1650 4GB
 #   - 32GB DDR4 RAM
 # ==========================================================================
+
 {
   config,
   lib,
@@ -94,12 +95,13 @@
   };
 
   # SOPS configuration to retrieve secrets & access forgejo repo
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-
-  sops.secrets.forgejo_ssh_config = {
-    # Writes the secret directly to the root user's SSH config
-    path = "/root/.ssh/config";
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.keyFile = "/var/lib/sops-nix/key.txt";
+    
+    secrets.forgejo_ssh_config = {
+      path = "/root/.ssh/config";
+    };
   };
 
   # Pull latest changes from forgejo before rebuild to maintain sync with remote

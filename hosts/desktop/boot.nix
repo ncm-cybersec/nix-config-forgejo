@@ -11,7 +11,7 @@
 
 {
 
-  # Kernel module for managing BIOS settings and updating firmware for HP devices
+  # Kernel module for managing BIOS settings & updating HP firmware
   environment.systemPackages = with pkgs; [
     
     efibooteditor

@@ -12,7 +12,9 @@
   
   # Enable Nushell w/ completions, carapace, and starship prompt
   programs = {
-    nushell = { enable = true;
+    
+    nushell = { 
+      enable = true;
       extraConfig = ''
        let carapace_completer = {|spans|
        carapace $spans.0 nushell ...$spans | from json
@@ -38,9 +40,11 @@
        )
        fastfetch | lolcat
        '';
+       
        shellAliases = {
        };
-   };
+    };
+   
    carapace = { 
      enable = true;
      enableNushellIntegration = true;
@@ -51,5 +55,4 @@
      settings = builtins.fromTOML (builtins.readFile ./starship.toml);
    };
  };
-
 }

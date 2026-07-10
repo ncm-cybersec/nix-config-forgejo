@@ -74,6 +74,5 @@
      nikto
      xsubfind3r
      
-
   ];
 }

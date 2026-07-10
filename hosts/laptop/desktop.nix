@@ -11,10 +11,6 @@
 
 {
 
-  # ==========================================================================
-  # Desktop Environment - KDE Plasma, Wayland
-  # ==========================================================================
-
   # Enable Plasma 6 (KDE)
   services.desktopManager.plasma6.enable = true;
 
@@ -45,10 +41,7 @@
     };
   };
 
-  # ==========================================================================
-  # AMD/NVIDIA Hybrid Graphics Configuration
-  # ==========================================================================
-
+  # AMD/NVIDIA Hybrid Graphics
   hardware.graphics = {
     enable = true;
     enable32Bit = true; 
@@ -66,20 +59,18 @@
 
     # Configure PRIME Hybrid graphics
     prime = {
+      
+      # nvidia-offload utility shell script
       offload = {
         enable = true;
-        enableOffloadCmd = true;  # Provides the 'nvidia-offload' utility shell script
+        enableOffloadCmd = true;
       };
 
-      # Bus IDs for hybrid graphics, verify these values using: lspci | grep -E "VGA|3D"
+      # Bus IDs for hybrid graphics, verify using: lspci | grep -E "VGA|3D"
       amdgpuBusId = "PCI:5:0:0";  
       nvidiaBusId = "PCI:1:0:0";  
     };
   };
-
-  # ==========================================================================
-  # Power Management
-  # ==========================================================================
 
   # Enable laptop power management, thermald to handle thermal throttling
   services = {
@@ -102,6 +93,4 @@
       "__VK_LAYER_NV_optimus" = "NVIDIA_only";
     };
   };
-
-
 }

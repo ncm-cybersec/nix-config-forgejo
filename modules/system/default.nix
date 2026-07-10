@@ -1,13 +1,16 @@
 # ==========================================================================
 # Nixos - Configuration.nix Imports
 # ==========================================================================
+
 {
   hostName,
   lib,
   ...
-}: {
-  imports =
-    [
+}: 
+
+{
+  imports = [
+      
       # Core modules shared between all hosts
       ./cache
       ./hardware
@@ -17,15 +20,21 @@
       ./packages/scripts
       ./packages/system
       ./shell
+      
     ]
-    # Conditional list based on config.networking.hostName used with lib.optionals to only include path if hostname matches
+        
     # Desktop-specific modules
     ++ lib.optionals (hostName == "nixadmin") [
+      
       ./packages/localllama/desktop
       ./packages/security
+      
     ]
+    
     # Laptop-specific modules - will be adding these shortly!
     ++ lib.optionals (hostName == "nixpgadmin") [
+      
       ./packages/localllama/laptop
+      
     ];
 }

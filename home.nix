@@ -17,7 +17,7 @@
       ./modules/user
     ];
  
-  # Username is defined for each host in flake.nix, passed to home-manager using extraSpecialArgs
+  # Username is defined for each host in flake.nix, passed to home-manager via extraSpecialArgs
   home = {
     username = username;
     homeDirectory = "/home/${username}";

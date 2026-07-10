@@ -66,5 +66,4 @@
     kdePackages.kweathercore
     
   ]);
-
 }

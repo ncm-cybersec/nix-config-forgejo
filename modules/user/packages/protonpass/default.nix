@@ -37,13 +37,13 @@
 
   # Proton Pass Agent Systemd Service - Unit File
   systemd.user.services.proton-pass-ssh-agent = {
-    Unit = {
-      Description = "Proton Pass SSH Agent";
-    };
+    Unit = { Description = "Proton Pass SSH Agent"; };
+    
     Service = {
       ExecStart = "${pkgsUnstable.proton-pass-cli}/bin/pass-cli ssh-agent start --socket-path %h/.ssh/proton-pass-agent.sock";
       Restart = "on-failure";
     };
+    
     Install.WantedBy = [ "default.target" ];
   };
 

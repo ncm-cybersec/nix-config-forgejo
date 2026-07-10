@@ -8,7 +8,7 @@
 
 { 
 
-  # Increase maximum number of open files to resolve "too many open files" error
+  # Resolve "too many open files" error
   security.pam.loginLimits = [
     {
       domain = "*";
@@ -16,6 +16,7 @@
       item = "nofile";
       value = "524288";
     }
+    
     { 
       domain = "*";
       type = "hard";
@@ -35,6 +36,7 @@
       "https://cuda-maintainers.cachix.org"
       "https://vicinae.cachix.org"
     ];
+    
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:mCHdDbf9VMTLI1uSRunKadHYADjL5YhBJWhhSPK6QR0="

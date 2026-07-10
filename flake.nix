@@ -1,8 +1,9 @@
 # ======================================================================================
-# NixOS Multi-Host Architecture and CI/CD Using Only Native Nix Options
+# N1x_Cybersec - NixOS Workstation & Home Lab Control Center
 # ======================================================================================
+
 {
-  description = "NixOS Multi-Host Architecture with CI/CD";
+  description = "NixOS Multi-Host Architecture & Nix Native CI/CD (Nixsync)";
 
   inputs = {
     # Default Channel
@@ -14,14 +15,14 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Global Theme - Defined as a home-manager module & imported in home.nix
+    # Global Theme
     catppuccin.url = "github:catppuccin/nix/release-26.05";
-    # Home Manager - Defined as a nixos module
+    # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Flake Module for system theme
+    # System Theme Effects
     kwin-effects-glass = {
       url = "github:4v3ngR/kwin-effects-glass";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +37,7 @@
       url = "github:mirkolenz/llmhop";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    # Declarative Flatpak management for applications that aren't in nixpkgs
+    # Declarative Flatpak management for applications unavailable in nixpkgs
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     # KDE Plasma Configuration Manager
     plasma-manager = {
@@ -44,9 +45,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # Window tiling manager inspired by PowerToys FancyZones for KDE Plasma
+    # Window tiling manager inspired by PowerToys FancyZones
     plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
-    # Secrets management for NixOS. Defined as a nixosModule
+    # Secrets management for NixOS
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +73,10 @@
     sops-nix,
     vicinae,
     ...
-  } @ inputs: let
+  } @ inputs: 
+  
+  let
+    
     system = "x86_64-linux";
     # Define nixpkgs-unstable as pkgsUnstable
     pkgsUnstable = import nixpkgs-unstable {
@@ -89,9 +93,11 @@
         cudaSupport = true;        
       };
     };
+    
   in {
+    
     # ==========================================================================
-    # Nixos Desktop - Hostname: nixadmin
+    # NixOS Desktop - Hostname: nixadmin
     # ==========================================================================
 
     nixosConfigurations.nixadmin = nixpkgs.lib.nixosSystem {

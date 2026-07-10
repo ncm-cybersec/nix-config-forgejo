@@ -19,6 +19,7 @@
   # Mount Google Drive using rclone via systemd service
   systemd.user.services.rclone-gdrive = {
     Unit.Description = "Mount Google Drive";
+    
     Service = {
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"
@@ -29,12 +30,14 @@
       Restart = "on-failure";
       RestartSec = "10s";
     };
+    
     Install.WantedBy = [ "default.target" ];
   };
 
   # Mount OneDrive using rclone via systemd service
   systemd.user.services.rclone-onedrive = {
     Unit.Description = "Mount OneDrive";
+    
     Service = {
       Environment = [
         "PATH=/run/wrappers/bin:$PATH"

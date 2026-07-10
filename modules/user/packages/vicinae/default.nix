@@ -11,29 +11,17 @@
 
 {
 
-# Vicinae theme is currently set using the Catppuccin Flake. 
-# To apply the theme defined in the .toml file, remove the curly braces, and uncomment lines 16, 19, 21, 23-25, 28, and 51.
-
-#let
-  
-  #rawThemeData = builtins.fromTOML (builtins.readFile ./rose-pine-moon.toml);
-
-#in {
-
-  #imports = [
-  #  inputs.vicinae.homeManagerModules.default
-  #];
-  
-  #home.file.".config/vicinae/themes/icons/rose-pine-moon.png".source = ./rose-pine.png;
-
   # Enable vicinae
   programs.vicinae = {
     enable = true;
+    
     systemd = {
       enable = true;
       autoStart = true;
     };
+    
     useLayerShell = true;
+    
     settings = {
       close_on_focus_loss = true;
       consider_preedit = true;
