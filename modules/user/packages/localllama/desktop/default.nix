@@ -20,7 +20,7 @@
         {
           type = "openai";
           name = "llmhop";
-          api_base = "http://127.0.0";
+          api_base = "http://127.0.0.1:8080/v1";
           api_key = "local-dummy-key";
           models = [
             {
@@ -37,7 +37,7 @@
     enable = true;
     package = pkgsUnstable.aider-chat;
     settings = {
-      openai-api-base = "http://127.0.0";
+      openai-api-base = "http://127.0.0.1:8080/v1";
       openai-api-key = "local-dummy-key";
       
       model = "openai/qwen3.5-9b";
@@ -59,7 +59,7 @@
   home.file = {
     ".config/fabric/.env".text = ''
       DEFAULT_MODEL=qwen3.5-9b
-      OPENAI_BASE_URL=http://127.0.0
+      OPENAI_BASE_URL=http://127.0.0.1:8080/v1
     '';
     ".config/fabric/openai_api_key".text = "local-dummy-key";
   };

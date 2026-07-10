@@ -13,7 +13,6 @@
     enable = true;
 
     settings = {
-      # Bind the llmhop OpenAI-compatible API to LAN interfaces
       listen = "0.0.0.0:8080";
     };
 
@@ -33,7 +32,7 @@
       models."gemma-4-12b" = {
         port = 8033;
         settings = {
-          host = "0.0.0.0"; # Bind to LAN for Web UI access
+          host = "0.0.0.0";
           hf-repo = "unsloth/gemma-4-GGUF:gemma-4-12B-it-qat-UD-Q4_K_XL";
           n-gpu-layers = 99;
           ctx-size = 4096;
