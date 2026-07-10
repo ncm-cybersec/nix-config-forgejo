@@ -20,17 +20,14 @@
 
         export SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"
 
+        autoload -Uz compinit && compinit
+        
+        setopt null_glob
+
         eval "$(starship init zsh)"
 
         fastfetch
-      '';
-      
-      initExtra = ''
-        setopt null_glob
-
-        autoload -Uz compinit && compinit
-      '';
-
+      '';    
     };
 
     # Zsh extensions

@@ -135,7 +135,6 @@
     MemoryHigh = "22G";
     MemoryMax = "26G";
     Nice = "19";
-    IOSchedulingClass = "idle";
   };
  
   system.stateVersion = "25.11";

@@ -73,7 +73,7 @@
 
     # Pipewire
     pulseaudio.enable = false;
-    security.rtkit.enable = true;
+    
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -81,5 +81,8 @@
       pulse.enable = true;
     };
   };
+  
+  # Realtimekit for low-latency audio
+  security.rtkit.enable = true;
 
 }
