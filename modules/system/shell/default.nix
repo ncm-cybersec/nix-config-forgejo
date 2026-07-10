@@ -13,10 +13,24 @@
     starship
   ];
   
-  # Configure ZSH as default system shell; system.userActivationScripts.zshrc creates a .zshrc file in the user's home directory, bypassing the ZSH first-time setup wizard.
+  # Create .zshrc to bypass ZSH setup wizard.
   system.userActivationScripts.zshrc = "touch .zshrc";
-  environment.shells =  with pkgs; [ bashInteractive zsh ];
+  
+  environment = {
+    
+    # System shells
+    shells =  with pkgs; [
+      bashInteractive
+      zsh
+    ];
+    
+    # Paths
+    pathsToLink = [
+      "/share/zsh"
+    ];
+  };
 
+  # Enable ZSH w/ ohMyZSH (further config at user level)
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -24,6 +38,7 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
     histSize = 10000;
+    
     shellAliases = {
       c = "clear";
       cdu = "cd ..";
@@ -46,6 +61,7 @@
       psyncup = "plasma-sync diff --update";
       wup = "update-warp";
     };
+    
     ohMyZsh = {
       enable = true;
       plugins = [
