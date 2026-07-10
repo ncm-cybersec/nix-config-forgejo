@@ -34,6 +34,7 @@
       "git"
       "podman"
       "adb"
+      "librechat"
       "libvirtd"
       "kvm"
       "i2c"
