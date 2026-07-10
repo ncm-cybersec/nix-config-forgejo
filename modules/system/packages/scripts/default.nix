@@ -43,7 +43,7 @@ in
   systemd.services."nixos-upgrade-failed@" = {
     description = "Notify user of failed NixOS upgrade on %i";
     script = "${nixos-upgrade-failed}/bin/nixos-upgrade-failed %i";
-    path = with pkgs; [ systemd sed sudo libnotify ];
+    path = with pkgs; [ systemd gnused sudo libnotify ];
   };
 
 }
