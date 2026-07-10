@@ -46,7 +46,6 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
-    QT_QUICK_BACKEND = "vulkan";
   };
 
   # Enable GTK pixbuf loader for Electron apps to display svg
@@ -59,7 +58,7 @@
 
   # NVIDIA GeForce RTX 3060 12GB GPU
   hardware.nvidia = {
-    open = true;
+    open = false;
     nvidiaSettings = true;
     modesetting.enable = true;
     powerManagement.enable = false;

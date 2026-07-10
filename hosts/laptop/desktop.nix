@@ -55,20 +55,13 @@
   };
 
   hardware.nvidia = {
-    # Modesetting for modern desktop environments
     modesetting.enable = true;
 
     # Power Management: turns off dGPU when not in use
     powerManagement.enable = true;
     powerManagement.finegrained = true;
-
-    # Proprietary driver
     open = false;
-
-    # Enable the NVIDIA Settings control panel dashboard
     nvidiaSettings = true;
-
-    # Package version matching 6.12 LTS kernel
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Configure PRIME Hybrid graphics
@@ -99,5 +92,16 @@
     enable = true;
     powertop.enable = true;
   };
+  
+  # Forces background LLM services to utilize dGPU
+  systemd.services."llmhop-llama-cpp@" = {
+    environment = {
+      "__NV_PRIME_RENDER_OFFLOAD" = "1";
+      "__NV_PRIME_RENDER_OFFLOAD_PROVIDER" = "NVIDIA-G0";
+      "__GLX_VENDOR_LIBRARY_NAME" = "nvidia";
+      "__VK_LAYER_NV_optimus" = "NVIDIA_only";
+    };
+  };
+
 
 }
