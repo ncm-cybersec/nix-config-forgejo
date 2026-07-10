@@ -1,8 +1,15 @@
 # ==========================================================================
 # Network Services & Security Configuration
 # ==========================================================================
-{pkgs, ...}: {
+
+{
+  pkgs,
+  ...
+}: 
+
+{
   environment.systemPackages = with pkgs; [
+    
     # General
     cacert
     certinfo-go
@@ -30,65 +37,72 @@
   # Enable NetworkManager
   networking.networkmanager.enable = true;
 
-  # Enable Avahi/mDNS
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
+  # Network Services
+  services = {
+    
+    # Enable Avahi/mDNS
+    avahi = {
       enable = true;
-      userServices = true;
-      addresses = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+        addresses = true;
+      };
     };
+
+    # Enable OpenSSH
+    openssh = {
+      enable = true;
+    };
+
+    # Enable Tailscale
+    tailscale = {
+      enable = true;
+      openFirewall = true;
+      useRoutingFeatures = "client";
+      interfaceName = "tailscale0";
+    }; 
   };
 
-  # Enable OpenSSH
-  services.openssh = {
-    enable = true;
-  };
-
-  # Enable Tailscale
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-    useRoutingFeatures = "client";
-    interfaceName = "tailscale0";
-  };
-
-  # Opnsense Tailscale Interface
-  networking.firewall.trustedInterfaces = [
-    "tailscale0"
-  ];
-
-  # TCP Ports and Ranges
+  # Firewall Configuration
   networking.firewall = {
+    
+    # OPNsense Tailscale Interface
+    trustedInterfaces = [
+      "tailscale0"
+    ];
+    
+    # TCP Ports
     allowedTCPPorts = [
-      8033 # LLMhop WebUI
-      8080 # LLMhop Proxy
-      8384 # Syncthing
-      9300 # Packet / Quick Share
+      3000  # Open WebUI
+      8033  # LLMhop WebUI
+      8080  # LLMhop Proxy
+      8384  # Syncthing
+      9300  # Packet / Quick Share
       24800 # Input-Leap
       53317 # Localsend
     ];
+    
     allowedTCPPortRanges = [
       {
         from = 1714;
         to = 1764; # TCP range for KDEConnect
       }
     ];
-  };
-
-  # UDP Ports and Ranges
-  networking.firewall = {
+    
+    # UDP Ports
     allowedUDPPorts = [
-      5353 # Avahi / MDNS, enabled by services.avahi ^
+      5353  # Avahi / MDNS, enabled by services.avahi ^
       41641 # Tailscale
       53317 # Localsend
     ];
+    
     allowedUDPPortRanges = [
       {
         from = 1714;
-        to = 1764; # UDP range for KDEConnect
+        to = 1764;  # UDP range for KDEConnect
       }
     ];
   };
