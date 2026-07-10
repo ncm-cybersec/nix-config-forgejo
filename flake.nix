@@ -30,12 +30,10 @@
     # Numtide's LLM Agents - common LLM agents and tools for NixOS
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # Local LLM Inference via llama.cpp, vLLM, or sglang
     llmhop = {
       url = "github:mirkolenz/llmhop";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # Declarative Flatpak management for applications unavailable in nixpkgs
     nix-flatpak.url = "github:gmodena/nix-flatpak";
