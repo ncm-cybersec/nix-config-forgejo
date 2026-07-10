@@ -20,7 +20,7 @@
     # Built-in llama.cpp worker management
     llama-cpp = {
       enable = true;
-      package = pkgsUnstable.llama-cpp;
+      package = pkgs.llama-cpp;
       models."qwen3.5-9b" = {
         port = 30001;
         settings = {
@@ -43,23 +43,33 @@
     };
   };
   
-  # Enable Open WebUI
-  services.open-webui = {
+  # Enable LibreChat Native Systemd Service
+  services.librechat = {
     enable = true;
-    package = pkgsUnstable.open-webui;
-    stateDir = "/var/lib/open-webui";
-    openFirewall = true;
-    port = 3000;
-    host = "0.0.0.0";
+    meilisearch.enable = true;
+    enableLocalDB = true;
     
-    environment = {
-      # Directs Open WebUI to LLMhop instance
-      OPENAI_API_BASE_URL = "http://127.0.0";
-      OPENAI_API_KEY = "local-dummy-key";
-      
-      # Disables Ollama seeking
-      ENABLE_OLLAMA_API = "False"; 
+    host = "0.0.0.0";
+    env.PORT = 3080; 
+    openFirewall = true;
+    group = "librechat";
+    
+    settings = {
+      endpoints = {
+        custom = [
+          {
+            name = "Local LLMhop";
+            baseURL = "http://127.0.0"; 
+            apiKey = "sk-local-token";
+            models = {
+              default = [ "gemma-4-12b" ];
+              fetch = false; 
+            };
+            titleConvo = true;
+            summarize = false;
+          }
+        ];
+      };
     };
   };
-  
 }
