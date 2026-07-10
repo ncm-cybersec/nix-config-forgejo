@@ -33,11 +33,12 @@
       "wheel"
       "git"
       "podman"
-      "adbusers"
+      "adb"
       "libvirtd"
       "kvm"
       "i2c"
     ];
+    
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
@@ -55,29 +56,48 @@
     ];
   };
 
-  # Enable experimental features
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    # Declare trusted users
-    trusted-users = [
-      "nixadmin"
-      "root"
-      "@wheel"
-    ];
-    # Build optimization settings
-    max-jobs = "auto";
-    cores = 0;
-    # Commit lockfile summary
-    commit-lockfile-summary = "Update flake inputs/flake.lock";
-    # Disable Git tree warning
-    warn-dirty = false;
+  # Nix Settings
+  nix = {
+    
+    # Enable flakes
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      
+      # Declare trusted users
+      trusted-users = [
+        "nixadmin"
+        "root"
+        "@wheel"
+      ];
+      
+      # Build optimization settings
+      max-jobs = "auto";
+      cores = 0;
+      commit-lockfile-summary = "Update flake inputs/flake.lock";
+      warn-dirty = false;
+    };
+    
+    # Garbage collection every Sunday at 3pm
+    gc = {
+      automatic = true;
+      dates = "Sun *-*-* 15:00:00";
+      options = "--delete-older-than 15d";
+    };
+    
+    # Optimise the Nix store every Saturday at 4pm
+    optimise = {
+      automatic = true;
+      dates = "Sat *-*-* 16:00:00";
+    };
   };
 
   # Allow root to access the flake git repo
   systemd.services.nixos-upgrade = {
+    onFailure = [ "nixos-upgrade-failed@%H.service" ];
+    
     preStart = ''
       ${pkgs.git}/bin/git config --global --add safe.directory /home/nixadmin/nix-config
     '';
@@ -90,18 +110,13 @@
     dates = "23:00";
     flake = "git+file:///home/nixadmin/nix-config";
   };
-
-  # Run garbage collection every Sunday at 3pm
-  nix.gc = {
-    automatic = true;
-    dates = "Sun *-*-* 15:00:00";
-    options = "--delete-older-than 15d";
-  };
-
-  # Optimise the Nix store every Saturday at 4pm
-  nix.optimise = {
-    automatic = true;
-    dates = "Sat *-*-* 16:00:00";
+  
+  # Set memory limits to prevent rebuild failures
+  systemd.services.nix-daemon.serviceConfig = {
+    MemoryHigh = "38G";
+    MemoryMax = "42G";
+    Nice = "19";
+    IOSchedulingClass = "idle";
   };
 
   system.stateVersion = "25.11";
