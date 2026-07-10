@@ -13,7 +13,7 @@
   
   programs.aichat = {
     enable = true;
-    package = pkgsUnstable.aichat;
+    package = pkgs.aichat;
     
     settings = {
       default_model = "llmhop:qwen3.5-9b";
@@ -31,12 +31,25 @@
           ];
         }
       ];
+      
+      highlight_theme = "dracula"; 
+      preambles = {
+        default = ''
+          You are a concise, agentic AI embedded inside a custom NixOS Konsole terminal running Zsh.
+          You are an expert of Technology, with a focus on Cybersecurity, Network Engineering, Programming, DevOps/IaC, and all things Linux/NixOS.          
+          The user's theme is Rose Pine / Catppuccin with glass blur effects. 
+          When rendering code blocks, scripts, or commands:
+          1. Always wrap code in explicit language Markdown blocks (e.g., ```nix or ```bash).
+          2. Keep conversational filler text to an absolute minimum.
+          3. Prioritize NixOS declarative syntax (flakes, modules) when asked system questions.
+        '';
+      };
     };
   };
 
   programs.aider-chat = {
     enable = true;
-    package = pkgsUnstable.aider-chat;
+    package = pkgs.aider-chat;
     
     settings = {
       openai-api-base = "http://127.0.0.1:8080/v1";
@@ -53,7 +66,7 @@
 
   programs.fabric-ai = {
     enable = true;
-    package = pkgsUnstable.fabric-ai;
+    package = pkgs.fabric-ai;
     enableZshIntegration = true;
     enablePatternsAliases = true;
   };
