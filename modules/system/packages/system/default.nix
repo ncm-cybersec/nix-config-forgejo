@@ -58,16 +58,6 @@
      nix-update
      nixpkgs-fmt
      nixpkgs-review
-     python3Packages.flake8
-     python3Packages.flake8-bugbear
-     python3Packages.flake8-class-newline
-     python3Packages.flake8-debugger
-     python3Packages.flake8-deprecated
-     python3Packages.flake8-docstrings
-     python3Packages.flake8-import-order
-     python3Packages.flake8-length
-     python3Packages.flake8-quotes
-     python3Packages.pytest-flake8
 
      # Recovery Utilities
      ntfs3g

@@ -7,8 +7,6 @@
 # ==========================================================================
 
 {
-  config,
-  lib,
   pkgs,
   ...
 }: 
@@ -49,8 +47,6 @@
   # Enable unfree packages, CUDA support, and configure NVIDIA drivers
   nixpkgs.config = {
     allowUnfree = true;
-    cudaSupport = true;
-    cudaCapabilities = [ "7.5" ];
     permittedInsecurePackages = [
       "electron-38.8.4"
       "electron-39.8.10"
@@ -59,15 +55,12 @@
 
   # Nix Settings
   nix = {
-    
-    # Enable flakes
     settings = {
       experimental-features = [
         "nix-command"
         "flakes"
       ];
       
-      # Declare trusted users
       trusted-users = [
         "nixadmin"
         "root"
@@ -94,6 +87,23 @@
       dates = "Sat *-*-* 16:00:00";
     };
   };
+  
+  # Resolve "too many open files" error
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "524288";
+    }
+    
+    { 
+      domain = "*";
+      type = "hard";
+      item = "nofile"; 
+      value = "1048576";
+    }
+  ];
 
   # SOPS configuration to retrieve secrets & access forgejo repo
   sops = {

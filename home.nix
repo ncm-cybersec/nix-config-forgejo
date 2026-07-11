@@ -3,7 +3,6 @@
 # ==========================================================================
 
 { 
-  config,
   inputs,
   pkgs, 
   pkgsUnstable,
@@ -71,11 +70,7 @@
   (with pkgsUnstable; [
 
     # Unstable packages
-    code-cursor
-    cursor-cli
-    kiro
-    kiro-cli
-    tabularis
+
     zed-editor
        
   ]) ++ 

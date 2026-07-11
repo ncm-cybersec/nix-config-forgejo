@@ -12,7 +12,6 @@
   imports = [
       
       # Core modules shared between all hosts
-      ./cache
       ./hardware
       ./networking
       ./packages/flatpak
@@ -27,11 +26,10 @@
     ++ lib.optionals (hostName == "nixadmin") [
       
       ./packages/localllama/desktop
-      ./packages/security
       
     ]
     
-    # Laptop-specific modules - will be adding these shortly!
+    # Laptop-specific modules
     ++ lib.optionals (hostName == "nixpgadmin") [
       
       ./packages/localllama/laptop

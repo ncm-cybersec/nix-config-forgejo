@@ -7,8 +7,6 @@
 # ==========================================================================
 
 {
-  config,
-  lib,
   pkgs,
   ...
 }: 
@@ -35,6 +33,7 @@
       "podman"
       "adb"
       "librechat"
+      "meilisearch"
       "libvirtd"
       "kvm"
       "i2c"
@@ -49,25 +48,20 @@
   # Enable unfree packages, CUDA support, and configure NVIDIA drivers
   nixpkgs.config = {
     allowUnfree = true;
-    cudaSupport = true;
-    cudaCapabilities = [ "8.6" ];
     permittedInsecurePackages = [
-      "electron-38.8.4"
       "electron-39.8.10"
+      "pnpm-10.29.2"
     ];
   };
 
   # Nix Settings
   nix = {
-    
-    # Enable flakes
     settings = {
       experimental-features = [
         "nix-command"
         "flakes"
       ];
       
-      # Declare trusted users
       trusted-users = [
         "nixadmin"
         "root"
@@ -94,6 +88,23 @@
       dates = "Sat *-*-* 16:00:00";
     };
   };
+  
+  # Resolve "too many open files" error
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "524288";
+    }
+    
+    { 
+      domain = "*";
+      type = "hard";
+      item = "nofile"; 
+      value = "1048576";
+    }
+  ];
 
   # Allow root to access the flake git repo
   systemd.services.nixos-upgrade = {

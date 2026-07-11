@@ -76,7 +76,7 @@
     
     # TCP Ports
     allowedTCPPorts = [
-      3000  # Open WebUI
+      3080  # LibreChat
       8033  # LLMhop WebUI
       8080  # LLMhop Proxy
       8384  # Syncthing
