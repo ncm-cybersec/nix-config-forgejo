@@ -1,7 +1,3 @@
-# ======================================================================================
-# Plasma-Manager Configuration Using plasma-sync.py Script (rc2nix Replacement)
-# ======================================================================================
-
 {
   ...
 }:
@@ -80,15 +76,22 @@
           command = "zsh";
           extraConfig = {
             Appearance = {
+              BorderWhenActive = true;
+              FocusBorderColor = "158,89,255";
               TabColor = "255,128,255";
             };
             "Cursor Options" = {
-              CustomCursorColor = "170,85,255";
-              CustomCursorTextColor = "170,0,255";
+              CursorShape = 2;
+              CustomCursorColor = "67,47,217";
+              CustomCursorTextColor = "158,89,255";
               UseCustomCursorColor = true;
             };
             General = {
               Parent = "FALLBACK/";
+            };
+            "Terminal Features" = {
+              AnimatingCursorEnabled = true;
+              BlinkingCursorEnabled = true;
             };
           };
           name = "Zsh";
@@ -199,8 +202,8 @@
             SetEditor = false;
           };
           MainWindow = {
-            "3 screens: Height" = 779;
-            "3 screens: Width" = 1116;
+            "3 screens: Height" = 757;
+            "3 screens: Width" = 892;
           };
           UiSettings = {
             ColorScheme = "Sweet";
@@ -406,7 +409,7 @@
             "Automatically select filename extension" = true;
             "Breadcrumb Navigation" = false;
             "Decoration position" = 2;
-            "Preview Width" = 261;
+            "Preview Width" = 320;
             "Show Full Path" = false;
             "Show Inline Previews" = true;
             "Show Preview" = true;
@@ -418,6 +421,9 @@
             "Sort reversed" = false;
             "Speedbar Width" = 140;
             "View Style" = "Simple";
+          };
+          "KShortcutsDialog Settings" = {
+            "Dialog Size" = "1029,679";
           };
           PreviewSettings = {
             EnableRemoteFolderThumbnail = false;
@@ -455,7 +461,7 @@
             "Recent URLs" = "file:$HOME/Downloads";
           };
           UiSettings = {
-            ColorScheme = "";
+            ColorScheme = "Scratchy";
           };
         };
         kservicemenurc = {
@@ -648,7 +654,7 @@
         };
         plasmarc = {
           Wallpapers = {
-            usersWallpapers = "/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-aurora.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-blue.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-green.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-purple.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-red.svg,/home/nixadmin/Media/Wallpaper/NixOS/nixos-wallpaper-catppuccin-mocha.png,/home/nixadmin/Media/Wallpaper/emperor-backgroundport.png,/home/nixadmin/Media/Wallpaper/port.jpeg,/home/nixadmin/Media/Wallpaper/emperor-background(13).png,/home/nixadmin/Downloads/PurPurNight/contents/images/1920x1080.png,/home/nixadmin/Downloads/Untitled.jpg,/home/nixadmin/Media/Wallpaper/3bf0daad1f208529ee918a42d0ce6575bd6fcde6.jpeg,/home/nixadmin/Media/Wallpaper/1920x1080.png,/home/nixadmin/Media/Wallpaper/nix-hackthebox.png,/home/nixadmin/Media/Wallpaper/nix-hacktheboxp.png,/home/nixadmin/Downloads/032efaf268990c35396f8c41560a641786793ad7.jpeg,/home/nixadmin/Downloads/new.jpeg";
+            usersWallpapers = "/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-aurora.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-blue.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-green.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-purple.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-red.svg,/home/nixadmin/Media/Wallpaper/NixOS/nixos-wallpaper-catppuccin-mocha.png,/home/nixadmin/Media/Wallpaper/emperor-backgroundport.png,/home/nixadmin/Media/Wallpaper/port.jpeg,/home/nixadmin/Media/Wallpaper/emperor-background(13).png,/home/nixadmin/Downloads/PurPurNight/contents/images/1920x1080.png,/home/nixadmin/Downloads/Untitled.jpg,/home/nixadmin/Media/Wallpaper/3bf0daad1f208529ee918a42d0ce6575bd6fcde6.jpeg,/home/nixadmin/Media/Wallpaper/1920x1080.png,/home/nixadmin/Media/Wallpaper/nix-hackthebox.png,/home/nixadmin/Media/Wallpaper/nix-hacktheboxp.png,/home/nixadmin/Downloads/032efaf268990c35396f8c41560a641786793ad7.jpeg,/home/nixadmin/Downloads/new.jpeg,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers.png,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers1.png,/home/nixadmin/Downloads/catppucin.png,/home/nixadmin/Downloads/t1 (1).png,/home/nixadmin/Downloads/catppucinport.png";
           };
         };
         powerdevilrc = {
@@ -658,18 +664,20 @@
         };
         spectaclerc = {
           Annotations = {
+            annotationToolType = 10;
             highlighterStrokeColor = "0,255,255";
           };
           ImageSave = {
-            lastImageSaveAsLocation = "file:///home/nixadmin/Downloads/nixos_desktop_theme.png";
-            lastImageSaveLocation = "file:///tmp/tmpful34l4g/normcap_spectacle.png";
+            lastImageSaveAsLocation = "file:///home/nixadmin/Downloads/Screenshot_20260705_231302.png";
+            lastImageSaveLocation = "file:///home/nixadmin/Pictures/Screenshots/Screenshot_20260708_134151.png";
             translatedScreenshotsFolder = "Screenshots";
           };
           VideoSave = {
             translatedScreencastsFolder = "Screencasts";
           };
           ViewerWindow = {
-            "3 screens: Window-Maximized" = true;
+            "3 screens: Height" = 808;
+            "3 screens: Width" = 1932;
           };
         };
       };
@@ -1088,7 +1096,7 @@
           swap_window_left = "Meta+Ctrl+Alt+Left";
           swap_window_right = "Meta+Ctrl+Alt+Right";
           swap_window_up = "Meta+Ctrl+Alt+Up";
-          toggle_autotile = "Meta+Shift+T";
+          toggle_autotile = [ ];
           toggle_layout_lock = "Meta+Ctrl+L";
           toggle_window_float = "Meta+F";
         };
@@ -1100,6 +1108,9 @@
         };
         "services/org.kde.krunner.desktop" = {
           _launch = ["Search" "Alt+F2"];
+        };
+        "services/plasmazonesd.desktop" = {
+          _launch = "Meta+Shift+T";
         };
         "services/vicinae.desktop" = {
           _launch = "Meta+Space";
