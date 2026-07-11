@@ -15,7 +15,6 @@
 
     # kde kwin-effects-glass flake module
     inputs.kwin-effects-glass.packages.${pkgs.system}.default 
-    inputs.kwin-effects-glass.packages.${pkgs.system}.x11    
 
     # kde
     kdePackages.kzones
