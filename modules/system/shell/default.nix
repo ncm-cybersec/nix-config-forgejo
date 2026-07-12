@@ -33,13 +33,8 @@
   # Enable ZSH w/ ohMyZSH (further config at user level)
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    enableBashCompletion = true;
-    enableLsColors = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
     histSize = 10000;
-    
+   
     shellAliases = {
       c = "clear";
       cdu = "cd ..";
@@ -61,19 +56,6 @@
       nrs = "sudo nixos-rebuild switch";
       psyncup = "plasma-sync diff --update";
       wup = "update-warp";
-    };
-    
-    ohMyZsh = {
-      enable = true;
-      plugins = [
-        "branch"
-        "git"
-        "ssh-agent"
-        "ssh"
-        "starship"
-        "systemd"
-        "tailscale"
-      ];
     };
   };
 }
