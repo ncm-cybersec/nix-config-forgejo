@@ -27,15 +27,14 @@
     isNormalUser = true;
     description = "nixpgadmin";
     extraGroups = [
-      "networkmanager"
-      "wheel"
-      "git"
-      "podman"
       "adb"
-      "librechat"
-      "libvirtd"
+      "git"
       "kvm"
+      "libvirtd"
+      "networkmanager"
+      "podman"
       "video"
+      "wheel"
     ];
     
     shell = pkgs.zsh;
