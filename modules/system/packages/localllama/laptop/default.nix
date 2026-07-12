@@ -19,7 +19,7 @@
     # Built-in llama.cpp worker management
     llama-cpp = {
       enable = true;
-      package = pkgs.llama-cpp;
+      package = pkgs.llama-cpp.override { cudaSupport = true; };
       models."qwen3.5-4b" = {
         port = 30001;
         settings = {
