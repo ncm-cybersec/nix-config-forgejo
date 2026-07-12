@@ -22,41 +22,63 @@
     
   ];
 
-  # Systemd-boot
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 20;
+  # Boot options
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 20;
+      };
+      
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
     };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
+
+    # Use latest Zen kernel 7.0.10
+    kernelPackages = pkgs.linuxPackages_zen;
+    
+    # Kernel modules
+    kernelModules = [ 
+      "i2c-dev"          # I2C device support for OpenRGB
+      "i2c-piix4"        # SMBus for Ryzen/OpenRGB
+      "kvm-amd"          # KVM virtualization
+      "uvcvideo"         # Webcam support
+      "videobuf2_v4l2"   # Video buffer for webcam
+    ];
+
+    # ACPI/SMBus conflict fix for OpenRGB
+    kernelParams = [ 
+      "acpi_enforce_resources=lax" 
+    ];
   };
 
-  # Use latest Zen kernel 7.0.10
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  # Kernel modules
-  boot.kernelModules = [ 
-    "kvm-amd"    # KVM virtualization
-    "i2c-dev"    # I2C device support for OpenRGB
-    "i2c-piix4"  # SMBus for Ryzen/OpenRGB
-  ];
-
-  # ACPI/SMBus conflict fix for OpenRGB
-  boot.kernelParams = [ 
-    "acpi_enforce_resources=lax" 
-  ];
-
+  # Hardware Modules
+  hardware = {
+    
+    # I2C kernel modules for openrgb
+    i2c.enable = true;
+    
+    # Allow unfree firmware
+    enableAllFirmware = true;
+    
+    # Drivers for Razer devices
+    openrazer = {
+      enable = true;
+      batteryNotifier = {
+        enable = true;
+        percentage = 33;
+      };
+    };
+  };
+  
   # Enable KVM virtualisation
   virtualisation.libvirtd.enable = true;
 
-  # I2C kernel modules for openrgb
-  hardware.i2c.enable = true;
+
 
   # GRUB kept for reference (NOT active)
-
   #boot.loader.grub = {
   #  enable = true;
   #  efiSupport = true;
