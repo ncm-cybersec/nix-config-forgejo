@@ -135,9 +135,9 @@
     # Run intervals daily at midnight
     dates = "00:00";
 
-    #flags = [
-
-    #];
+    flags = [
+      "--accept-flake-config"
+    ];
   };
   
   # Set memory limits to prevent rebuild failures
