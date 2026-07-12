@@ -21,36 +21,37 @@
   ];  
 
   # Systemd-boot
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 20;
+  boot = { 
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 20;
+      };
+    
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
     };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
+    
+    # Use LTS Kernel
+    kernelPackages = pkgs.linuxPackages_6_12;
+
+    # Additional kernel module options
+    kernelModules = [
+      "kvm-amd" 
+      "amdgpu" 
+    ];
+
+    kernelParams = [
+      # AMD driver for power management
+      "amd_pstate=active"        
+      # Power savings on idle PCIe lanes
+      "pcie_aspm=force"          
+      # NVIDIA VRAM sleep threshold optimization
+      "nvidia.NVreg_DynamicPowerManagementVideoMemoryThreshold=200" 
+    ];
   };
-
-  # Use LTS Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-
-  # Additional kernel module options
-  boot.kernelModules = [
-    # For hardware-accelerated VMs
-    "kvm-amd" 
-    # Integrated Radeon driver for early init
-    "amdgpu" 
-  ];
-
-  boot.kernelParams = [
-    # AMD driver for power management
-    "amd_pstate=active"        
-    # Power savings on idle PCIe lanes
-    "pcie_aspm=force"          
-    # NVIDIA VRAM sleep threshold optimization
-    "nvidia.NVreg_DynamicPowerManagementVideoMemoryThreshold=200" 
-  ];
 
   # Enable KVM virtualisation
   virtualisation.libvirtd.enable = true;
