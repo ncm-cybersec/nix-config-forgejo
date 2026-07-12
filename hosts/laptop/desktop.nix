@@ -14,28 +14,27 @@
     enable = true;
   };
   
-  # Desktop environment
+  # Desktop environment configuration
   services = { 
-  
-    # Enable Plasma 6 (KDE)
     desktopManager.plasma6.enable = true;
 
-    # Enable SDDM display manager, Wayland, and auto-login 
     displayManager = {
       sddm = {
         enable = true;
         wayland.enable = true;
+        autoNumlock = true;
       };
+      
       defaultSession = "plasma";
       autoLogin.user = "nixpgadmin";
     };
 
-    # Enable X11
     xserver = {
       enable = true; 
       videoDrivers = [
         "nvidia" 
-      ]; 
+      ];
+      
       xkb = {
         layout = "us";
         variant = "";
@@ -76,7 +75,7 @@
     };
   };
 
-  # Enable laptop power management, thermald to handle thermal throttling
+  # Enable laptop power management, thermal throttling
   services = {
     power-profiles-daemon.enable = true;
     thermald.enable = true;
