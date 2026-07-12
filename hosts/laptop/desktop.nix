@@ -9,64 +9,70 @@
 
 {
 
-  # Enable Plasma 6 (KDE)
-  services.desktopManager.plasma6.enable = true;
-
-  # Enable SDDM display manager, Wayland, and auto-login 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-    defaultSession = "plasma";
-    autoLogin.user = "nixpgadmin";
-  };
-  
   # Enable PlasmaZones window tiling manager
   programs.plasmazones = {
     enable = true;
   };
+  
+  # Desktop environment
+  services = { 
+  
+    # Enable Plasma 6 (KDE)
+    desktopManager.plasma6.enable = true;
 
-  # Enable X11
-  services.xserver = {
-    enable = true; 
-    videoDrivers = [
-      "nvidia" 
-    ]; 
-    xkb = {
-      layout = "us";
-      variant = "";
+    # Enable SDDM display manager, Wayland, and auto-login 
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+      defaultSession = "plasma";
+      autoLogin.user = "nixpgadmin";
+    };
+
+    # Enable X11
+    xserver = {
+      enable = true; 
+      videoDrivers = [
+        "nvidia" 
+      ]; 
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
   };
 
   # AMD/NVIDIA Hybrid Graphics
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true; 
-  };
+  hardware = { 
+    graphics = {
+      enable = true;
+      enable32Bit = true; 
+    };
 
-  hardware.nvidia = {
-    modesetting.enable = true;
+    nvidia = {
+      modesetting.enable = true;
 
-    # Power Management: turns off dGPU when not in use
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # Power Management: turns off dGPU when not in use
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # Configure PRIME Hybrid graphics
-    prime = {
+      # Configure PRIME Hybrid graphics
+      prime = {
       
-      # nvidia-offload utility shell script
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+        # nvidia-offload utility shell script
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
 
-      # Bus IDs for hybrid graphics, verify using: lspci | grep -E "VGA|3D"
-      amdgpuBusId = "PCI:5:0:0";  
-      nvidiaBusId = "PCI:1:0:0";  
+        # Bus IDs for hybrid graphics, verify using: lspci | grep -E "VGA|3D"
+        amdgpuBusId = "PCI:5:0:0";  
+        nvidiaBusId = "PCI:1:0:0";  
+      };
     };
   };
 
