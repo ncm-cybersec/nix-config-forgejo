@@ -17,7 +17,7 @@
       enableBashCompletion = true;
       enableCompletion = true;
       enableLsColors = true;
-      autosuggestions.enable = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       
       plugins = [
