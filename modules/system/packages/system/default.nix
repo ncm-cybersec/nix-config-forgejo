@@ -12,6 +12,19 @@
   
   # Install applications using Nix options
   programs = {
+    command-not-found.enable = true;
+    
+    nix-index = {
+      enable = true;
+      package = pkgs.nix-index;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+    
+    nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld;
+    };
     
     firefox.enable = true;
     bash.enable = true;
@@ -51,7 +64,6 @@
      manix
      nil
      nixd
-     nix-index
      nix-output-monitor
      nix-template
      nix-tree
