@@ -21,6 +21,19 @@
     username = username;
     homeDirectory = "/home/${username}";
   };
+  
+  programs = {
+    nh = {
+      enable = true;
+      package = pkgs.nh;
+      
+      clean = {
+        enable = true;
+        dates = "Sun *-*-* 15:00:00";
+        extraArgs = "--keep 5 --keep-since 3d";
+      };
+    };
+  };
 
   # Packages installed to user profiles
   home.packages = (with pkgs; [
