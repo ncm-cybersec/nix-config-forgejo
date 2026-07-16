@@ -77,8 +77,6 @@
     # TCP Ports
     allowedTCPPorts = [
       3080  # LibreChat
-      8033  # LLMhop WebUI
-      8080  # LLMhop Proxy
       8384  # Syncthing
       9300  # Packet / Quick Share
       24800 # Input-Leap
