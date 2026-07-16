@@ -43,7 +43,7 @@
     ];
   };
   
-  # Enable unfree packages, CUDA support, and configure NVIDIA drivers
+  # Enable unfree packages
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
