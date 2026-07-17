@@ -27,12 +27,12 @@
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
 
-    ./packages/llmagents
-    ./packages/localllama/desktop
-    ./packages/mcp
+    ./packages/localllama/desktop/aichat
+    ./packages/localllama/desktop/llmagents
+    ./packages/localllama/desktop/mcp
     ./shell/nushell
     ./shell/tmux
-    ./storage/rclone/desktop
+    ./storage/desktop/rclone
  
   ]
 
@@ -40,7 +40,7 @@
   ++ lib.optionals (hostName == "nixpgadmin") [
 
     ./packages/localllama/laptop
-    ./storage/rclone/laptop
+    ./storage/laptop/rclone
     
   ];
 }
