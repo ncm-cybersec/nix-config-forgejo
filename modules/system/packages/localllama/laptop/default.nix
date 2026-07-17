@@ -25,8 +25,10 @@
         settings = {
           hf-repo = "unsloth/Qwen3.5-4B-GGUF:Q4_K_M";
           n-gpu-layers = 99;
-          ctx-size = 8192;
-          no-webui = true;
+          ctx-size = 16384;
+          flash-attn = true;
+          cache-type = "k-quant";
+          cache-quant-level = 8;
         };
       };
     };
