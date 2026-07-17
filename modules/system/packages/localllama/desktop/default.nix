@@ -1,5 +1,5 @@
 # ==========================================================================
-# Desktop Local LLM Services
+# Desktop Local LLM Stack
 # ==========================================================================
 {
   pkgs,
@@ -7,12 +7,19 @@
 }:
  
 {
+  
+  imports = [
+    ./librechat
+    
+  ];
+  
   # llmhop Router
   services.llmhop = {
     enable = true;
 
     settings = {
       listen = "0.0.0.0:8080";
+      cache = true;
     };
 
     # Built-in llama.cpp worker management
@@ -24,20 +31,23 @@
         settings = {
           hf-repo = "unsloth/Qwen3.5-9B-GGUF:Q4_K_M";
           n-gpu-layers = 99;
-          ctx-size = 8192;
+          ctx-size = 32768;
           no-webui = true;
+          flash-attn = true;
+          
         };
       };
       
-      #models."gemma-4-12b" = {
-        #port = 8033;
-        #settings = {
-          #host = "0.0.0.0";
-          #hf-repo = "unsloth/gemma-4-GGUF:gemma-4-12B-it-qat-UD-Q4_K_XL";
-          #n-gpu-layers = 99;
-          #ctx-size = 4096;
-        #};
-      #};
+      models."gemma4-12b" = {
+        port = 8033;
+        settings = {
+          host = "0.0.0.0";
+          hf-repo = "unsloth/gemma-4-GGUF:gemma-4-12B-it-qat-UD-Q4_K_XL";
+          n-gpu-layers = 99;
+          ctx-size = 32768;
+          flash-attn = true;
+        };
+      };
     };
   };
 }
