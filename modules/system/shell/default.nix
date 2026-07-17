@@ -3,15 +3,12 @@
 # ==========================================================================
 
 { 
+  config,
   pkgs, 
   ... 
 }:
 
 {
-  environment.systemPackages = with pkgs; [
-    nerd-fonts.fira-code
-    starship
-  ];
   
   # Create .zshrc to bypass ZSH setup wizard.
   system.userActivationScripts.zshrc = "touch .zshrc";
@@ -33,6 +30,8 @@
   # Enable ZSH w/ ohMyZSH (further config at user level)
   programs.zsh = {
     enable = true;
+    enableGlobalCompInit = config.programs.zsh.enableCompletion;
+    enableLsColors = true;
     histSize = 10000;
    
     shellAliases = {
