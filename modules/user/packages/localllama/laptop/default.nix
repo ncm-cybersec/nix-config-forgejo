@@ -24,7 +24,7 @@
           models = [
             {
               name = "qwen3.5-4b";
-              max_input_tokens = 8192;
+              max_input_tokens = 16384;
             }
           ];
         }
