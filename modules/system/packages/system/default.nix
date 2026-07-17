@@ -12,7 +12,6 @@
   
   # Install applications using Nix options
   programs = {
-    command-not-found.enable = true;
     
     nix-index = {
       enable = true;
