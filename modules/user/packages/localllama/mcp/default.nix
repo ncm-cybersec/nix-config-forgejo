@@ -11,6 +11,7 @@
   # MCP Settings
   programs = {
     antigravity.profiles.nixadmin.enableMcpIntegration = true;
+    antigravity-cli.enableMcpIntegration = true;
     opencode.enableMcpIntegration = true;
     zed-editor.enableMcpIntegration = true;
   };
