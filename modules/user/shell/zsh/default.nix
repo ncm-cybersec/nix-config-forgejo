@@ -3,7 +3,6 @@
 # ==========================================================================
 
 { 
-  config,
   pkgs, 
   ... 
 }:
@@ -14,7 +13,6 @@
     nerd-fonts.fira-code
     starship
     zsh-forgit
-    zsh-fzf-tab
   ];
 
   # Enable ZSH w/ completions & extensions
@@ -27,15 +25,15 @@
       
       plugins = [
         {
-          name = "fabric-completions";
-          src = "${pkgs.fabric-ai}/share/zsh/site-functions"; 
-          file = "_fabric"; 
+          name = "zsh-autocomplete";
+          src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete"; 
         }
       ];
-      
+           
       oh-my-zsh = {
         enable = true;
-        custom = "\${config.home.homeDirectory}/zsh/oh-my-zsh/custom";
+        package = pkgs.oh-my-zsh;
+        custom = "/home/nixadmin/.zsh/oh-my-zsh/custom";
         plugins = [
           "branch"
           "git"
@@ -65,12 +63,12 @@
         ai-buffer() {
           [[ -z "$BUFFER" ]] && return
 
-          # Clear visual artifacts and notify user using theme colors
+          # Clear visual artifacts and notify user
           echo -e "\n\e[1;34m [Agentic Router] Translating to executable shell syntax... \e[0m"
 
           local prompt="Convert this natural language instruction into a precise, executable Zsh/NixOS/Linux command. Return ONLY the raw shell command, with no explanations, no markdown formatting, and no code blocks: $BUFFER"
       
-          # FIX: Force execution output string format bypassing interactive TTY allocation
+          # Force execution output string format bypassing interactive TTY allocation
           local ai_command=$(aichat --execute "$prompt" 2>/dev/null)
 
           # Strip any residual newlines or markdown artifacts the model emitted
@@ -87,7 +85,7 @@
         bindkey '^ ' ai-buffer
 
         # -------------------------------------------------------------------------
-        # ZSH > AIChat: Natural Language Auto-Intercept Executor Stream Execution
+        # ZSH > AIChat: Prefix-Triggered Natural Language Execution
         # -------------------------------------------------------------------------
         ai-intercept-executor() {
           if [[ -z "$BUFFER" ]]; then
@@ -95,31 +93,27 @@
             return
           fi
 
-          local first_word=''${BUFFER%% *}
-
-          # Skip if first token matches an actual script, file path, path string, or registered function
-      if whence "$first_word" >/dev/null 2>&1 || [[ "$BUFFER" =~ ^[./] ]]; then
-        zle .accept-line
-        return
-      fi
-
-      local safety_prompt="Is the following text a conversational question or a natural language statement? Answer with exactly 'YES' or 'NO': $BUFFER"
-      local is_natural=$(aichat --execute "$safety_prompt" 2>/dev/null | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]')
-
-      if [[ "$is_natural" == *"YES"* ]]; then
-        echo -e "\n\e[1;33m [Natural Language Intercept] -> Hitting Local Qwen Stack \e[0m"
-        
-        # Passes text block safely down to active aichat instances
-        aichat "$BUFFER"
-        
-        BUFFER=""
-        zle reset-prompt
-      else
-        zle .accept-line
-      fi
-    }
-    zle -N ai-intercept-executor
-    bindkey '^M' ai-intercept-executor
+          # Check if the line starts with '?'
+          if [[ "$BUFFER" == \?* ]]; then
+            echo -e "\n\e[1;33m [Natural Language Intercept] -> Hitting Local Qwen Stack \e[0m"
+            
+            # Strip the '?' prefix and any leading whitespace
+            local query="''${BUFFER#\?}"
+            query="''${query## }"
+            
+            # Pass the raw text block directly down to aichat
+            aichat "$query"
+            
+            # Clear the prompt after the chat finishes
+            BUFFER=""
+            zle reset-prompt
+          else
+            # Standard shell command
+            zle .accept-line
+          fi
+        }
+        zle -N ai-intercept-executor
+        bindkey '^M' ai-intercept-executor
       '';    
     };
 
