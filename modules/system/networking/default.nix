@@ -76,7 +76,6 @@
     
     # TCP Ports
     allowedTCPPorts = [
-      3080  # LibreChat
       8384  # Syncthing
       9300  # Packet / Quick Share
       24800 # Input-Leap
