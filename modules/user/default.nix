@@ -14,6 +14,7 @@
     # Core modules shared between all hosts, using /modules/user & default.nix for imports format.
     ./packages/git
     ./packages/kde
+    ./packages/localllama/aichat
     ./packages/protonpass
     ./packages/system
     ./packages/vicinae
@@ -27,9 +28,8 @@
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
 
-    ./packages/localllama/desktop/aichat
-    ./packages/localllama/desktop/llmagents
-    ./packages/localllama/desktop/mcp
+    ./packages/localllama/llmagents
+    ./packages/localllama/mcp
     ./shell/nushell
     ./shell/tmux
     ./storage/desktop/rclone
@@ -39,7 +39,6 @@
   # Laptop-specific modules
   ++ lib.optionals (hostName == "nixpgadmin") [
 
-    ./packages/localllama/laptop
     ./storage/laptop/rclone
     
   ];

@@ -15,6 +15,7 @@
       ./hardware
       ./networking
       ./packages/flatpak
+      ./packages/localllama
       ./packages/podman
       ./packages/scripts
       ./packages/system
@@ -25,14 +26,12 @@
     # Desktop-specific modules
     ++ lib.optionals (hostName == "nixadmin") [
       
-      ./packages/localllama/desktop
       
     ]
     
     # Laptop-specific modules
     ++ lib.optionals (hostName == "nixpgadmin") [
-      
-      ./packages/localllama/laptop
-      
+
+            
     ];
 }
