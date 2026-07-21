@@ -30,6 +30,7 @@
       "adb"
       "git"
       "i2c"
+      "keys"
       "kvm"
       "libvirtd"
       "networkmanager"
