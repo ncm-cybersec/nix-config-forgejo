@@ -28,49 +28,35 @@
   
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     catppuccin.url = "github:catppuccin/nix/release-26.05";
-    
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     kwin-effects-glass = {
       url = "github:4v3ngR/kwin-effects-glass";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
-    
-    llmhop = {
-      url = "github:mirkolenz/llmhop";
-    };
-    
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    
     plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
-    
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
@@ -84,7 +70,6 @@
     home-manager,
     kwin-effects-glass,
     llm-agents,
-    llmhop,
     nix-flatpak,
     plasma-manager,
     plasmazones,
@@ -130,11 +115,11 @@
     # Programmatically define top-level nixosModules & homeModules
     nixosConfigurations = builtins.mapAttrs (hostName: hostCfg: nixpkgs.lib.nixosSystem {
       inherit system;
-
+      
+      # Passed to configuration.nix
       specialArgs = {
         inherit self inputs pkgsUnstable hostName;
       };
-      
       modules = [
         # Dynamic Core Configuration based on host
         hostCfg.configPath
@@ -171,7 +156,6 @@
         }
         
         # Shared global modules
-        llmhop.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         plasmazones.nixosModules.default
         sops-nix.nixosModules.sops
