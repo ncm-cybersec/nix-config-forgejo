@@ -20,6 +20,8 @@
     
       # Model settings & Ollama integration
       settings = {
+        
+        # Dynamically select model based on hostname
         default_model = if hostName == "nixadmin"
           then "qwen2.5-coder:14b"
           else "qwen3:4b";
@@ -67,10 +69,12 @@
       settings = {
         openai-api-base = "http://127.0.0.1:11434";
         openai-api-key = "local-dummy-key";
-      
+        
+        # Dynamically select model based on hostname
         model = if hostName == "nixadmin"
           then "qwen2.5-coder:14b"
           else "qwen3:4b";
+          
         editor-model = if hostName == "nixadmin"
           then "qwen2.5-coder:14b"
           else "qwen3:4b";
