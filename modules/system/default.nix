@@ -9,9 +9,9 @@
 }: 
 
 {
+  
+  # Core modules shared between all hosts
   imports = [
-      
-      # Core modules shared between all hosts
       ./hardware
       ./networking
       ./packages/flatpak
@@ -20,7 +20,6 @@
       ./packages/scripts
       ./packages/system
       ./shell
-      
     ]
         
     # Desktop-specific modules
