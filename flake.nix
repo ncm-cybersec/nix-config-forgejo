@@ -51,7 +51,6 @@
     };
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
@@ -59,7 +58,7 @@
       inputs.home-manager.follows = "home-manager";
     };
     plasmazones = {
-      url = "github:fuddlesworth/PlasmaZones";
+      url = "github:fuddlesworth/PlasmaZones/v3.0.15";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
