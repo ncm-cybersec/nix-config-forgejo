@@ -73,7 +73,6 @@
     # Utilities
     hardinfo2
     localsend
-    rustdesk
     vicinae
     vlc
     warp
@@ -83,7 +82,6 @@
   (with pkgsUnstable; [
 
     # Unstable packages
-
     zed-editor
        
   ]) ++ 
