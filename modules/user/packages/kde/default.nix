@@ -16,23 +16,6 @@
   home.packages = (with pkgs; [
 
     # Stable
-
-    # Fix for KDE Plasma Applet/Widgets crashing or causing issues w/ plasmashell
-    (python3.withPackages (ps: with ps; [
-      dbus-python
-      pygobject3
-    ]))
-
-    utterly-nord-plasma
-    wayland-utils
-    
-  ]) ++ 
-  
-  (with pkgsUnstable; [
-  
-    # Unstable KDE packages
-    kdePackages.akonadi
-    kdePackages.akonadi-calendar
     kdePackages.dolphin-plugins
     kdePackages.dragon
     kdePackages.filelight
@@ -63,6 +46,19 @@
     kdePackages.sddm-kcm
     kdePackages.kweather
     kdePackages.kweathercore
+
+    # Fix for KDE Plasma Applet/Widgets crashing or causing issues w/ plasmashell
+    (python3.withPackages (ps: with ps; [
+      dbus-python
+      pygobject3
+    ]))
+
+    utterly-nord-plasma
+    wayland-utils
+    
+  ]) ++ 
+  
+  (with pkgsUnstable; [
     
   ]);
 }
