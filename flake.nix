@@ -34,7 +34,10 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix/release-26.05";
+    catppuccin = {
+      url = "github:catppuccin/nix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,13 +49,19 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    plasmazones.url = "github:fuddlesworth/PlasmaZones/v3.0.15";
+    plasmazones = {
+      url = "github:fuddlesworth/PlasmaZones";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,7 +98,7 @@
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
-          "electron-39.8.10"
+          "electron-40.10.5"
           "pnpm-10.29.2"
         ];       
       };
