@@ -21,6 +21,7 @@
     ./shell/bash
     ./shell/zsh
     ./sops
+    ./storage/rclone
     ./theme
   ] 
   
@@ -29,11 +30,10 @@
     ./packages/localllama/llmagents
     ./shell/nushell
     ./shell/tmux
-    ./storage/desktop/rclone
   ]
 
   # Laptop-specific modules
   ++ lib.optionals (hostName == "nixpgadmin") [
-    ./storage/laptop/rclone
+
   ];
 }
