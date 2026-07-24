@@ -12,7 +12,6 @@
   
   # Numtide/LLM-agents Packages
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [ 
-    
     gitnexus
     gno
     herdr
@@ -22,7 +21,6 @@
     nanocoder
     oh-my-opencode
     skills
-    
   ];
   
   # Enable Opencode using pkg from llmagents flakes
@@ -31,15 +29,13 @@
       enable = true;
       package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
       
-      # Opencode.json
+      # opencode.json
       settings = {
         provider = {
           ollama = {
             npm = "@ai-sdk/openai-compatible";
             name = "Ollama";
-            options = {
-              baseUrl = "http://127.0.0.1:11434";
-            };
+            baseURL = "http://127.0.0.1:11434/v1";
             models = {
               "qwen2.5-coder:14b" = {
                 name = "Qwen2.5";
@@ -53,10 +49,6 @@
             };
           };
         };
-        plugin = [
-          "opencode-mem"
-          "@warp-dot-dev/opencode-warp"
-        ];
       };
     };
   };
