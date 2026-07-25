@@ -49,7 +49,10 @@
 
         eval "$(starship init zsh)"
         
-        eval "$(inshellisense init zsh)"
+        if command -v inshellisense &> /dev/null; then
+          [[ ! -d "$HOME/.inshellisense" ]] && inshellisense bind zsh &>/dev/null
+          eval "$(inshellisense init zsh)"
+        fi
 
         fastfetch
       '';    
