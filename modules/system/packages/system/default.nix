@@ -41,71 +41,68 @@
   };
 
   environment.systemPackages = (with pkgs; [
-     
-     # Stable packages
+    
+    # Applications
+    gearlever
+    normcap
+    qemu
+    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+      qemu-system-x86_64 \
+        -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+        "$@"
+    '')
+    tesseract
+    virt-manager
+    
+    # Nix
+    cachix
+    deadnix
+    manix
+    nil
+    nixd
+    nix-output-monitor
+    nix-template
+    nix-tree
+    nix-update
+    nixpkgs-fmt
+    nixpkgs-review
 
-     # Applications
-     gearlever
-     normcap
-     qemu
-     # QEMU UEFI support
-     (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
-        qemu-system-x86_64 \
-          -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-          "$@"
-      '')
-     tesseract
-     virt-manager
-     
-     # Nix
-     cachix
-     deadnix
-     manix
-     nil
-     nixd
-     nix-output-monitor
-     nix-template
-     nix-tree
-     nix-update
-     nixpkgs-fmt
-     nixpkgs-review
+    # Recovery Utilities
+    ntfs3g
+    ntfsprogs
+    ntfsprogs-plus
+    partclone
+    partclone-utils
+    testdisk
 
-     # Recovery Utilities
-     ntfs3g
-     ntfsprogs
-     ntfsprogs-plus
-     partclone
-     partclone-utils
-     testdisk
-
-     # System
-     android-tools
-     argc
-     bat
-     cargo
-     cmake
-     dbus
-     direnv
-     gdb
-     git
-     gparted
-     gsettings-desktop-schemas
-     javaPackages.compiler.openjdk25
-     jq
-     jql
-     libvirt
-     llvm
-     nodejs_24
-     perl
-     powershell
-     python3
+    # System
+    android-tools
+    argc
+    bat
+    cargo
+    cmake
+    dbus
+    direnv
+    gdb
+    git
+    gparted
+    gsettings-desktop-schemas
+    javaPackages.compiler.openjdk25
+    jq
+    jql
+    libvirt
+    llvm
+    nodejs_24
+    perl
+    powershell
+    python3
 
   ]) ++ 
   
   # Unstable packages
   (with pkgsUnstable; [
-         
+  
     openrgb-with-all-plugins
-     
+  
   ]);
 }
