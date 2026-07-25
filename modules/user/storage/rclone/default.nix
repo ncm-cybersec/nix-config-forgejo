@@ -18,11 +18,13 @@
   
   sops.secrets = {
     rclone-gd = {
-      neededForUsers = false;
+      sopsFile = ../../../../secrets/storage/rclone-gd.yaml;
+      key = "RCLONE_CONFIG_PASS";
     };
     
     rclone-od = {
-      neededForUsers = false;
+      sopsFile = ../../../../secrets/storage/rclone-od.yaml;
+      key = "RCLONE_CONFIG_PASS";
     };
   };
   
