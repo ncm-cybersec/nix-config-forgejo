@@ -37,10 +37,10 @@
     };
     
     Service = {
-      EnvironmentFile = [ "%t/sops-nix/secrets/rclone-gd" ];
+      EnvironmentFile = [ "-${config.sops.secrets.rclone-gd.path}" ];
       Environment = [ "PATH=/run/wrappers/bin:$PATH" ];
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/mnt/GoogleDrive";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount googledrive: ${config.home.homeDirectory}/mnt/GoogleDrive --vfs-cache-mode full --poll-interval 15s";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount googledrive: ${config.home.homeDirectory}/mnt/GoogleDrive --vfs-cache-mode full --allow-other --poll-interval 15s";
       ExecStop = "/run/wrappers/bin/fusermount -u ${config.home.homeDirectory}/mnt/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
@@ -59,9 +59,9 @@
     
     Service = {
       Environment = [ "PATH=/run/wrappers/bin:$PATH" ];
-      EnvironmentFile = [ "%t/sops-nix/secrets/rclone-od" ];
+      EnvironmentFile = [ "-${config.sops.secrets.rclone-od.path}" ];
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/mnt/OneDrive";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount onedrive: ${config.home.homeDirectory}/mnt/OneDrive --vfs-cache-mode full";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount onedrive: ${config.home.homeDirectory}/mnt/OneDrive --vfs-cache-mode full --allow-other --exclude '/Personal Vault/**'";
       ExecStop = "/run/wrappers/bin/fusermount -u ${config.home.homeDirectory}/mnt/OneDrive";
       Restart = "on-failure";
       RestartSec = "10s";
