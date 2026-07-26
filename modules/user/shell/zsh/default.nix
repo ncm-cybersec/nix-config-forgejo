@@ -10,7 +10,6 @@
 {
   
   home.packages = with pkgs; [
-    inshellisense
     nerd-fonts.fira-code
     starship
     zsh-forgit
@@ -41,20 +40,19 @@
       };
       
       initContent = ''
-        export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+        export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.npm-global/bin"
 
         export SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"
         
         setopt null_glob
 
         eval "$(starship init zsh)"
+              
+        fastfetch
         
         if command -v inshellisense &> /dev/null; then
-          [[ ! -d "$HOME/.inshellisense" ]] && inshellisense bind zsh &>/dev/null
           eval "$(inshellisense init zsh)"
         fi
-
-        fastfetch
       '';    
     };
 
