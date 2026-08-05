@@ -12,24 +12,24 @@
   
   # Core modules shared between all hosts
   imports = [
-    ./packages/git
     ./packages/kde
-    ./packages/localllama/aichat
-    ./packages/protonpass
     ./packages/system
-    ./packages/vicinae
     ./shell/bash
     ./shell/zsh
     ./sops
     ./storage/rclone
     ./theme
+    ./utilities/git
+    ./utilities/localllama/aichat
+    ./utilities/protonpass
+    ./utilities/vicinae
   ] 
   
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
-    ./packages/localllama/llmagents
     ./shell/nushell
     ./shell/tmux
+    ./utilities/localllama/llmagents
   ]
 
   # Laptop-specific modules
