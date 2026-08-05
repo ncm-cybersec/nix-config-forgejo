@@ -15,11 +15,11 @@
       ./hardware
       ./networking
       ./packages/flatpak
-      ./packages/localllama
-      ./packages/podman
-      ./packages/scripts
       ./packages/system
+      ./scripts
       ./shell
+      ./utilities/localllama
+      ./utilities/podman
     ]
         
     # Desktop-specific modules
