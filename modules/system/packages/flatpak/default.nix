@@ -13,7 +13,7 @@
     warehouse
   ];
 
-  # XDG is required to install flatpak on systems using window compositors, or installing flatpaks on a per-user basis
+  # XDG is required if using window compositors, or installing flatpaks on a per-user basis
   xdg.portal = {
     enable = true;
     config = {
@@ -29,14 +29,16 @@
     ];
   };
 
-  # Enable Flatpak
   services.flatpak = {
     enable = true;
     update.onActivation = true;
     packages = [
-      "com.github.tchx84.Flatseal"
       "org.garudalinux.firedragon"
+      "com.github.tchx84.Flatseal"
+      "io.github.giantpinkrobots.flatsweep"
+      "com.rustdesk.RustDesk"
+      "com.vixalien.sticky"
+      "io.github.flattool.Warehouse"
     ];
   };
-
 }
