@@ -68,6 +68,17 @@
       };
     };
     
+    kitty = {
+      enable = true;
+      flavor = "macchiato";
+    };
+    
+    lazygit = {
+      enable = true;
+      accent = "mauve";
+      flavor = "macchiato";
+    };
+    
     nushell = {
       enable = true;
       flavor = "macchiato";
