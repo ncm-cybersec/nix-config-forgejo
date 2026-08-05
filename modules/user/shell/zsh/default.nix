@@ -3,6 +3,7 @@
 # ==========================================================================
 
 { 
+  config,
   pkgs, 
   ... 
 }:
@@ -21,14 +22,45 @@
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-                 
+      
+      syntaxHighlighting = { 
+        enable = true;
+        package = pkgs.zsh-syntax-highlighting;
+        highlighters = [
+          "brackets"
+          "pattern"
+          "regexp"
+          "cursor"
+          "root"
+          "line"
+        ];
+      };
+      
+      history = {
+        append = true;
+        expireDuplicatesFirst = true;
+        extended = true;
+        ignoreAllDups = true;
+        path = "${config.xdg.dataHome}/zsh/history";
+        save = 10000;
+        saveNoDups = true;
+        share = true;
+        size = 10000;
+      };
+      
+      historySubstringSearch = {
+        enable = true;
+        searchDownKey = [ "$terminfo[kcud1]" ];
+        searchUpKey = [ "$terminfo[kcuu1]" ];
+      };
+      
       oh-my-zsh = {
         enable = true;
         package = pkgs.oh-my-zsh;
-        custom = "/home/nixadmin/.zsh/oh-my-zsh/custom";
+        custom = "${config.xdg.dataHome}/zsh/custom";
         plugins = [
           "branch"
+          "deja"
           "git"
           "git-commit"
           "ssh-agent"
@@ -44,15 +76,19 @@
 
         export SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"
         
+        export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+          --color=fg:#cbccc6,bg:#1f2430,hl:#707a8c
+          --color=fg+:#707a8c,bg+:#191e2a,hl+:#ffcc66
+          --color=info:#73d0ff,prompt:#707a8c,pointer:#cbccc6
+          --color=marker:#73d0ff,spinner:#73d0ff,header:#d4bfff'
+        
         setopt null_glob
 
         eval "$(starship init zsh)"
+        
+        eval "$(deja init zsh)"
               
         fastfetch
-        
-        if command -v inshellisense &> /dev/null; then
-          eval "$(inshellisense init zsh)"
-        fi
       '';    
     };
 
@@ -60,6 +96,9 @@
     eza = {
       enable = true;
       enableZshIntegration = true;
+      colors = "auto";
+      icons = true;
+      git = true;
     };
     
     fastfetch = {
