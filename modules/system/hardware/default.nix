@@ -10,12 +10,10 @@
 {
 
   environment.systemPackages = with pkgs; [
-    
     bluez-tools
     input-leap
     pavucontrol
     polychromatic
-    
   ];
 
   # Time zone
@@ -71,6 +69,14 @@
       enable = true;
       motherboard = "amd";
     };
+    
+    # Peripherals
+    input-remapper = {
+      enable = true;
+      enableUdevRules = true;
+      package = pkgs.input-remapper;
+      serviceWantedBy = [ "multi-user.target" ];
+    };      
 
     # Pipewire
     pulseaudio.enable = false;
