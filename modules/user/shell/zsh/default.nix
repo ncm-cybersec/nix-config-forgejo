@@ -17,7 +17,6 @@
     nav
     nerd-fonts.fira-code
     starship
-    zsh-autocomplete
     zsh-completions
     zsh-forgit
     zsh-nix-shell
