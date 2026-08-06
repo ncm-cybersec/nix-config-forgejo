@@ -34,6 +34,7 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    app-manager.url = "github:kem-a/AppManager";
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,6 +75,7 @@
     nixpkgs,
     nixpkgs-unstable,
     antigravity-nix,
+    app-manager,
     catppuccin,
     home-manager,
     kwin-effects-glass,
