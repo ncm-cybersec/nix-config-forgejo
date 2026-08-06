@@ -30,6 +30,7 @@
       "adb"
       "git"
       "i2c"
+      "input"
       "keys"
       "kvm"
       "libvirtd"
@@ -37,6 +38,7 @@
       "openrazer"
       "plugdev"
       "podman"
+      "uinput"
       "video"
       "wheel"
     ];
