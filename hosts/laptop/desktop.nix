@@ -42,10 +42,6 @@
     };
   };
   
-  environment.sessionVariables = {
-    FUSE_BIN = "/run/current-system/sw/bin/fusermount";
-  };
-
   # AMD/NVIDIA Hybrid Graphics
   hardware = { 
     graphics = {
