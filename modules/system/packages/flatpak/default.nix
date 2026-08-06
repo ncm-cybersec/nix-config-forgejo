@@ -33,6 +33,7 @@
     enable = true;
     update.onActivation = true;
     packages = [
+      "sa.sy.bluerecorder"
       "org.garudalinux.firedragon"
       "com.github.tchx84.Flatseal"
       "io.github.giantpinkrobots.flatsweep"
