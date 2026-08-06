@@ -34,6 +34,10 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
+      
+      supportedFilesystems = [
+        "fuse"
+      ];
     };
 
     # Use latest Zen kernel 7.0.10

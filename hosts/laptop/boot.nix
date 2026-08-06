@@ -32,6 +32,10 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
+      
+      supportedFilesystems = [
+        "fuse"
+      ];
     };
     
     # Use LTS Kernel
