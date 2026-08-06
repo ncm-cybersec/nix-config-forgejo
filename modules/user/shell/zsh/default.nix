@@ -86,6 +86,8 @@
 
         eval "$(starship init zsh)"
         
+        eval "$(witr completion zsh)"
+        
         eval "$(deja init zsh)"
               
         fastfetch
