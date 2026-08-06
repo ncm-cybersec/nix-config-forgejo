@@ -20,6 +20,7 @@
     ./storage/rclone
     ./theme
     ./utilities/git
+    ./utilities/kitty
     ./utilities/localllama/aichat
     ./utilities/protonpass
     ./utilities/vicinae
