@@ -24,6 +24,12 @@
     nix-ld = {
       enable = true;
       package = pkgs.nix-ld;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        openssl
+        curl
+        glibc
+      ];
     };
     
     firefox.enable = true;
@@ -39,6 +45,13 @@
       enable = true;
       userAllowOther = true;
     };
+  };
+  
+  system.activationScripts.tls-compat = {
+    text = ''
+      mkdir -p /etc/ssl/certs
+      ln -sfn /etc/static/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
+    '';
   };
 
   environment.systemPackages = (with pkgs; [
