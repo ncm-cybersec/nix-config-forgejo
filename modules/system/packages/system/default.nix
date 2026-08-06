@@ -86,6 +86,7 @@
     cmake
     dbus
     direnv
+    fuse
     gdb
     git
     gparted
