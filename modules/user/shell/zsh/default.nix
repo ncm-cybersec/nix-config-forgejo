@@ -11,9 +11,15 @@
 {
   
   home.packages = with pkgs; [
+    deja
+    fzf-zsh-plugin
+    jq-zsh-plugin
     nerd-fonts.fira-code
     starship
+    zsh-autocomplete
+    zsh-completions
     zsh-forgit
+    zsh-nix-shell
   ];
 
   # Enable ZSH w/ completions & extensions
@@ -54,13 +60,18 @@
         searchUpKey = [ "$terminfo[kcuu1]" ];
       };
       
+      plugins = [
+        {
+          name = "zsh-autocomplete";
+          src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete"; 
+        }
+      ];
+      
       oh-my-zsh = {
         enable = true;
         package = pkgs.oh-my-zsh;
-        custom = "${config.xdg.dataHome}/zsh/custom";
         plugins = [
           "branch"
-          "deja"
           "git"
           "git-commit"
           "ssh-agent"
@@ -86,6 +97,8 @@
 
         eval "$(starship init zsh)"
         
+        eval "$(nav --init zsh --completion zsh)"
+        
         eval "$(witr completion zsh)"
         
         eval "$(deja init zsh)"
@@ -99,7 +112,7 @@
       enable = true;
       enableZshIntegration = true;
       colors = "auto";
-      icons = true;
+      icons = "auto";
       git = true;
     };
     
