@@ -3,6 +3,7 @@
 # ==========================================================================
 
 { 
+  inputs,
   pkgs, 
   pkgsUnstable, 
   ... 
@@ -44,6 +45,7 @@
     
     # Applications
     gearlever
+    inputs.app-manager.packages.x86_64-linux.default
     normcap
     qemu
     (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
@@ -66,6 +68,7 @@
     nix-update
     nixpkgs-fmt
     nixpkgs-review
+    witr
 
     # Recovery Utilities
     ntfs3g
