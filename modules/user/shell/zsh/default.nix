@@ -14,6 +14,7 @@
     deja
     fzf-zsh-plugin
     jq-zsh-plugin
+    nav
     nerd-fonts.fira-code
     starship
     zsh-autocomplete
@@ -27,7 +28,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      autosuggestion.enable = true;
+      autosuggestion.enable = false;
       
       syntaxHighlighting = { 
         enable = true;
