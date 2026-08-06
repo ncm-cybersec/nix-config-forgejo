@@ -49,6 +49,7 @@
   
   # Force Qt/Electron apps to use Wayland/GBM, set env var for GTK to use vulkan renderer
   environment.sessionVariables = {
+    FUSE_BIN = "/run/current-system/sw/bin/fusermount";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
