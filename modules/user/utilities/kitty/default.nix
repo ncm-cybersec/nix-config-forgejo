@@ -3,7 +3,6 @@
 # ==========================================================================
 
 {
-  pkgs,
   pkgsUnstable,
   ...
 }:
@@ -15,12 +14,6 @@
       package = pkgsUnstable.kitty;
       enableGitIntegration = true;
       shellIntegration.enableZshIntegration = true;
-
-      font = {
-        name = "FiraCode";
-        package = pkgs.nerd-fonts.fira-code;
-        size = "11";
-      };
 
       quickAccessTerminalConfig = {
         lines = "40";
