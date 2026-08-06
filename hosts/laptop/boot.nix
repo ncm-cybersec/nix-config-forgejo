@@ -32,10 +32,6 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
-      
-      supportedFilesystems = [
-        "fuse"
-      ];
     };
     
     # Use LTS Kernel
@@ -54,6 +50,10 @@
       "pcie_aspm=force"          
       # NVIDIA VRAM sleep threshold optimization
       "nvidia.NVreg_DynamicPowerManagementVideoMemoryThreshold=200" 
+    ];
+    
+    supportedFilesystems = [
+      "fuse"
     ];
   };
 

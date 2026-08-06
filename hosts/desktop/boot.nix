@@ -34,10 +34,6 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
-      
-      supportedFilesystems = [
-        "fuse"
-      ];
     };
 
     # Use latest Zen kernel 7.0.10
@@ -55,6 +51,10 @@
     # ACPI/SMBus conflict fix for OpenRGB
     kernelParams = [ 
       "acpi_enforce_resources=lax" 
+    ];
+    
+    supportedFilesystems = [
+      "fuse"
     ];
   };
 
