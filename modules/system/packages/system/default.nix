@@ -44,6 +44,7 @@
   environment.systemPackages = (with pkgs; [
     
     # Applications
+    appimage-run
     gearlever
     inputs.app-manager.packages.x86_64-linux.default
     normcap
