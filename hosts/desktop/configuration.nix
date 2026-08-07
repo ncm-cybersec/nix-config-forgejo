@@ -122,9 +122,14 @@
   # Automatically install system updates daily at 11pm
   system.autoUpgrade = {
     enable = true;
+    runGarbageCollection = true;
     allowReboot = true;
     dates = "23:00";
     flake = "git+file:///home/nixadmin/nix-config";
+    flags = [
+      "--update-input"
+      "--commit-lock-file"
+    ];
   };
   
   # Set memory limits to prevent rebuild failures
