@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # ==============================================================================
-# - By NCM_Cybersecurity
+# - By NCM_Cybersec
 # - Plasma-Manager Synchronization Tool: plasma-sync.py
 #
 # - A pure-Python utility to replace 'rc2nix'. Capture live KDE Plasma configurations, 
