@@ -3,7 +3,6 @@
 # ==========================================================================
 
 { 
-  inputs,
   pkgs, 
   pkgsUnstable, 
   ... 
@@ -35,31 +34,11 @@
     firefox.enable = true;
     bash.enable = true;
     virt-manager.enable = true;
-    
-    appimage = {
-      enable = true;
-      binfmt = true;
-    };  
-    
-    fuse = {
-      enable = true;
-      userAllowOther = true;
-    };
   };
   
-  system.activationScripts.tls-compat = {
-    text = ''
-      mkdir -p /etc/ssl/certs
-      ln -sfn /etc/static/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
-    '';
-  };
-
   environment.systemPackages = (with pkgs; [
     
     # Applications
-    appimage-run
-    gearlever
-    inputs.app-manager.packages.x86_64-linux.default
     normcap
     qemu
     (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
