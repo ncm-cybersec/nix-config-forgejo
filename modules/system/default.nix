@@ -14,6 +14,7 @@
   imports = [
       ./hardware
       ./networking
+      ./packages/appimage
       ./packages/flatpak
       ./packages/system
       ./scripts
@@ -25,12 +26,10 @@
     # Desktop-specific modules
     ++ lib.optionals (hostName == "nixadmin") [
       
-      
     ]
     
     # Laptop-specific modules
     ++ lib.optionals (hostName == "nixpgadmin") [
 
-            
     ];
 }
