@@ -29,7 +29,6 @@
   # Desktop-specific modules
   ++ lib.optionals (hostName == "nixadmin") [
     ./shell/nushell
-    ./shell/tmux
     ./utilities/localllama/llmagents
   ]
 
