@@ -13,8 +13,8 @@
   # Numtide/LLM-agents Packages
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [ 
     aven
+    ax
     gitnexus
-    gno
     herdr
     kilocode-cli
     letta-code
@@ -22,6 +22,7 @@
     nanocoder
     oh-my-opencode
     skills
+    swamp
   ];
   
   # Enable Opencode using pkg from llmagents flakes
@@ -36,7 +37,9 @@
           ollama = {
             npm = "@ai-sdk/openai-compatible";
             name = "Ollama";
-            baseURL = "http://127.0.0.1:11434/v1";
+            options = {
+              baseURL = "http://127.0.0.1:11434/v1";
+            };
             models = {
               "hf.co/RavichandranJ/Dolphin3-Cyber-8B-GGUF:Q8_0" = {
                 name = "Dolphin3-Cyber";
