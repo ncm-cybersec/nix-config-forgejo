@@ -63,7 +63,8 @@
   ]) ++ 
   
   (with pkgsUnstable; [
-
+    
+    cmux
     zed-editor
 
   ]) ++ 
