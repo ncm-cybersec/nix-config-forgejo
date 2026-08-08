@@ -38,11 +38,17 @@
             name = "Ollama";
             baseURL = "http://127.0.0.1:11434/v1";
             models = {
-              "qwen2.5-coder:14b" = {
-                name = "Qwen2.5";
+              "hf.co/RavichandranJ/Dolphin3-Cyber-8B-GGUF:Q8_0" = {
+                name = "Dolphin3-Cyber";
               };
               "gemma4:12b" = {
                 name = "Gemma4";
+              };
+              "ornith:9b" = {
+                name = "Ornith";
+              };
+              "qwen2.5-coder:14b" = {
+                name = "Qwen2.5";
               };
               "qwen3.5:9b" = {
                 name = "Qwen3.5";
