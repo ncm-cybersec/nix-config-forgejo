@@ -39,6 +39,7 @@
     marktext
     obsidian
     onlyoffice-desktopeditors
+    stirling-pdf-desktop
 
     # Productivity
     discord
