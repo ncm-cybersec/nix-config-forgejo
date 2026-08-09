@@ -13,7 +13,10 @@ let
   # Define scripts as local Nix variables
   git-stage-commit = pkgs.writeShellScriptBin "git-stage-commit" (builtins.readFile "${self}/scripts/git/git-stage-commit.zsh");
 
-  nix-rebuild = pkgs.writers.writePython3Bin "nix-rebuild" (builtins.readFile "${self}/scripts/nixos/nix-rebuild.py");
+  nix-rebuild = pkgs.writers.writePython3Bin "nix-rebuild" { 
+    libraries = [ ]; 
+    flakeIgnore = [ "E265" "E302" "E305" "E501" "F841" "W291" "W292" "W293" ]; 
+  } (builtins.readFile "${self}/scripts/nixos/nix-rebuild.py");
   
   nixos-upgrade-failed = pkgs.writeShellScriptBin "nixos-upgrade-failed" (builtins.readFile "${self}/scripts/nixos/nixos-upgrade-failed.zsh");
   
