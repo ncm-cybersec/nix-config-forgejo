@@ -14,7 +14,6 @@
   # Local LLM System Services - Ollama
   services = {
     
-    # Enable Ollama
     ollama = {
       enable = true;
       package = pkgsUnstable.ollama-cuda;     
@@ -43,7 +42,6 @@
         ])
       ];
     
-      # Enable Flash Attention
       environmentVariables = {
         OLLAMA_FLASH_ATTENTION = "1";
       };
