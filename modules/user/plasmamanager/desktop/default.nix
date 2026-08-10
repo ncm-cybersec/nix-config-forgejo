@@ -1,4 +1,6 @@
 {
+  config,
+  pkgs,
   ...
 }:
 
@@ -198,12 +200,12 @@
             KonsoleEscKeyBehaviour = true;
             KonsoleEscKeyExceptions = "vi,vim,nvim,git";
             RemoveExtension = false;
-            RunPrefix = "";
+            RunPrefix = "bash";
             SetEditor = false;
           };
           MainWindow = {
-            "3 screens: Height" = 757;
-            "3 screens: Width" = 892;
+            "3 screens: Height" = 825;
+            "3 screens: Width" = 1026;
           };
           UiSettings = {
             ColorScheme = "Sweet";
@@ -409,7 +411,7 @@
             "Automatically select filename extension" = true;
             "Breadcrumb Navigation" = false;
             "Decoration position" = 2;
-            "Preview Width" = 320;
+            "Preview Width" = 317;
             "Show Full Path" = false;
             "Show Inline Previews" = true;
             "Show Preview" = true;
@@ -456,6 +458,9 @@
         konsolerc = {
           General = {
             ConfigVersion = 1;
+          };
+          "Notification Messages" = {
+            CloseAllTabs = true;
           };
           "SaveHistory Settings" = {
             "Recent URLs" = "file:$HOME/Downloads";
@@ -542,8 +547,8 @@
           };
           Plugins = {
             glassEnabled = true;
-            kwin_effect_plasmazonesEnabled = true;
-            kzonesEnabled = false;
+            kwin_effect_plasmazonesEnabled = false;
+            kzonesEnabled = true;
             rememberwindowpositionsEnabled = true;
           };
           Round-Corners = {
@@ -566,7 +571,7 @@
             OutlineThickness = 3;
             SecondOutlineColor = "101,90,255";
             SecondOutlineThickness = 2;
-            ShadowColor = "182,130,255";
+            ShadowColor = "10,83,255";
             ShadowSize = 30;
             Size = 14;
             UseNativeDecorationShadows = false;
@@ -628,9 +633,35 @@
             wmclass = "vicinae";
             wmclassmatch = 1;
           };
+          "4a4d9fcb-44ad-4186-99e4-6200ed2f1c01" = {
+            Description = "Window settings for kcm_kwinrules";
+            position = "640,205";
+            positionrule = 2;
+            size = "800,800";
+            sizerule = 2;
+            title = "Window Rules";
+            types = 1;
+            wmclass = "kcmshell6 kcm_kwinrules";
+            wmclasscomplete = true;
+            wmclassmatch = 1;
+          };
+          "6fb7e8ce-4f21-46a4-a64d-96b0383d0569" = {
+            Description = "Application settings for md.Obsidian";
+            desktopfile = "obsidian";
+            desktopfilerule = 2;
+            wmclass = "electron md.Obsidian";
+            wmclasscomplete = true;
+            wmclassmatch = 1;
+          };
+          "8cd2781f-edb7-42a0-8bad-371295f6a163" = {
+            Description = "Application settings for MstyGo";
+            wmclass = "MstyGo";
+            wmclasscomplete = true;
+            wmclassmatch = 1;
+          };
           General = {
-            count = 3;
-            rules = "30256d98-a585-4ab0-823c-0e8b76bb4195,f99a3d7d-cef4-418a-b09a-30bc9fbd2486,31ed2cf2-cb03-48be-8c1b-928dda26fb80";
+            count = 6;
+            rules = "8cd2781f-edb7-42a0-8bad-371295f6a163,4a4d9fcb-44ad-4186-99e4-6200ed2f1c01,6fb7e8ce-4f21-46a4-a64d-96b0383d0569,30256d98-a585-4ab0-823c-0e8b76bb4195,f99a3d7d-cef4-418a-b09a-30bc9fbd2486,31ed2cf2-cb03-48be-8c1b-928dda26fb80";
           };
           f99a3d7d-cef4-418a-b09a-30bc9fbd2486 = {
             Description = "Application settings for GParted";
@@ -647,14 +678,20 @@
           };
         };
         plasmanotifyrc = {
+          "Applications/ferdium" = {
+            ShowPopups = false;
+          };
           "Applications/thunderbird" = {
             ShowBadges = false;
             ShowPopups = false;
           };
+          DoNotDisturb = {
+            Until = "2026,8,3,20,0,0.941";
+          };
         };
         plasmarc = {
           Wallpapers = {
-            usersWallpapers = "/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-aurora.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-blue.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-green.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-purple.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-red.svg,/home/nixadmin/Media/Wallpaper/NixOS/nixos-wallpaper-catppuccin-mocha.png,/home/nixadmin/Media/Wallpaper/emperor-backgroundport.png,/home/nixadmin/Media/Wallpaper/port.jpeg,/home/nixadmin/Media/Wallpaper/emperor-background(13).png,/home/nixadmin/Downloads/PurPurNight/contents/images/1920x1080.png,/home/nixadmin/Downloads/Untitled.jpg,/home/nixadmin/Media/Wallpaper/3bf0daad1f208529ee918a42d0ce6575bd6fcde6.jpeg,/home/nixadmin/Media/Wallpaper/1920x1080.png,/home/nixadmin/Media/Wallpaper/nix-hackthebox.png,/home/nixadmin/Media/Wallpaper/nix-hacktheboxp.png,/home/nixadmin/Downloads/032efaf268990c35396f8c41560a641786793ad7.jpeg,/home/nixadmin/Downloads/new.jpeg,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers.png,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers1.png,/home/nixadmin/Downloads/catppucin.png,/home/nixadmin/Downloads/t1 (1).png,/home/nixadmin/Downloads/catppucinport.png";
+            usersWallpapers = "/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-aurora.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-blue.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-green.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-purple.svg,/home/nixadmin/Media/Wallpaper/NixOS/nix-d-nord-red.svg,/home/nixadmin/Media/Wallpaper/NixOS/nixos-wallpaper-catppuccin-mocha.png,/home/nixadmin/Media/Wallpaper/emperor-backgroundport.png,/home/nixadmin/Media/Wallpaper/port.jpeg,/home/nixadmin/Media/Wallpaper/emperor-background(13).png,/home/nixadmin/Downloads/PurPurNight/contents/images/1920x1080.png,/home/nixadmin/Media/Wallpaper/3bf0daad1f208529ee918a42d0ce6575bd6fcde6.jpeg,/home/nixadmin/Media/Wallpaper/1920x1080.png,/home/nixadmin/Media/Wallpaper/nix-hackthebox.png,/home/nixadmin/Media/Wallpaper/nix-hacktheboxp.png,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers.png,/home/nixadmin/Media/Wallpaper/wp12329536-nixos-wallpapers1.png,/home/nixadmin/Media/catppucin.png,/home/nixadmin/Media/catppucinport.png";
           };
         };
         powerdevilrc = {
@@ -664,12 +701,12 @@
         };
         spectaclerc = {
           Annotations = {
-            annotationToolType = 10;
+            annotationToolType = 9;
             highlighterStrokeColor = "0,255,255";
           };
           ImageSave = {
-            lastImageSaveAsLocation = "file:///home/nixadmin/Downloads/Screenshot_20260705_231302.png";
-            lastImageSaveLocation = "file:///home/nixadmin/Pictures/Screenshots/Screenshot_20260708_134151.png";
+            lastImageSaveAsLocation = "file:///home/nixadmin/nix-config/assets/screenshots/nixos_desktop.png";
+            lastImageSaveLocation = "file:///tmp/tmpibm5ursp/normcap_spectacle.png";
             translatedScreenshotsFolder = "Screenshots";
           };
           VideoSave = {
@@ -981,11 +1018,13 @@
           _k_friendly_name = "Netcatty";
         };
         "org.chromium.Chromium" = {
+          "11FD1B515EB7E62CC39DB6D1DF896EB2-Ctrl+Shift+I" = [ ];
           "6675D13B3DFD21624488FE183B423E73-" = [ ];
           "858032175DF1DD87982173E6DC80C347-" = [ ];
           "8868F0BD6BD49C1A9F52CF4A18ABC40E-Ctrl+0" = [ ];
           A19A2E3F97B98C784D11B7D000AAEB4D- = [ ];
           CF87E7337FB9D4FF0EF0DC8462ACAB3B- = [ ];
+          "F0F9535B478A54E29D9D45C8B0013274-Ctrl+Shift+I" = [ ];
           _k_friendly_name = "org.chromium.Chromium";
         };
         # --- Power Actions ---
@@ -1107,7 +1146,11 @@
           _launch = [ ];
         };
         "services/org.kde.krunner.desktop" = {
-          _launch = ["Search" "Alt+F2"];
+          _launch = "Ctrl+Space";
+        };
+        "services/org.kde.spectacle.desktop" = {
+          CurrentMonitorScreenShot = [ ];
+          OpenWithoutScreenshot = [ ];
         };
         "services/plasmazonesd.desktop" = {
           _launch = "Meta+Shift+T";
@@ -1122,7 +1165,7 @@
         cursor = {
           theme = "catppuccin-macchiato-mauve-cursors";
         };
-        iconTheme = "Fluent-purple-dark";
+        iconTheme = "kora-pgrey";
         theme = "Utterly-Round";
       };
     };
