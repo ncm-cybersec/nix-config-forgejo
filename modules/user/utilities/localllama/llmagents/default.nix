@@ -14,13 +14,13 @@
   home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [ 
     aven
     ax
+    cline
     gitnexus
     herdr
-    kilocode-cli
     letta-code
     memvid-cli
-    nanocoder
     oh-my-opencode
+    open-code-review
     skills
     swamp
   ];
@@ -33,13 +33,14 @@
       
       # opencode.json
       settings = {
+        shell = "/bin/zsh";
+        model = "qwen3.5:9b";
+        default_agent = "plan";
+        autoupdate = false;
+        lsp = true;
+        formatter = true;
         provider = {
           ollama = {
-            npm = "@ai-sdk/openai-compatible";
-            name = "Ollama";
-            options = {
-              baseURL = "http://127.0.0.1:11434/v1";
-            };
             models = {
               "hf.co/RavichandranJ/Dolphin3-Cyber-8B-GGUF:Q8_0" = {
                 name = "Dolphin3-Cyber";
@@ -55,6 +56,16 @@
               };
               "qwen3.5:9b" = {
                 name = "Qwen3.5";
+              };
+            };
+            name = "Ollama";
+            npm = "@ai-sdk/openai-compatible";
+            options = {
+              baseURL = "http://localhost:11434/v1";
+              extraBody = {
+                options = {
+                  num_ctx = 32768;
+                };
               };
             };
           };
