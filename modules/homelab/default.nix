@@ -10,7 +10,6 @@
   
   imports = [
     ./ansible
-    ./sops
     ./ssh
   ];
   
