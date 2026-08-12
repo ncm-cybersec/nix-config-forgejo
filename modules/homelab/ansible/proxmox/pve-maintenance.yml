@@ -1,0 +1,58 @@
+---
+- name: Zero-Downtime Rolling Upgrade with Auto-Failback Verification
+  hosts: proxmox_nodes
+  gather_facts: yes
+  become: yes
+  serial: 1
+
+  tasks:
+    - name: Ping verification
+      ansible.builtin.ping:
+
+    - name: Enable Proxmox Maintenance Mode
+      ansible.builtin.command:
+        cmd: ha-manager set node:{{ ansible_hostname }} --state maintenance
+      changed_when: true
+
+    - name: Wait for HA VM evacuation to complete
+      ansible.builtin.pause:
+        seconds: 60
+      comment: Gives the cluster a full minute to cleanly shift memory maps over the network.
+
+    - name: Clear old APT cache configurations
+      ansible.builtin.apt:
+        clean: yes
+
+    - name: Perform full distribution upgrade to Proxmox VE 9.2
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: full
+        autoremove: yes
+
+    - name: Check if a reboot is needed
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+
+    - name: Reboot node safely
+      ansible.builtin.reboot:
+        msg: "Rebooting for Proxmox 9.2 update"
+        reboot_timeout: 600
+        post_reboot_delay: 30
+      when: reboot_required_file.stat.exists
+
+    - name: Ensure Proxmox API web services are functional again
+      ansible.builtin.wait_for:
+        port: 8006
+        delay: 15
+        timeout: 300
+
+    - name: Disable Maintenance Mode (Re-enables HA Placement Targets)
+      ansible.builtin.command:
+        cmd: ha-manager set node:{{ ansible_hostname }} --state online
+      changed_when: true
+
+    - name: Post-Upgrade Cooling Period (Allows HA Failback Migrations to Complete)
+      ansible.builtin.pause:
+        seconds: 90
+      comment: Crucial step. Gives the cluster time to live-migrate VMs BACK to this host before moving to the next node.
