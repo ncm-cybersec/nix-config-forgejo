@@ -16,6 +16,7 @@
     ./boot.nix
     ./desktop.nix
     ./hardware-configuration.nix
+    ../../modules/homelab
     ../../modules/system
   ];
 
