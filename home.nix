@@ -49,12 +49,7 @@
     slack
     spotify
     tor-browser
-    (vivaldi.overrideAttrs (oldAttrs: {
-      appendRunpaths = [ "${oldAttrs.passthru.stripped}/opt/vivaldi/lib" ];
-    })).override {
-      proprietaryCodecs = true;
-      enableWidevine = true;
-    }
+    vivaldi
     zoom-us
 
     # Utilities
