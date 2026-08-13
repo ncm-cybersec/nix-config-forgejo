@@ -1,5 +1,5 @@
 # ==========================================================================
-# Home Manager - zsh configuration
+# Home Manager - Zsh Configuration
 # ==========================================================================
 
 { 
@@ -9,6 +9,10 @@
 }:
 
 {
+  
+  imports = [
+    ./integrations
+  ];
   
   home.packages = with pkgs; [
     deja
@@ -22,7 +26,7 @@
     zsh-nix-shell
   ];
 
-  # Enable ZSH w/ completions & extensions
+  # Enable Zsh w/ oh-my-zsh
   programs = {
     zsh = {
       enable = true;
@@ -48,10 +52,10 @@
         extended = true;
         ignoreAllDups = true;
         path = "${config.xdg.dataHome}/zsh/history";
-        save = 10000;
+        save = 1000;
         saveNoDups = true;
         share = true;
-        size = 10000;
+        size = 1000;
       };
       
       historySubstringSearch = {
@@ -121,53 +125,6 @@
               
         fastfetch
       '';    
-    };
-
-    # Zsh extensions
-    eza = {
-      enable = true;
-      enableZshIntegration = true;
-      colors = "auto";
-      icons = "auto";
-      git = true;
-    };
-    
-    fastfetch = {
-      enable = true;
-      # https://github.com/borko17/fastfetch-config.git
-      settings = builtins.fromJSON (builtins.readFile ./fastfetch1.jsonc);
-    };
-    
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    
-    nix-index = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    
-    ripgrep = {
-      enable = true;
-      arguments = [
-        "RIPGREP_CONFIG_PATH=~/.config/ripgreprc"
-      ];
-    };
-    
-    ripgrep-all = {
-      enable = true;
-    };
-    
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-      settings = builtins.fromTOML (builtins.readFile ./starship.toml);
-    };
-    
-    zoxide = {
-      enable = true;
-      enableZshIntegration = true;
     };
   };  
 }
