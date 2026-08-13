@@ -34,6 +34,12 @@
     accent = "mauve";
     flavor = "macchiato";
     
+    atuin = {
+      enable = true;
+      flavor = "macchiato";
+      accent = "mauve";
+    };
+    
     btop = {
       enable = true;
       flavor = "macchiato";
