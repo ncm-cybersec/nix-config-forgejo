@@ -67,6 +67,9 @@
     # Allow unfree firmware
     enableAllFirmware = true;
     
+    # Enable NVIDIA GPU support for podman containers
+    nvidia-container-toolkit.enable = true;
+    
     # Drivers for Razer devices
     openrazer = {
       enable = true;
