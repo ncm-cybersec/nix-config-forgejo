@@ -23,6 +23,7 @@
     termscp
 
     # Git Tools
+    git-conventional-commits
     gitfetch
     git-get
     gitlint
@@ -37,9 +38,7 @@
   ];
 
   # SOPS secret for remote repo
-  sops.secrets.forgejo_desktop_ssh_config = {
-    
-  };
+  sops.secrets.forgejo_desktop_ssh_config = {};
 
   programs = {
 
@@ -51,14 +50,14 @@
       settings = {
         "*" = {
           addKeysToAgent = "yes";
+        };
       };
-    };
     
-    # SOPS secret for self-hosted forgejo repo
-    includes = [
-      config.sops.secrets.forgejo_desktop_ssh_config.path
-    ];
-  };
+      # SOPS secret for self-hosted forgejo repo
+      includes = [
+        config.sops.secrets.forgejo_desktop_ssh_config.path
+      ];
+    };
 
     # Git
     git = {
@@ -77,11 +76,27 @@
       };
     };
     
-    # Lazygit
+    gh = {
+      enable = true;
+      settings = {
+        git_protocol = "ssh";
+        prompt = "enabled";
+        browser = "vivaldi";
+        color_labels = "enabled";
+        accessible_colors = "enabled";
+        spinner = "enabled";
+      };
+      
+      extensions = with pkgs; [
+        gh-dash
+        gh-eco
+        gh-signoff
+      ];
+    };
+    
     lazygit = {
       enable = true;
       enableZshIntegration = true;
-      package = pkgs.lazygit;
     };
   };
 }
